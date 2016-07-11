@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<form action="/signup" method="post">
+		이름            <input type="text" name="name" size="10"><br/>
+		아이디          <input type="text" name="id" size="10"><form action="/checkid" method="post"><input type="button" id = "checkbutton" value="중복검사"></form>
+		비밀번호        <input type="password" name="pwd" size="10"><br/>
+        비밀번호 확인   <input type="password" name="repwd" size="10"><br/>
+		구분            <input type="radio" name="major" value="parent">학부모
+		<input type="radio" name="major" value="teacher" checked="checked">선생님
+		<input type="radio" name="major" value="etc">기타
+		<br/>
+
+
+		<input type="submit" value="확인">
+		<input type="reset" value ="초기화">
+	</form>
+</body>
+</html>
