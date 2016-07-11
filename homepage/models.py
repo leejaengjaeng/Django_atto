@@ -10,8 +10,7 @@ class SliderImages(models.Model):
 	imgPath = models.CharField(max_length=256)
 	isAppear = models.BooleanField(default=True)
 	imgName = models.CharField(max_length=100)
-	role = models.PositiveSmallInteger(default=0)
-	# 0 : 방문자(언제나 보여줌?), 1:, 2:, :3, ...
+	#role = models.PositiveSmallInteger(default=0)
  
 	def __str__(self):
 		return self.imgName
@@ -28,5 +27,4 @@ class Users(models.Model):
 	address_line2 = models.CharField(max_length=100,null=False)
 	mobilePhoneNumber = models.CharField(max_length=50,null=False)
 	phoneNumber = models.CharField(max_length=50)
-	role = models.PositiveSmallInteger(default=0)
-	# 0: 방문자 , 1: , 2: ,3: ,...
+	#role = models.PositiveSmallInteger(default=0)

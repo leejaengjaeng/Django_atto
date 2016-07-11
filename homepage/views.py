@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from homepage.models import sliderImages
+from homepage.models import SliderImages
 
 from django.http import HttpResponse
 
