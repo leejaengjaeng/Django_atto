@@ -1,0 +1,23 @@
+{% load staticfiles %}
+<!doctype html>
+<html>
+<head>
+	<title> ImgTest </title>
+</head>
+<body>
+<p>{{cnt}}</p>
+<p>{{imgs}}</p>
+
+{% for img in imgs %} 
+<!--<img src= "{% static 'homepage/img/' %}{{img}}"/>
+--><br>
+{% ifequal 1 forloop.counter0 %}
+	<p> OH! </p>
+{% else %}
+	<p> ho..</p>
+{% endifequal %}
+
+{% endfor %}
+
+</body>
+</html>

@@ -1,0 +1,15 @@
+*.pyc
+*.db
+*.rdb
+*.DS_Store
+*.egg*
+*.swp
+*.log
+*.pid
+*.conf
+**/statics/
+**/media/
+**/dev/
+**/log/
+*.sqlite3
+**/.idea/
