@@ -67,7 +67,7 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'atto_homepage',
-	'USER':'root',
+	'USER':'attoDev',
 	'PASSWORD':'0000',
 	'HOST':'', #if database in the same machine with Django, Don't needed
 	'PORT':'', #port too 
