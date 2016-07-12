@@ -8,6 +8,15 @@ urlpatterns = [
 	url(r'^imgTest/',views.imgTest, name='imgtest'),
 	url(r'^Test/',views.Test, name='test'),
 	url(r'^signup/',views.signup,name='signup'),
-
+	url(r'^login/',
+		'django.contrib.auth.views.login',
+		name='userLogin',
+		kwargs={ 'template_name':'registration/loginTest.html', }
+		),
+	url(r'^logout/',
+		'django.contrib.auth.views.logout'
+		,name='userLogout',
+		kwargs={ 'template_name':'homepage/attocube_main.html',}
+		),
 ]
 
