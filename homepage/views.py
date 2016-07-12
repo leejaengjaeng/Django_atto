@@ -2,7 +2,7 @@ from django.shortcuts import render
 from homepage.models import SliderImages
 
 from django.http import HttpResponse
-
+from django.contrib.auth.models import User
 # Create your views here.
 
 def home(request):
@@ -14,11 +14,21 @@ def home(request):
 	return render(request,'homepage/attocube_main.html',{'imgs':sendToTemplate})
 
 def signup(request):
-
 	return render(request, 'registration/signup.html')
 
-# def checkid(request):
-# 	return rend
+def inputsign(request):
+	name = request.POST.get("name", str)
+	username = request.POST.get("id", str)
+	pwd = request.POST.get("pwd", str)
+	repwd = request.POST.get("repwd", str)
+	groups = request.POST.get("major", str)
+	mPhoneNum = request.POST.get("phonenum", str)
+	teleNum = request.POST.get("telenum",str)
+	user = User.objects.create_user(username=username, email=None, password=pwd,last_name=name)
+	user.userprofile.mobilePhoneNumber=mPhoneNum
+	user.userprofile.phoneNumber=teleNum
+	user.userprofile.save()
+	return render(request, 'registration/signup.html')
 
 def index(request):
 	return HttpResponse("Hello<br>This page will be the attocube's homepage")
