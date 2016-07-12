@@ -1,4 +1,5 @@
 from django.conf.urls import url
+import django.contrib.auth.views as auth_views
 from . import views
 
 urlpatterns = [
@@ -10,13 +11,15 @@ urlpatterns = [
 
 	url(r'^signup/',views.signup,name='signup'),
 	url(r'^login/',
-		'django.contrib.auth.views.login',
+		auth_views.login,
+		#'django.contrib.auth.views.login',
 		name='userLogin',
 		kwargs={ 'template_name':'registration/loginTest.html', }
 		),
 	url(r'^logout/',
-		'django.contrib.auth.views.logout'
-		,name='userLogout',
+		auth_views.logout,
+		#'django.contrib.auth.views.logout',
+		name='userLogout',
 		kwargs={ 'template_name':'homepage/attocube_main.html',}
 		),
 	url(r'^inputsign',views.inputsign,name='inputsign'),

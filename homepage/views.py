@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render,redirect
 from homepage.models import SliderImages
 
 from django.http import HttpResponse
@@ -28,7 +28,9 @@ def inputsign(request):
 	user.userprofile.mobilePhoneNumber=mPhoneNum
 	user.userprofile.phoneNumber=teleNum
 	user.userprofile.save()
-	return render(request, 'registration/signup.html')
+	return redirect('/home')
+	#	render(request,'homepage/attocube_main.html')
+#	return render(request, 'registration/signup.html')
 
 def index(request):
 	return HttpResponse("Hello<br>This page will be the attocube's homepage")
