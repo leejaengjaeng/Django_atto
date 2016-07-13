@@ -2,27 +2,22 @@ from django.conf.urls import url
 import django.contrib.auth.views as auth_views
 from . import views
 
+# base
 urlpatterns = [
 	url(r'^$',views.home, name='home'),
 	url(r'^home/',views.home ,name='home2'),
-	url(r'^second/',views.index2, name='test'),
-	url(r'^imgTest/',views.imgTest, name='imgtest'),
-	url(r'^Test/',views.Test, name='test'),
+]
 
+# about User
+urlpatterns += [
 	url(r'^signup/',views.signup,name='signup'),
+	url(r'^inputsign',views.inputsign,name='inputsign'),
 	url(r'^login/',
 		auth_views.login,
 		#'django.contrib.auth.views.login',
 		name='userLogin',
-		kwargs={ 'template_name':'registration/loginTest.html', }
+		kwargs={ 'template_name':'userTemplate/loginPage.html', }
 		),
-	url(r'^logout/',
-		auth_views.logout,
-		#'django.contrib.auth.views.logout',
-		name='userLogout',
-		kwargs={ 'template_name':'homepage/attocube_main.html',}
-		),
-	url(r'^inputsign',views.inputsign,name='inputsign'),
-
+	url(r'^logout/',views.logout,name="logout"),
 ]
 

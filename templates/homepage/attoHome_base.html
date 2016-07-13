@@ -1,12 +1,27 @@
+<!DOCTYPE html>
 {% load staticfiles %}
-<!doctype html>
 <html>
 <head>
-	<title> Base Html File </title>
+        <meta charset="utf-8" name="viewport" content="width=device-width, user-scalable=no">
+        <title>AttoCube.TEST</title>
+        <link rel="stylesheet" href = "{% static 'homepage/css/bootstrap.min.css' %}" />
+        <link rel="stylesheet" href="{% static 'homepage/css/bootstrap.min.css' %}" />
+        <script src="{% static 'homepage/js/jquery-3.0.0.min.js' %}"></script>
+        <script src="{% static 'homepage/js/bootstrap.min.js' %}"></script>
+        <script>
+            $(document).ready(function() {
+                $('#myCarousel').carousel('cycle');
+            });
+        </script>
 </head>
-<body>
-<p>Base HTML File</p>
+
+<body class="container">
+{% block nav_bar %}
+{% endblock nav_bar %}
+{% block slider %}
+{% endblock slider %}
+
 {% block content %}
-{% endblock %}
+{% endblock content %}
 </body>
 </html>

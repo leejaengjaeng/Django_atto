@@ -1,8 +1,8 @@
 from django.shortcuts import render,redirect
 from homepage.models import SliderImages
-
-from django.http import HttpResponse
 from django.contrib.auth.models import User
+
+import django.contrib.auth as djangoAuth
 # Create your views here.
 
 def home(request):
@@ -11,7 +11,13 @@ def home(request):
 	for t in imgList:
 		if t.isAppear==True : 
 			sendToTemplate.insert(0,t.imgPath)
-	return render(request,'homepage/attocube_main.html',{'imgs':sendToTemplate})
+
+	#login check
+	if request.user.is_authenticated():
+		# TODO : changing by role
+		return render(request,'userTemplate/logged_in.html',{'imgs':sendToTemplate,'user':request.user.get_full_name})
+	else :
+		return render(request,'userTemplate/default_template.html',{'imgs':sendToTemplate})
 
 def signup(request):
 	return render(request, 'registration/signup.html')
@@ -29,27 +35,7 @@ def inputsign(request):
 	user.userprofile.phoneNumber=teleNum
 	user.userprofile.save()
 	return redirect('/home')
-	#	render(request,'homepage/attocube_main.html')
-#	return render(request, 'registration/signup.html')
 
-def index(request):
-	return HttpResponse("Hello<br>This page will be the attocube's homepage")
-
-def index2(request):
-	return HttpResponse("SecondPage")
-
-def imgTest(request):
-	imgList = SliderImages.objects.all()
-	sendToTemplate =[]
-	for t in imgList:
-		if t.isAppear==True : 
-			sendToTemplate.insert(0,t.imgPath)
-	print sendToTemplate
-
-	return render(request,'homepage/imgTest.html',{'cnt':1,'imgs': sendToTemplate})
-
-def Test(request):
-	a = request.GET.get("username", None)
-	b = request.GET.get("email", None)
-	c = request.GET.get("password", None)
-	return HttpResponse(a + "/" + b + "/" + c)
+def logout(request):
+	djangoAuth.logout(request)
+	return redirect('/home')

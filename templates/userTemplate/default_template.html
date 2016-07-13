@@ -1,32 +1,13 @@
-<!DOCTYPE html>
+{% extends "homepage/attoHome_base.html" %}
+
 {% load staticfiles %}
-<html>
-<head>
-        <meta charset="utf-8">
-        <title>AttoCube.TEST</title>
 
-        <link rel="stylesheet" href = "{% static 'homepage/css/bootstrap.min.css' %}" />
-        <link rel="stylesheet" href="{% static 'homepage/css/bootstrap.min.css' %}" />
-        <script src="{% static 'homepage/js/jquery-3.0.0.min.js' %}"></script>
-        <script src="{% static 'homepage/js/bootstrap.min.js' %}"></script>
-        <!-- <script src="{% static 'homepage/js/"></script>  holder.js link -->
-        <script>
-            $(document).ready(function() {
-                $('#myCarousel').carousel('cycle');
-            });
-        </script>
-</head>
-
-<body class="container">
-
-<!-- Navigation bar start -->
-
-
-<nav class = "navbar navbar-default">
+{% block nav_bar %}
+<nav class = "navbar navbar-default" >
 	<div class = "container-fluid">
 		<div class = "navbar-header">
 			<a class = "navbar-brand" href="/home">
-				 <img src="{% static 'homepage/img/logo.png' %}" width="50" style="float:left; margin-right: 30px">
+				 <img src="{% static 'homepage/img/logo.png' %}" width="50" style="float:left;">
 			</a>
 		</div>
 		<div class="collapse navbar-collapse">
@@ -51,18 +32,19 @@
 		</div>
 	</div>
 </nav>
-<!-- Navigation bar end -->
-<!-- 슬라이더 범위-->
+{% endblock nav_bar %}
+
+{% block slider %}
 <div>
 	<!-- 슬라이더 그림 개수 설정 -->
-	<div id="myCarousel" class="carousel slide" data-ride="carousel" data-interval="5000">
+	<div id="myCarousel" class="carousel slide" data-ride="carousel" data-interval="4000">
  	  <ol class="carousel-indicators">
-	    {% if imgs %}	
+	    {% if imgs %}
 		{% for img in imgs %}
-			{% ifequal 0 forloop.counter0 %}		
+			{% ifequal 0 forloop.counter0 %}
 				<li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-			{% else %}	   
-				<li data-target="#myCarousel" data-slide-to= {{forloop.counter}} class=""></li> 
+			{% else %}
+				<li data-target="#myCarousel" data-slide-to= {{forloop.counter}} class=""></li>
 			{% endifequal %}
 	   	{% endfor %}
 	    {% else %}
@@ -70,10 +52,10 @@
 	    {% endif %}
 	  </ol>
 	<!-- 슬라이더 그림수 만큼 이미지 넣기 -->
-	  <div class="carousel-inner" role="listbox">	
+	  <div class="carousel-inner" role="listbox">
 	  {% if imgs %}
 		{% for img in imgs %}
-			{% ifequal 0 forloop.counter0 %}			
+			{% ifequal 0 forloop.counter0 %}
     				<div class="item active">
 	    	   		  <img src="{% static 'homepage/img/' %}{{img}}"/>
 	    			</div>
@@ -98,17 +80,6 @@
 	    <span class="sr-only">Next</span>
 	  </a>
 	</div><!-- myCarousel out -->
-    <div>
-        <form action="/Test" method="get">
-            <input type="text" name="username">
-            <input type="text" name="email">
-            <input type="text" name="password">
-            <input type="submit" value="Submit">
-        </form>
-    </div>
 	<hr>
-</div>	     
-<!-- 슬라이더 범위 끝 -->
-
-</body>
-</html>
+</div>
+{% endblock slider %}
