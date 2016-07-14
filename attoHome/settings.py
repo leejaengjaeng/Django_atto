@@ -73,6 +73,7 @@ DATABASES = {
 	'PORT':'', #port too 
     }
 }
+DATABASE_OPTIONS = {'charset':'utf8'}
 
 
 # Password validation
