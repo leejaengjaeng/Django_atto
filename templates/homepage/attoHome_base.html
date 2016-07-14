@@ -4,10 +4,10 @@
 <head>
         <meta charset="utf-8" name="viewport" content="width=device-width">
         <title>AttoCube.TEST</title>
-        <link rel="stylesheet" href = "{% static 'homepage/css/bootstrap.min.css' %}" />
-        <link rel="stylesheet" href="{% static 'homepage/css/bootstrap.min.css' %}" />
-        <script src="{% static 'homepage/js/jquery-3.0.0.min.js' %}"></script>
-        <script src="{% static 'homepage/js/bootstrap.min.js' %}"></script>
+        <link rel="stylesheet" href = "{% static 'assets/css/bootstrap.min.css' %}" />
+        <link rel="stylesheet" href="{% static 'assets/css/bootstrap.min.css' %}" />
+        <script src="{% static 'assets/js/jquery-3.0.0.min.js' %}"></script>
+        <script src="{% static 'assets/js/bootstrap.min.js' %}"></script>
         <script>
             $(document).ready(function() {
                 $('#myCarousel').carousel('cycle');
@@ -16,12 +16,69 @@
 </head>
 
 <body class="container">
-{% block nav_bar %}
-{% endblock nav_bar %}
-{% block slider %}
-{% endblock slider %}
 
+<!-- 네비게이션 바 시작 -->
+<nav class = "navbar navbar-default" >
+	<div class = "container-fluid">
+		<div class = "navbar-header">
+			<!-- 햄버거 메뉴-->
+			<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-collapse">
+                {% block nav_bar_hamburger %}
+                {% endblock nav_bar_hamburger %}
+		  	</button>
+			<a class = "navbar-brand" href="/home" style="padding:8px 10px 8px 10px" >
+                <img src="{% static 'assets/img/logo.png' %}" width="40">
+			</a>
+		</div>
+		<!-- 사이즈 줄어들면 사라질 부분 -->
+		<div class="collapse navbar-collapse" id="navbar-collapse">
+			<!--기본메뉴-->
+			<ul class="nav navbar-nav">
+                    {% block nav_bar_menu %}
+                    {% endblock nav_bar_menu %}
+			</ul>
+			<ul class="nav navbar-nav navbar-right" id="navbar-collapse-loginForm">
+			    {% block nav_bar_right %}
+                {% endblock nav_bar_right %}
+			</ul>
+		</div>
+	</div>
+</nav>
+<!-- 네비게이션 바 끝-->
+
+<!-- 슬라이더 시작 -->
+	<!- TODO: 슬라이더 하단 동그란 버튼이 첫번째 버튼만 동작함 -->
+<div>
+	<div id="myCarousel" class="carousel slide" data-ride="carousel" data-interval="3000">
+	<!-- 슬라이더 그림 개수 설정 -->
+ 	  <ol class="carousel-indicators">
+		{% block setSliderCnt %}
+		{% endblock setSliderCnt %}
+	  </ol>
+	<!-- 슬라이더 그림수 만큼 이미지 넣기 -->
+	  <div class="carousel-inner" role="listbox">
+		  {% block putSliderImages %}
+		  {% endblock putSliderImages %}
+	  </div>
+	<!-- 슬라이더 화살표 -->
+	{% if imgs %}
+		<a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
+			<span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+			<span class="sr-only">Previous</span>
+		</a>
+		<a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
+			<span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+			<span class="sr-only">Next</span>
+		</a>
+	{% endif %}
+	</div>
+
+</div>
+<!-- 슬라이더 종료 -->
+
+{% block dev_where_am_i %}
+{% endblock %}
+</body>
 {% block content %}
 {% endblock content %}
-</body>
 </html>

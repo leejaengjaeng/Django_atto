@@ -37,7 +37,7 @@ class userProfile(models.Model):
 	address_line2 = models.CharField(max_length=100,null=True)
 	mobilePhoneNumber = models.CharField(max_length=50,null=True)
 	phoneNumber = models.CharField(max_length=50,null=True)
-
+	role = models.IntegerField(null=True)
 	post_save.connect(create_user_profile, sender=User)
 
 	def __str__(self):

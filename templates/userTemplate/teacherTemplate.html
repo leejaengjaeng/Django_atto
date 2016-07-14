@@ -21,13 +21,11 @@
 
 {% block nav_bar_right %}
 	<li role="presentation">
-		<button type="button"  class="btn btn-default navbar-btn" onclick="location.href='/login'">
-			로그인
-		</button>
+	    <a href="#"> {{user}} </a>
 	</li>
 	<li role="presentation">
-		<button type="button"  class="btn btn-default navbar-btn" onclick="location.href='/signup'">
-			회원 가입
+		<button type="button"  class="btn btn-default navbar-btn" onclick="location.href='/logout'">
+			로그아웃
 		</button>
 	</li>
 {% endblock nav_bar_right %}
@@ -63,3 +61,7 @@
 		<!-- 뭔가 예외처리 하기 -->
 	  {% endif %}
 {% endblock putSliderImages %}
+
+{% block dev_where_am_i %}
+<h1>Dev teacher Template</h1>
+{% endblock %}

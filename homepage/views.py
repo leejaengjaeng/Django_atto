@@ -2,7 +2,7 @@ from django.shortcuts import render,redirect
 from homepage.models import SliderImages
 from django.contrib.auth.models import User
 
-import django.contrib.auth as djangoAuth
+import django.contrib.auth as django_auth
 # Create your views here.
 
 def home(request):
@@ -11,11 +11,19 @@ def home(request):
 	for t in imgList:
 		if t.isAppear==True : 
 			sendToTemplate.insert(0,t.imgPath)
-
+	currentUser = request.user
 	#login check
-	if request.user.is_authenticated():
+	if currentUser.is_authenticated():
 		# TODO : changing by role
-		return render(request,'userTemplate/logged_in.html',{'imgs':sendToTemplate,'user':request.user.get_full_name})
+		if currentUser.userprofile.role == 0:
+			return render(request,'userTemplate/customerTemplate.html',{'imgs':sendToTemplate,'user':request.user.get_full_name})
+		elif currentUser.userprofile.role == 1:
+			return render(request, 'userTemplate/teacherTemplate.html',{'imgs': sendToTemplate, 'user': request.user.get_full_name})
+		elif currentUser.userprofile.role == 2:
+			return render(request, 'userTemplate/investorTemplate.html', {'imgs': sendToTemplate, 'user': request.user.get_full_name})
+		else:
+			return render(request, 'userTemplate/logged_in.html', {'imgs': sendToTemplate, 'user': request.user.get_full_name})
+
 	else :
 		return render(request,'userTemplate/default_template.html',{'imgs':sendToTemplate})
 
@@ -37,5 +45,5 @@ def inputsign(request):
 	return redirect('/home')
 
 def logout(request):
-	djangoAuth.logout(request)
+	django_auth.logout(request)
 	return redirect('/home')
