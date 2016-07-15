@@ -19,5 +19,6 @@ urlpatterns += [
 		kwargs={ 'template_name':'userTemplate/loginPage.html', }
 		),
 	url(r'^logout/',views.logout,name="logout"),
+    url(r'^checkid/',views.checkIDv,name="checkid"),
 ]
 
