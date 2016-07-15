@@ -1,39 +1,56 @@
-from django.shortcuts import render,redirect,render_to_response
+
+# -*- coding: utf-8 -*-
+from django.shortcuts import render, redirect ,render_to_response
 from homepage.models import SliderImages
 from django.contrib.auth.models import User
+from django.core.exceptions import ObjectDoesNotExist
+import django.contrib.auth as django_auth
 from django.http import HttpResponse
-
-import django.contrib.auth as djangoAuth
 
 
 # Create your views here.
 
 def home(request):
-	imgList = SliderImages.objects.all()
-	sendToTemplate =[]
-	for t in imgList:
-		if t.isAppear==True : 
-			sendToTemplate.insert(0,t.imgPath)
+    currentUser = request.user
 
-	#login check
-	if request.user.is_authenticated():
-		# TODO : changing by role
-		return render(request,'userTemplate/logged_in.html',{'imgs':sendToTemplate,'user':request.user.get_full_name})
-	else :
-		return render(request,'userTemplate/default_template.html',{'imgs':sendToTemplate})
+    # 로그인 된 유저인지 확인
+    if currentUser.is_authenticated():
+        user_role = currentUser.userprofile.role
+    else :
+        user_role = 0
+
+    try:
+        imgList = SliderImages.objects.filter(role=user_role)
+        sendToTemplate = []
+        for t in imgList:
+            if t.isAppear == True:
+                sendToTemplate.insert(0, t.imgPath)
+    except ObjectDoesNotExist:
+        imgList = SliderImages.objects.all()
+        sendToTemplate = []
+        for t in imgList:
+            if t.isAppear == True:
+                sendToTemplate.insert(0, t.imgPath)
+
+    # login check
+    if currentUser.is_authenticated():
+        if currentUser.userprofile.role == 0:
+            return render(request, 'userTemplate/customerTemplate.html',
+                          {'imgs': sendToTemplate, 'user': request.user.get_full_name})
+        elif currentUser.userprofile.role == 1:
+            return render(request, 'userTemplate/teacherTemplate.html',
+                          {'imgs': sendToTemplate, 'user': request.user.get_full_name})
+        elif currentUser.userprofile.role == 2:
+            return render(request, 'userTemplate/investorTemplate.html',
+                          {'imgs': sendToTemplate, 'user': request.user.get_full_name})
+        else:
+            return render(request, 'userTemplate/logged_in.html',
+                          {'imgs': sendToTemplate, 'user': request.user.get_full_name})
+    else:
+        return render(request, 'userTemplate/default_template.html', {'imgs': sendToTemplate})
+
 
 def signup(request):
-    if (request.method == 'GET'):
-        ID = request.GET.get('id')
-        temp = User.objects.filter(username=ID)
-        response_data = {}
-        if temp.exists():
-            # reval = "0"
-            response_data['result'] = '0'
-        else:
-            # reval = "1"
-            response_data['result'] = '1'
-        return HttpResponse(json.dumps(response_data), content_type="application/json")
 	return render(request, 'registration/signup.html')
 
 def inputsign(request):
@@ -69,8 +86,8 @@ def inputsign(request):
     return redirect('/home')
 
 def logout(request):
-	djangoAuth.logout(request)
-	return redirect('/home')
+    django_auth.logout(request)
+    return redirect('/home')
 
 import json
 
@@ -85,3 +102,9 @@ def checkIDv(request):
         reval["exist"]="1"
 
     return HttpResponse(json.dumps(reval),content_type="application/json")
+
+
+def logout(request):
+    django_auth.logout(request)
+    return redirect('/home')
+

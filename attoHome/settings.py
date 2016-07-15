@@ -73,6 +73,7 @@ DATABASES = {
 	'PORT':'', #port too 
     }
 }
+DATABASE_OPTIONS = {'charset':'utf8'}
 
 
 # Password validation
@@ -113,9 +114,9 @@ USE_TZ = True
 
 STATIC_URL = '/statics/'
 
-STATIC_ROOT = '/statics/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'statics')
 
-STATICFILES_DIRS = (os.path.join(BASE_DIR,"statics"),)
+STATICFILES_DIRS = [('assets', os.path.join(BASE_DIR, 'assets')),]
 
 MEDIA_URL ='/media/'
 MEDIA_ROOT = '/media/'
