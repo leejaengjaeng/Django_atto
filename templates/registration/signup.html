@@ -62,7 +62,7 @@
 <h1>회원가입</h1>
 
 
-<form method="GET" name="form1" action="/checkid" onsubmit="return execute();">{% csrf_token %}
+<form method="POST" name="form1" action="/checkid" onsubmit="return execute();">{% csrf_token %}
     아이디          <input type="text" name="id" size="10" id="inputid"><button id="loginbtn">중복확인</button>
     <script>
         $(document).ready(function(){
@@ -70,8 +70,8 @@
                 var inputID = document.getElementById("inputid");
 
                 $.ajax({
-                    method:'GET',
-                    url: 'http://localhost:8000/checkid/',
+                    method:'POST',
+                    url: '/checkid/',
                     success: function(data){
                         alert("sucess");
                         var dd = data;
@@ -84,7 +84,7 @@
 </form>
 <br/>
 <br/>
-<form method="POST" name="form1" action="/inputsign" onsubmit="return execute();">{% csrf_token %}
+<form method="POST" name="form1" action="/inputsign">{% csrf_token %}
     비밀번호        <input type="password" name="pwd" size="10" id="pwd"><br/>
     비밀번호 확인   <input type="password" name="repwd" size="10" id="repwd"><br/>
     이름            <input type="text" name="name" size="10" id="name"><br/>
