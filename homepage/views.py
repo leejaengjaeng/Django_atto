@@ -54,18 +54,7 @@ def signup(request):
 	return render(request, 'registration/signup.html')
 
 def inputsign(request):
-    if(request.method=='GET'):
-        ID = request.GET.get('id')
-        temp = User.objects.filter(username=ID)
-        response_data = {}
-        if temp.exists():
-            #reval = "0"
-            response_data['result']='0'
-        else:
-            #reval = "1"
-            response_data['result'] = '1'
-        return HttpResponse(json.dumps(response_data),content_type="application/json")
-        #return HttpResponse('<h1>page was sss</h1>')
+
     name = request.POST.get("name", str)
     username = request.POST.get("id", str)
     pwd = request.POST.get("pwd", str)
