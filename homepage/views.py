@@ -80,17 +80,17 @@ def logout(request):
 
 import json
 
-def checkIDv(request):
-    ID=request.GET.get('id')
+def checkid(request):
+    ID=request.POST.get('id')
     temp = User.objects.filter(username=ID)
-    reval={}
+
     if temp.exists():
-        reval["exist"]="0"
+        reval="0"
 
     else:
-        reval["exist"]="1"
+        reval="1"
 
-    return HttpResponse(json.dumps(reval),content_type="application/json")
+    return render(request,'registration/signup.html',{'value':reval})
 
 
 def logout(request):

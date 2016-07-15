@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+{% load staticfiles %}
 <html>
 <head>
     <meta charset="utf-8">
@@ -62,29 +63,47 @@
 <h1>회원가입</h1>
 
 
-<form method="POST" name="form1" action="/checkid" onsubmit="return execute();">{% csrf_token %}
-    아이디          <input type="text" name="id" size="10" id="inputid"><button id="loginbtn">중복확인</button>
-    <script>
-        $(document).ready(function(){
-            $("#loginbtn").click(function () {
-                var inputID = document.getElementById("inputid");
 
-                $.ajax({
+<form method="POST" name="form1" action="/inputsign">
+    {% csrf_token %}
+    아이디 <input type="text" name="id" size="10" id="inputid"> <button type="button" id="loginbtn">중복확인</button>
+
+    <script>
+      $(document).ready(function()
+        {
+            $("#loginbtn").click(function ()
+            {
+                var inputID = document.getElementById('inputid').value;
+
+                alert(inputID);
+
+                $.ajax(
+                {
                     method:'POST',
-                    url: '/checkid/',
-                    success: function(data){
-                        alert("sucess");
-                        var dd = data;
-                        alert(dd);
+                    url: '/checkid',
+                    data : { 'id':inputID ,'csrfmiddlewaretoken': '{{ csrf_token }}',},
+                    success: function(data)
+                    {
+                        alert("ajax sucess");
+                        var retValue = data.reval;
+                        //var dd =JSON.stringify(data)
+
+                        if(retValue == 1)
+                            alert('쓸수있당~');
+                        else
+                            alert('못써영~');
+                    },
+                    error: function()
+                    {
+                        alert('error');
                     }
-                })
-            })
-        })
+                });
+            });
+        });
     </script>
-</form>
+
 <br/>
 <br/>
-<form method="POST" name="form1" action="/inputsign">{% csrf_token %}
     비밀번호        <input type="password" name="pwd" size="10" id="pwd"><br/>
     비밀번호 확인   <input type="password" name="repwd" size="10" id="repwd"><br/>
     이름            <input type="text" name="name" size="10" id="name"><br/>
