@@ -6,6 +6,8 @@ from django.contrib.auth.models import User
 from django.core.exceptions import ObjectDoesNotExist
 import django.contrib.auth as django_auth
 from django.http import HttpResponse
+import json
+
 
 import json
 
@@ -20,35 +22,61 @@ def home(request):
     else :
         user_role = 0
 
+    # 사용자에 맞는 이미지 가지고오기
     try:
         imgList = SliderImages.objects.filter(role=user_role)
-        sendToTemplate = []
+        sendSliderImgs = []
         for t in imgList:
             if t.isAppear == True:
-                sendToTemplate.insert(0, t.imgPath)
+                sendSliderImgs.insert(0, t.imgPath)
     except ObjectDoesNotExist:
         imgList = SliderImages.objects.all()
-        sendToTemplate = []
+        sendSliderImgs = []
         for t in imgList:
             if t.isAppear == True:
-                sendToTemplate.insert(0, t.imgPath)
+                sendSliderImgs.insert(0, t.imgPath)
+
+    # 사용자에 맞는 메뉴 수와 이름 가지고 오기
+        #TODO: 메뉴 사용자에 맞게 나타나게 고치기
+    menu = [
+        ('Home', '#'),
+        ('Profile', '#'),
+        ('Messages', '#'),
+        ('(dev) ID : attocube / PW : attocube', '#'),
+    ]
+
+    # 메뉴바 오른쪽 부분
+        #TODO : 사용자에 맞게 메뉴바 오른쪽 부분도 수정하기
+    menu_right = []
+    if user_role == 0:
+        menu_right = [
+            ("로그인", "location.href='/login'"),
+            ("회원 가입", "location.href='/signup'"),
+        ]
+    else:
+        menu_right = [
+            (currentUser.get_full_name, "location.href='/#'"),
+            ("로그 아웃", "location.href='/logout'"),
+        ]
 
     # login check
     if currentUser.is_authenticated():
         if currentUser.userprofile.role == 0:
             return render(request, 'userTemplate/customerTemplate.html',
-                          {'imgs': sendToTemplate, 'user': request.user.get_full_name})
+                          {'imgs':  sendSliderImgs, 'menu': menu, 'menu_right': menu_right, })
+
         elif currentUser.userprofile.role == 1:
             return render(request, 'userTemplate/teacherTemplate.html',
-                          {'imgs': sendToTemplate, 'user': request.user.get_full_name})
+                          {'imgs':  sendSliderImgs, 'menu': menu, 'menu_right': menu_right, })
+
         elif currentUser.userprofile.role == 2:
             return render(request, 'userTemplate/investorTemplate.html',
-                          {'imgs': sendToTemplate, 'user': request.user.get_full_name})
+                          {'imgs': sendSliderImgs, 'menu': menu, 'menu_right': menu_right, })
         else:
-            return render(request, 'userTemplate/logged_in.html',
-                          {'imgs': sendToTemplate, 'user': request.user.get_full_name})
+            return HttpResponse('user role Error')
     else:
-        return render(request, 'userTemplate/default_template.html', {'imgs': sendToTemplate})
+        return render(request, 'userTemplate/default_template.html',
+                      {'imgs':  sendSliderImgs, 'menu': menu, 'menu_right': menu_right, })
 
 
 def signup(request):
@@ -60,7 +88,7 @@ def inputsign(request):
     username = request.POST.get("id", str)
     pwd = request.POST.get("pwd", str)
     email1 = request.POST.get("email1", str)
-    email2 = request.POST.get("email2", str)
+    email2 = request.POST.get("email3", str)
     addr1=request.POST.get("addr1",str)
     addr2 = request.POST.get("addr2", str)
     addr3 = request.POST.get("addr3", str)
@@ -74,19 +102,22 @@ def inputsign(request):
     user.userprofile.role=role
     user.userprofile.save()
     return redirect('/home')
-
-
 def checkid(request):
+
+    print request.is_ajax()
+
     ID=request.POST.get('id')
+
     temp = User.objects.filter(username=ID)
 
     if temp.exists():
-        reval="0"
-
+        reval= 0
     else:
-        reval="1"
+        reval= 1
 
-    return HttpResponse(json.dumps({ 'reval': reval }), content_type="application/json")
+    print request.is_ajax()
+
+    return HttpResponse(json.dumps({'reval': reval}), content_type="application/json")
 
 def logout(request):
     django_auth.logout(request)
