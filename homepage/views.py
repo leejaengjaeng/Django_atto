@@ -95,8 +95,7 @@ def checkid(request):
 
     print request.is_ajax()
 
-    return HttpResponse(json.dumps({ 'reval': reval }), content_type="application/json")
-
+    return HttpResponse(json.dumps({'reval': reval}), content_type="application/json")
 
 def logout(request):
     django_auth.logout(request)
