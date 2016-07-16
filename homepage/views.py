@@ -6,6 +6,8 @@ from django.contrib.auth.models import User
 from django.core.exceptions import ObjectDoesNotExist
 import django.contrib.auth as django_auth
 from django.http import HttpResponse
+import json
+
 
 
 # Create your views here.
@@ -78,20 +80,22 @@ def logout(request):
     django_auth.logout(request)
     return redirect('/home')
 
-import json
-
 def checkid(request):
+
+    print request.is_ajax()
+
     ID=request.POST.get('id')
+
     temp = User.objects.filter(username=ID)
 
     if temp.exists():
-        reval="0"
-
+        reval= 0
     else:
-        reval="1"
+        reval= 1
+
+    print request.is_ajax()
 
     return HttpResponse(json.dumps({'reval': reval}), content_type="application/json")
-
 
 def logout(request):
     django_auth.logout(request)
