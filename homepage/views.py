@@ -59,7 +59,7 @@ def inputsign(request):
     username = request.POST.get("id", str)
     pwd = request.POST.get("pwd", str)
     email1 = request.POST.get("email1", str)
-    email2 = request.POST.get("email2", str)
+    email2 = request.POST.get("email3", str)
     addr1=request.POST.get("addr1",str)
     addr2 = request.POST.get("addr2", str)
     addr3 = request.POST.get("addr3", str)

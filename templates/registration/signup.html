@@ -8,15 +8,13 @@
     <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
     <script language="Javascript">
         <!--
-        function checkemailaddy(){
-            if (form.email_select.value == '1') {
-                form.email2.readonly = false;
-                form.email2.value = '';
-                form.email2.focus();
-            }
-            else {
-                form.email2.readonly = true;
-                form.email2.value = form.email_select.value;
+        function changeEmail ( email ) {
+            if(email == "1") {
+                document.getElementById("email3").style.display = "block";
+                document.frm.email3.value = "";
+            } else {
+                document.getElementById("email3").style.display = "none";
+                document.form1.email3.value = email;
             }
         }
 //-->
@@ -61,7 +59,7 @@
                 alert("주소를 입력하세요");
                 return false;
             }
-            if(document.form1.id!="readOnly"){
+            if(document.getElementById("inputid").getAttribute("readOnly")!="true"){
                 alert("아이디 중복확인을 해주세요");
                 return false;
             }
@@ -96,7 +94,7 @@
                                     //var dd =JSON.stringify(data)
 
                                     if (retValue == 1) {
-                                        alert('쓸수있당~');
+
                                         var q = confirm(inputID + "는 사용할 수 있습니다. 사용하시겠습니까?");
                                         if (q == true) {
                                             var f = document.form1;
@@ -108,7 +106,7 @@
                                         }
                                     }
                                     else {
-                                        alert('못써영~');
+                                        alert("중복된 아이디 입니다");
                                         //var f = document.form1;
                                          document.form1.id.value = "";
                                     }
@@ -127,20 +125,37 @@
     비밀번호        <input type="password" name="pwd" size="10" id="pwd"><br/>
     비밀번호 확인   <input type="password" name="repwd" size="10" id="repwd"><br/>
     이름            <input type="text" name="name" size="10" id="name"><br/>
-    <input name="email1" type="text" class="box" id="email1" size="15"> @ <input name="email2" type="text" class="box" id="email2" size="20">
-    <select name="email_select" class="box" id="email_select" onChange="checkemailaddy();">
-        <option value="" selected>선택하세요</option>
+    <input name="email1" type="text" class="box"> @
+
+    <select name="email2" onChange=changeEmail(this.value)>
+        <option value="" selected>이메일선택</option>
         <option value="naver.com">naver.com</option>
+        <option value="dreamwiz.com">dreamwiz.com</option>
+        <option value="empal.com">empal.com</option>
+        <option value="hanmir.com">hanmir.com</option>
+        <option value="hanafos.com">hanafos.com</option>
         <option value="hotmail.com">hotmail.com</option>
-        <option value="hanmail.com">hanmail.com</option>
+        <option value="lycos.co.kr">lycos.co.kr</option>
+        <option value="nate.com">nate.com</option>
+        <option value="paran.com">paran.com</option>
+        <option value="netian.com">netian.com</option>
         <option value="yahoo.co.kr">yahoo.co.kr</option>
+        <option value="kornet.net">kornet.net</option>
+        <option value="nownuri.net">nownuri.net</option>
+        <option value="unitel.co.kr">unitel.co.kr</option>
+        <option value="freechal.com">freechal.com</option>
+        <option value="korea.com">korea.com</option>
+        <option value="orgio.net">orgio.net</option>
+        <option value="chollian.net">chollian.net</option>
+        <option value="hitel.net">hitel.net</option>
         <option value="1">직접입력</option>
-    </select><br/>
+
+    </select>  <input type="text" name="email3" id = "email3" style="display:none"><br/>
     핸드폰 번호   <input type="text" name="phonenum" size="10" id="phonenumber"><br/>
     <input type="text" id="sample4_postcode" placeholder="우편번호" name="addr1" >
     <input type="button" onclick="sample4_execDaumPostcode()" value="우편번호 찾기"><br>
     <input type="text" id="sample4_roadAddress" placeholder="도로명주소" name="addr2">
-    <input type="text" id="sample4_jibunAddress" placeholder="지번주소" name="addr3">
+    <input type="text" id="sample4_jibunAddress" placeholder="나머지 주소" name="addr3">
     <span id="guide" style="color:#999"></span>
 
     <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
@@ -177,7 +192,7 @@
                     // 우편번호와 주소 정보를 해당 필드에 넣는다.
                     document.getElementById('sample4_postcode').value = data.zonecode; //5자리 새우편번호 사용
                     document.getElementById('sample4_roadAddress').value = fullRoadAddr;
-                    document.getElementById('sample4_jibunAddress').value = data.jibunAddress;
+                    //document.getElementById('sample4_jibunAddress').value = data.jibunAddress;
 
                     // 사용자가 '선택 안함'을 클릭한 경우, 예상 주소라는 표시를 해준다.
                     if(data.autoRoadAddress) {
