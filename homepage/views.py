@@ -7,6 +7,7 @@ from django.core.exceptions import ObjectDoesNotExist
 import django.contrib.auth as django_auth
 from django.http import HttpResponse
 
+import json
 
 # Create your views here.
 
@@ -74,11 +75,6 @@ def inputsign(request):
     user.userprofile.save()
     return redirect('/home')
 
-def logout(request):
-    django_auth.logout(request)
-    return redirect('/home')
-
-import json
 
 def checkid(request):
     ID=request.POST.get('id')
@@ -90,8 +86,7 @@ def checkid(request):
     else:
         reval="1"
 
-    return render(request,'registration/signup.html',{'value':reval})
-
+    return HttpResponse(json.dumps({ 'reval': reval }), content_type="application/json")
 
 def logout(request):
     django_auth.logout(request)

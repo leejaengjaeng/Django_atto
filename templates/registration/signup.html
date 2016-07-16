@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<DOCTYPE html>
 {% load staticfiles %}
 <html>
 <head>
@@ -36,23 +36,29 @@
                 alert("비밀번호가 맞지 않습니다.");
                 return false;
             }
-            if(name.value==""){
+            else if(name.value==""){
                 alert("이름을 입력하세요");
+		return false;
             }
-            if(inputid.value==""){
+            else if(inputid.value==""){
                 alert("아이디를 입력하세요");
+		return false;
             }
-            if(pwd.value==""){
+            else if(pwd.value==""){
                 alert("비밀번호를 입력하세요");
+		return false;
             }
-            if(email1.value==""||email2.value==""){
+            else if(email1.value==""||email2.value==""){
                 alert("메일 주소를 입력하세요");
+		return false;
             }
-            if(phonenumber.value==""){
+            else if(phonenumber.value==""){
                 alert("전화번호를 입력하세요");
+		return false;
             }
-            if(addr1.value==""||addr2.value==""||addr3.value=="") {
+            else if(addr1.value==""||addr2.value==""||addr3.value=="") {
                 alert("주소를 입력하세요");
+		return false;
             }
             document.addjoin.submit();
         }
@@ -64,7 +70,7 @@
 
 
 
-<form method="POST" name="form1" action="/inputsign">
+<form method="POST" name="form1" action="/inputsign" onsubmit="return execute()">
     {% csrf_token %}
     아이디 <input type="text" name="id" size="10" id="inputid"> <button type="button" id="loginbtn">중복확인</button>
 
@@ -87,11 +93,25 @@
                         alert("ajax sucess");
                         var retValue = data.reval;
                         //var dd =JSON.stringify(data)
-
-                        if(retValue == 1)
+			alert(retValue);
+                        if(retValue == 1){
                             alert('쓸수있당~');
-                        else
+			    var q = confirm(inputID + "는 사용할 수 있습니다. 사용하시겠습니까?");
+                                        if (q == true) {
+                                            var f = document.form1;
+                                            f.id.readOnly = true;
+                                        }
+                                        else {
+                                            var f = document.form1;
+                                            f.id.value = "";
+                                        }
+			}
+                        else{
                             alert('못써영~');
+			    var f = document.form1;
+                            f.id.value = "";
+			}
+				
                     },
                     error: function()
                     {
