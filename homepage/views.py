@@ -19,8 +19,28 @@ def home(request):
     # 로그인 된 유저인지 확인
     if currentUser.is_authenticated():
         user_role = currentUser.userprofile.role
-    else :
+        # 메뉴바 오른쪽 부분
+        menu_right = [
+            (currentUser.get_full_name, "location.href='/#'"),
+            ("로그 아웃", "location.href='/logout'"),
+        ]
+    else:
         user_role = 0
+        # 메뉴바 오른쪽 부분
+        menu_right = [
+            ("로그인", "location.href='/login'"),
+            ("회원 가입", "location.href='/signup'"),
+        ]
+
+
+    # 사용자에 맞는 메뉴 수와 이름 가지고 오기
+        #TODO: 메뉴 사용자에 맞게 나타나게 고치기
+    menu = [
+        ('Home', '#'),
+        ('Profile', '#'),
+        ('Messages', '#'),
+        ('(dev) ID : attocube / PW : attocube', '#'),
+    ]
 
     # 사용자에 맞는 이미지 가지고오기
     try:
@@ -35,29 +55,6 @@ def home(request):
         for t in imgList:
             if t.isAppear == True:
                 sendSliderImgs.insert(0, t.imgPath)
-
-    # 사용자에 맞는 메뉴 수와 이름 가지고 오기
-        #TODO: 메뉴 사용자에 맞게 나타나게 고치기
-    menu = [
-        ('Home', '#'),
-        ('Profile', '#'),
-        ('Messages', '#'),
-        ('(dev) ID : attocube / PW : attocube', '#'),
-    ]
-
-    # 메뉴바 오른쪽 부분
-        #TODO : 사용자에 맞게 메뉴바 오른쪽 부분도 수정하기
-    menu_right = []
-    if user_role == 0:
-        menu_right = [
-            ("로그인", "location.href='/login'"),
-            ("회원 가입", "location.href='/signup'"),
-        ]
-    else:
-        menu_right = [
-            (currentUser.get_full_name, "location.href='/#'"),
-            ("로그 아웃", "location.href='/logout'"),
-        ]
 
     # login check
     if currentUser.is_authenticated():
