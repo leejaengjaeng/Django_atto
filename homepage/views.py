@@ -90,7 +90,7 @@ def checkid(request):
     else:
         reval="1"
 
-    return render(request,'registration/signup.html',{'value':reval})
+    return HttpResponse(json.dumps({'reval': reval}), content_type="application/json")
 
 
 def logout(request):
