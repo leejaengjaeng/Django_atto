@@ -2,36 +2,6 @@
 
 {% load staticfiles %}
 
-<!-- 메뉴바 전체, 나올 개수/정보 확인해서 그거에 맞게 바꾸기 -->
-
-{% block nav_bar_hamburger %}
-	 <span class="sr-only">Toggle navigation</span>
-	 <span class="icon-bar"></span>
-	 <span class="icon-bar"></span>
-	 <span class="icon-bar"></span>
-	 <span class="icon-bar"></span>
-{% endblock nav_bar_hamburger %}
-
-{% block nav_bar_menu %}
-	<li role="presentation" class="active"><a href="#">Home</a></li>
-	<li role="presentation"><a href="#">Profile</a></li>
-	<li role="presentation"><a href="#">Messages</a></li>
-	<li role="presentation"><a href="#">Id: atto / pw: attocube </a> </li>
-{% endblock nav_bar_menu %}
-
-{% block nav_bar_right %}
-	<li role="presentation">
-		<button type="button"  class="btn btn-default navbar-btn" onclick="location.href='/login'">
-			로그인
-		</button>
-	</li>
-	<li role="presentation">
-		<button type="button"  class="btn btn-default navbar-btn" onclick="location.href='/signup'">
-			회원 가입
-		</button>
-	</li>
-{% endblock nav_bar_right %}
-
 {% block setSliderCnt %}
 	    {% if imgs %}
 		{% for img in imgs %}
