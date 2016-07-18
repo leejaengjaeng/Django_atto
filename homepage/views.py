@@ -85,3 +85,16 @@ def shop(request):
     sliderImgs = customUserHandler.getSliderImages(request)
     return render(request, 'homepage/shop.html',
                   {'imgs': sliderImgs, 'menu': menu, 'menu_right': menu_right,})
+
+def myaccount(request):
+    currentuser = request.user;
+    if currentuser.is_authenticated():
+        id=currentuser.username
+        mail = currentuser.email
+        name = currentuser.last_name
+        addr1 = currentuser.userprofile.address_line1
+        addr2 = currentuser.userprofile.address_line2
+        phonenum = currentuser.userprofile.mobilePhoneNumber
+        role = currentuser.userprofile.role
+        return render(request,'registration/myaccount.html',
+                      {'ids':id,'emails':mail,'names':name,'addr1s':addr1,'addr2s':addr2,'phonenums':phonenum,'roles':role})

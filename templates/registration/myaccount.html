@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>마이페이지</title>
+</head>
+<body>
+
+이름 : {{ names }} <br/>
+이메일 주소 : {{ emails }} <br/>
+아이디 : {{ ids }}<br/>
+주소 : {{ addr1s }}  {{ addr2s }}<br/>
+전화번호 : {{ phonenums }}<br/>
+구분 :
+{% ifequal roles 0 %}
+    고객
+{% endifequal %}
+{% ifequal roles 1 %}
+    선생님
+{% endifequal %}
+{% ifequal roles 2 %}
+    기타
+{% endifequal %}
+
+</body>
+</html>

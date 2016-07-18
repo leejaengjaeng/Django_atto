@@ -20,7 +20,7 @@ def getMenuRight(request):
     currentUser = request.user
     if currentUser.is_authenticated():
         menu_right = [
-            (currentUser.get_full_name, "location.href='/#'"),
+            (currentUser.get_full_name, "location.href='/myaccount'"),
             ("로그 아웃", "location.href='/logout'"),
         ]
     else:
