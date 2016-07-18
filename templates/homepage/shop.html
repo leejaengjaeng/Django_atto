@@ -2,73 +2,11 @@
 
 {% load staticfiles %}
 
-{% block additional_assets %}
 
-    <script type="text/javascript">
-        $(document).ready(function()
-        {
-            $('#itemSlider').carousel({
-            interval: 3500
-            })
-
-            $('#itemSlider').on('slid.bs.carousel', function() {
-                console.log("slid");
-            });
-
-        });
-    </script>
-
-    .carousel-control {
-        padding-top:10%;
-        width:5%;
-    }
-{% endblock additional_assets %}
 
 {% block slider %}
     {% include 'homepage/main_slider.html' with images=imgs %}
-<br>
-<br>
-<div id="itemSlider" class="carousel slide">
-    <!-- Carousel items -->
-    <div class="carousel-inner">
-        <div class="item active">
-            <div class="row">
-                <div class="col-sm-3"><a href="#x"><img src="http://placehold.it/500x500" alt="Image" class="img-responsive"></a></div>
-                <div class="col-sm-3"><a href="#x"><img src="http://placehold.it/500x500" alt="Image" class="img-responsive"></a></div>
-                <div class="col-sm-3"><a href="#x"><img src="http://placehold.it/500x500" alt="Image" class="img-responsive"></a></div>
-                <div class="col-sm-3"><a href="#x"><img src="http://placehold.it/500x500" alt="Image" class="img-responsive"></a></div>
-            </div>
-            <!--/row-->
-        </div>
-        <!--/item-->
-        <div class="item">
-            <div class="row">
-                <div class="col-sm-3"><a href="#x" class="thumbnail"><img src="http://placehold.it/250x250" alt="Image" class="img-responsive"></a></div>
-                <div class="col-sm-3"><a href="#x" class="thumbnail"><img src="http://placehold.it/250x250" alt="Image" class="img-responsive"></a></div>
-                <div class="col-sm-3"><a href="#x" class="thumbnail"><img src="http://placehold.it/250x250" alt="Image" class="img-responsive"></a></div>
-                <div class="col-sm-3"><a href="#x" class="thumbnail"><img src="http://placehold.it/250x250" alt="Image" class="img-responsive"></a></div>
-            </div>
-            <!--/row-->
-        </div>
-        <!--/item-->
-        <div class="item">
-            <div class="row">
-                <div class="col-sm-3"><a href="#x" class="thumbnail"><img src="http://placehold.it/250x250" alt="Image" class="img-responsive"></a>
-                </div>
-                <div class="col-sm-3"><a href="#x" class="thumbnail"><img src="http://placehold.it/250x250" alt="Image" class="img-responsive"></a>
-                </div>
-                <div class="col-sm-3"><a href="#x" class="thumbnail"><img src="http://placehold.it/250x250" alt="Image" class="img-responsive"></a>
-                </div>
-                <div class="col-sm-3"><a href="#x" class="thumbnail"><img src="http://placehold.it/250x250" alt="Image" class="img-responsive"></a>
-                </div>
-            </div>
-            <!--/row-->
-        </div>
-        <!--/item-->
-    </div>
-    <!--/carousel-inner--> <a class="left carousel-control" href="#myCarousel" data-slide="prev">‹</a>
-    <a class="right carousel-control" href="#myCarousel" data-slide="next">›</a>
-</div>
-<!--/myCarousel-->
-
+    <br>
+    <br>
+    {% include 'homepage/item_slider.html' %}
 {% endblock slider %}

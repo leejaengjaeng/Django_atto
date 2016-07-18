@@ -8,7 +8,6 @@
     </script>
 {% endblock additional_assets %}
 
-<!- TODO: 슬라이더 하단 동그란 버튼이 첫번째 버튼만 동작함 -->
 <div>
 	<div id="mainSlider" class="carousel slide" data-ride="carousel" data-interval="3000">
 	<!-- 슬라이더 그림 개수 설정 -->
@@ -18,7 +17,7 @@
                 {% ifequal 0 forloop.counter0 %}
                     <li data-target="#mainSlider" data-slide-to="0" class="active"></li>
                 {% else %}
-                    <li data-target="#mainSlider" data-slide-to= {{forloop.counter}} class=""></li>
+                    <li data-target="#mainSlider" data-slide-to= {{forloop.counter0}} class=""></li>
                 {% endifequal %}
     	   	{% endfor %}
 	    {% else %}
@@ -43,17 +42,5 @@
             <!-- 뭔가 예외처리 하기 (이미지가 없는 경우) -->
           {% endif %}
 	  </div>
-	<!-- 슬라이더 화살표 -->
-	{% if imgs %}
-		<a class="left carousel-control" href="#mainSlider" role="button" data-slide="prev">
-			<span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
-			<span class="sr-only">Previous</span>
-		</a>
-		<a class="right carousel-control" href="#mainSlider" role="button" data-slide="next">
-			<span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
-			<span class="sr-only">Next</span>
-		</a>
-	{% endif %}
 	</div>
-
 </div>

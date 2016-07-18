@@ -2,8 +2,11 @@
 
 {% load staticfiles %}
 
-{% block main_content %}
+{% block slider %}
 	{% include 'homepage/main_slider.html' with images=imgs %}
+{% endblock slider %}
+
+{% block main_content %}
 	<h1> DEV </h1>
 	<p> Teacher Page</p>
 {% endblock main_content %}
