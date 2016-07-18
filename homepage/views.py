@@ -1,79 +1,37 @@
-
 # -*- coding: utf-8 -*-
 from django.shortcuts import render, redirect ,render_to_response
-from homepage.models import SliderImages
 from django.contrib.auth.models import User
-from django.core.exceptions import ObjectDoesNotExist
 import django.contrib.auth as django_auth
 from django.http import HttpResponse
 import json
-
-
-import json
+import customUserHandler
 
 # Create your views here.
 
 def home(request):
     currentUser = request.user
+    menu_right = customUserHandler.getMenuRight(request)
+    menu = customUserHandler.getMenu(request)
+    sliderImgs = customUserHandler.getSliderImages(request)
 
-    # 로그인 된 유저인지 확인
-    if currentUser.is_authenticated():
-        user_role = currentUser.userprofile.role
-        # 메뉴바 오른쪽 부분
-        menu_right = [
-            (currentUser.get_full_name, "location.href='/#'"),
-            ("로그 아웃", "location.href='/logout'"),
-        ]
-    else:
-        user_role = 0
-        # 메뉴바 오른쪽 부분
-        menu_right = [
-            ("로그인", "location.href='/login'"),
-            ("회원 가입", "location.href='/signup'"),
-        ]
-
-
-    # 사용자에 맞는 메뉴 수와 이름 가지고 오기
-        #TODO: 메뉴 사용자에 맞게 나타나게 고치기
-    menu = [
-        ('Home', '#'),
-        ('Profile', '#'),
-        ('Messages', '#'),
-        ('(dev) ID : attocube / PW : attocube', '#'),
-    ]
-
-    # 사용자에 맞는 이미지 가지고오기
-    try:
-        imgList = SliderImages.objects.filter(role=user_role)
-        sendSliderImgs = []
-        for t in imgList:
-            if t.isAppear == True:
-                sendSliderImgs.insert(0, t.imgPath)
-    except ObjectDoesNotExist:
-        imgList = SliderImages.objects.all()
-        sendSliderImgs = []
-        for t in imgList:
-            if t.isAppear == True:
-                sendSliderImgs.insert(0, t.imgPath)
-
-    # login check
+    # 로그인 체크
     if currentUser.is_authenticated():
         if currentUser.userprofile.role == 0:
             return render(request, 'userTemplate/customerTemplate.html',
-                          {'imgs':  sendSliderImgs, 'menu': menu, 'menu_right': menu_right, })
+                          {'imgs':  sliderImgs, 'menu': menu, 'menu_right': menu_right, })
 
         elif currentUser.userprofile.role == 1:
             return render(request, 'userTemplate/teacherTemplate.html',
-                          {'imgs':  sendSliderImgs, 'menu': menu, 'menu_right': menu_right, })
+                          {'imgs':  sliderImgs, 'menu': menu, 'menu_right': menu_right, })
 
         elif currentUser.userprofile.role == 2:
             return render(request, 'userTemplate/investorTemplate.html',
-                          {'imgs': sendSliderImgs, 'menu': menu, 'menu_right': menu_right, })
-        else:
+                          {'imgs': sliderImgs, 'menu': menu, 'menu_right': menu_right, })
+        else: #role이 입력되어있지 않은경우
             return HttpResponse('user role Error')
     else:
         return render(request, 'userTemplate/default_template.html',
-                      {'imgs':  sendSliderImgs, 'menu': menu, 'menu_right': menu_right, })
+                      {'imgs':  sliderImgs, 'menu': menu, 'menu_right': menu_right, })
 
 
 def signup(request):
@@ -120,3 +78,10 @@ def logout(request):
     django_auth.logout(request)
     return redirect('/home')
 
+def shop(request):
+
+    menu_right = customUserHandler.getMenuRight(request)
+    menu = customUserHandler.getMenu(request)
+    sliderImgs = customUserHandler.getSliderImages(request)
+    return render(request, 'homepage/shop.html',
+                  {'imgs': sliderImgs, 'menu': menu, 'menu_right': menu_right,})

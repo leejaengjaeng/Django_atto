@@ -4,59 +4,24 @@
 <head>
         <meta charset="utf-8" name="viewport" content="width=device-width">
         <title>AttoCube.TEST</title>
-        <link rel="stylesheet" href = "{% static 'assets/css/bootstrap.min.css' %}" />
+        <link rel="shortcut icon" type="image/x-icon" href="{% static 'assets/img/logo.png' %}"/>
+		<link rel="stylesheet" href = "{% static 'assets/css/bootstrap.min.css' %}" />
         <link rel="stylesheet" href="{% static 'assets/css/bootstrap.min.css' %}" />
-        <script src="{% static 'assets/js/jquery-3.0.0.min.js' %}"></script>
+
+		<script src="{% static 'assets/js/jquery-3.0.0.min.js' %}"></script>
         <script src="{% static 'assets/js/bootstrap.min.js' %}"></script>
-        <script>
-            $(document).ready(function() {
-                $('#myCarousel').carousel('cycle');
-            });
-        </script>
+
+
+		{% block additional_assets %}
+		{% endblock additional_assets %}
+
 </head>
 
 <body class="container">
 {% include 'homepage/navigation_bar.html' with menuNav=menu menuRightNav=menu_right %}
+{% block slider %}{% endblock slider %}
+{% block main_content %}{% endblock main_content %}
 
-<!-- 슬라이더 시작 -->
-	<!- TODO: 슬라이더 하단 동그란 버튼이 첫번째 버튼만 동작함 -->
-<div>
-	<div id="myCarousel" class="carousel slide" data-ride="carousel" data-interval="3000">
-	<!-- 슬라이더 그림 개수 설정 -->
- 	  <ol class="carousel-indicators">
-		{% block setSliderCnt %}
-		{% endblock setSliderCnt %}
-	  </ol>
-	<!-- 슬라이더 그림수 만큼 이미지 넣기 -->
-	  <div class="carousel-inner" role="listbox">
-		  {% block putSliderImages %}
-		  {% endblock putSliderImages %}
-	  </div>
-	<!-- 슬라이더 화살표 -->
-	{% if imgs %}
-		<a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
-			<span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
-			<span class="sr-only">Previous</span>
-		</a>
-		<a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
-			<span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
-			<span class="sr-only">Next</span>
-		</a>
-	{% endif %}
-	</div>
-
-</div>
-<!-- 슬라이더 종료 -->
-
-{% block dev_where_am_i %}
-{% endblock %}
-
-{% block main_content %}
-{% endblock main_content %}
-
-<div>
-
-</div>
-
+{% include 'homepage/footer.html' %}
 </body>
 </html>

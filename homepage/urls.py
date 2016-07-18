@@ -20,5 +20,6 @@ urlpatterns += [
 		),
 	url(r'^logout/',views.logout,name="logout"),
     url(r'^checkid',views.checkid,name="checkid"),
+	url(r'^shop', views.shop, name="shop"),
 ]
 

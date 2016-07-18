@@ -2,66 +2,8 @@
 
 {% load staticfiles %}
 
-<!-- 메뉴바 전체, 나올 개수/정보 확인해서 그거에 맞게 바꾸기 -->
-
-{% block nav_bar_hamburger %}
-	 <span class="sr-only">Toggle navigation</span>
-	 <span class="icon-bar"></span>
-	 <span class="icon-bar"></span>
-	 <span class="icon-bar"></span>
-	 <span class="icon-bar"></span>
-{% endblock nav_bar_hamburger %}
-
-{% block nav_bar_menu %}
-	<li role="presentation" class="active"><a href="#">Home</a></li>
-	<li role="presentation"><a href="#">Profile</a></li>
-	<li role="presentation"><a href="#">Messages</a></li>
-	<li role="presentation"><a href="#">Id: atto / pw: attocube </a> </li>
-{% endblock nav_bar_menu %}
-
-{% block nav_bar_right %}
-	<li role="presentation">
-	    <a href="#"> {{user}} </a>
-	</li>
-	<li role="presentation">
-		<button type="button"  class="btn btn-default navbar-btn" onclick="location.href='/logout'">
-			로그아웃
-		</button>
-	</li>
-{% endblock nav_bar_right %}
-
-{% block setSliderCnt %}
-	    {% if imgs %}
-		{% for img in imgs %}
-			{% ifequal 0 forloop.counter0 %}
-				<li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-			{% else %}
-				<li data-target="#myCarousel" data-slide-to= {{forloop.counter}} class=""></li>
-			{% endifequal %}
-	   	{% endfor %}
-	    {% else %}
-		<!-- 뭔가 예외처리 하기 -->
-	    {% endif %}
-{% endblock setSliderCnt %}
-
-{% block putSliderImages %}
-	  {% if imgs %}
-		{% for img in imgs %}
-			{% ifequal 0 forloop.counter0 %}
-    				<div class="item active">
-	    	   		  <img src="{% static 'assets/img/' %}{{img}}"/>
-	    			</div>
-			{% else %}
-	    			<div class="item">
-	      			  <img src="{% static 'assets/img/' %}{{img}}">
-	    			</div>
-			{% endifequal %}
-	  	{% endfor %}
-	  {% else %}
-		<!-- 뭔가 예외처리 하기 -->
-	  {% endif %}
-{% endblock putSliderImages %}
-
-{% block dev_where_am_i %}
-<h1>Dev customer Template</h1>
-{% endblock %}
+{% block main_content %}
+	{% include 'homepage/main_slider.html' with images=imgs %}
+	<h1> DEV </h1>
+	<p> customer Page</p>
+{% endblock main_content %}
