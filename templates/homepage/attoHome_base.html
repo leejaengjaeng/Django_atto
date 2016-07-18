@@ -14,14 +14,29 @@
 
 		{% block additional_assets %}
 		{% endblock additional_assets %}
-
+        <style type="text/css">
+        #fixed {
+            width: 50px;
+            height: 50px;
+            position: fixed;
+            bottom: 100px;
+            right: 20px;
+        }
+        #footersty{
+            bottom : 0px;
+        }
+        </style>
 </head>
 
 <body class="container">
 {% include 'homepage/navigation_bar.html' with menuNav=menu menuRightNav=menu_right %}
 {% block slider %}{% endblock slider %}
 {% block main_content %}{% endblock main_content %}
-
+<div id="fixed">
+<div style="cursor:pointer;" onclick="window.scrollTo(0,0);"><img src="{% static 'assets/img/' %}/topbtn.png"></div>
+</div>
+<div id = "footersty">
 {% include 'homepage/footer.html' %}
+</div>
 </body>
 </html>
