@@ -1,7 +1,7 @@
 {% extends "homepage/attoHome_base.html" %}
 {% load staticfiles %}
 
-<h1>회원가입</h1>
+<h1>개인정보수정</h1>
 {% block main_content %}
 <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
     <script language="Javascript">
@@ -66,9 +66,9 @@
         }
     </script>
 
-<form method="POST" name="form1" action="/inputsign" onsubmit="return execute()">
+<form method="POST" name="form1" action="/editsave" onsubmit="return execute()">
     {% csrf_token %}
-    아이디 <input type="text" name="id" size="10" id="inputid"> <button type="button" id="loginbtn">중복확인</button>
+    아이디 <input type="text" name="id" size="10" id="inputid" value="{{ ids }}" readonly style="background-color: #e2e2e2;">
 
     <script>
       $(document).ready(function()
@@ -116,8 +116,8 @@
 <br/>
     비밀번호        <input type="password" name="pwd" size="10" id="pwd"><br/>
     비밀번호 확인   <input type="password" name="repwd" size="10" id="repwd"><br/>
-    이름            <input type="text" name="name" size="10" id="name"><br/>
-    <input name="email1" type="text" class="box"> @
+    이름            <input type="text" name="name" size="10" id="name" value="{{ names }}"><br/>
+    <input name="email1" type="text" class="box" value="{{ mails }}"> @
 
     <select name="email2" onChange=changeEmail(this.value)>
         <option value="" selected>이메일선택</option>
@@ -132,7 +132,7 @@
         <option value="1">직접입력</option>
 
     </select>  <input type="text" name="email3" id = "email3" style="display:none"><br/>
-    핸드폰 번호   <input type="text" name="phonenum" size="10" id="phonenumber"><br/>
+    핸드폰 번호   <input type="text" name="phonenum" size="10" id="phonenumber" value="{{ phonenums }}"><br/>
     <input type="text" id="sample4_postcode" placeholder="우편번호" name="addr1" >
     <input type="button" onclick="sample4_execDaumPostcode()" value="우편번호 찾기"><br>
     <input type="text" id="sample4_roadAddress" placeholder="도로명주소" name="addr2">
