@@ -58,6 +58,7 @@ def inputsign(request):
     user.userprofile.address_line2=addr2+" "+addr3
     user.userprofile.role=role
     user.userprofile.save()
+
     return redirect('/home')
 def checkid(request):
 
@@ -101,6 +102,7 @@ def myaccount(request):
         return render(request,'registration/myaccount.html',
                       {'ids':id,'emails':mail,'names':name,'addr1s':addr1,'addr2s':addr2,'phonenums':phonenum,'roles':role})
 
+<<<<<<< HEAD
 from homepage.forms import TestImageUploadForm
 from homepage.models import shopItem
 from django.template import RequestContext
@@ -124,3 +126,40 @@ def TestUpload(request):
     )
 
 
+=======
+def editaccount(request):
+    currentuser=request.user
+    if currentuser.is_authenticated():
+        id = currentuser.username
+        mail = currentuser.email.split('@')
+        name = currentuser.last_name
+        addr1 = currentuser.userprofile.address_line1
+        addr2 = currentuser.userprofile.address_line2
+        phonenum = currentuser.userprofile.mobilePhoneNumber
+        role = currentuser.userprofile.role
+        return render(request, 'registration/editaccount.html',
+                      {'ids': id, 'emails': mail, 'names': name, 'addr1s': addr1, 'addr2s': addr2,
+                       'phonenums': phonenum, 'roles': role})
+
+def editaccountsave(request):
+    user=User.objects.get(username=request.user.username)
+    newpwd=request.POST.get("pwd");
+    user.set_password(newpwd)
+    newname=request.POST.get("name");
+    user.last_name=newname;
+    newemail1= request.POST.get("email1")
+    newemail2 = request.POST.get("email2")
+    user.email = newemail1+"@"+newemail2
+    user.save()
+    newphonenum = request.POST.get("phonenum")
+    user.userprofile.mobilePhoneNumber=newphonenum
+    newaddr1 = request.POST.get("addr1")
+    newaddr2 = request.POST.get("addr2")
+    newaddr3 = request.POST.get("addr3")
+    user.userprofile.address_line1 = newaddr1
+    user.userprofile.address_line2 = newaddr2 + " " + newaddr3
+    newrole = request.POST.get("major")
+    user.userprofile.role = newrole
+    user.userprofile.save()
+    return redirect('/home')
+>>>>>>> 6e459906c18ada4f095b42a4cd9417a417ba2ded

@@ -22,6 +22,11 @@ urlpatterns += [
     url(r'^checkid',views.checkid,name="checkid"),
 	url(r'^shop', views.shop, name="shop"),
 	url(r'^myaccount', views.myaccount,name="myaccount"),
+<<<<<<< HEAD
 	url(r'^testUp',views.TestUpload,name='tu'),
+=======
+	url(r'^editaccount',views.editaccount,name="editaccount"),
+	url(r'^editsave',views.editaccountsave,name="editaccountsave"),
+>>>>>>> 6e459906c18ada4f095b42a4cd9417a417ba2ded
 ]
 

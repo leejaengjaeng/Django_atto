@@ -1,17 +1,12 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>마이페이지</title>
-</head>
-<body>
-
-이름 : {{ names }} <br/>
-이메일 주소 : {{ emails }} <br/>
-아이디 : {{ ids }}<br/>
-주소 : {{ addr1s }}  {{ addr2s }}<br/>
-전화번호 : {{ phonenums }}<br/>
-구분 :
+{% extends "homepage/attoHome_base.html" %}
+{% load staticfiles %}
+{% block main_content %}
+<p>이름 : {{ names }} </p>
+<p>이메일 주소 : {{ emails }} </p>
+<p>아이디 : {{ ids }}</p>
+<p>주소 : {{ addr1s }}  {{ addr2s }}</p>
+<p>전화번호 : {{ phonenums }}</p>
+<p>구분 :
 {% ifequal roles 0 %}
     고객
 {% endifequal %}
@@ -22,5 +17,6 @@
     기타
 {% endifequal %}
 
-</body>
-</html>
+</p>
+<button type="button" onclick="location.href='/editaccount'">정보수정</button>
+{% endblock main_content %}
