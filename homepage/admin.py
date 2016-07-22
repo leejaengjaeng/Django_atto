@@ -14,7 +14,11 @@ class userProfileInline(admin.StackedInline):
 class UserAdmin(UserAdmin):
     inlines = (userProfileInline,)
 
+
+from homepage.models import shopItem
+
 # Re register UserAdmin
 admin.site.unregister(User)
 admin.site.register(User, UserAdmin)
 admin.site.register(SliderImages)
+admin.site.register(shopItem)

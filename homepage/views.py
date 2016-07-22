@@ -9,6 +9,8 @@ import customUserHandler
 # Create your views here.
 
 def home(request):
+    request.encoding = 'utf-8'
+    print request.encoding
     currentUser = request.user
     menu_right = customUserHandler.getMenuRight(request)
     menu = customUserHandler.getMenu(request)
@@ -98,3 +100,27 @@ def myaccount(request):
         role = currentuser.userprofile.role
         return render(request,'registration/myaccount.html',
                       {'ids':id,'emails':mail,'names':name,'addr1s':addr1,'addr2s':addr2,'phonenums':phonenum,'roles':role})
+
+from homepage.forms import TestImageUploadForm
+from homepage.models import shopItem
+from django.template import RequestContext
+
+def TestUpload(request):
+    if request.method == 'POST' :
+        form = TestImageUploadForm(request.POST, request.FILES)
+        if form.is_valid():
+            newItem = shopItem(img=request.FILES['docfile'])
+            newItem.save()
+            return redirect('/testUp')
+    else :
+        form = TestImageUploadForm()
+
+    items = shopItem.objects.all()
+
+    return render_to_response(
+        'itemList.html',
+        {'items':items, 'form':form},
+        context_instance=RequestContext(request)
+    )
+
+

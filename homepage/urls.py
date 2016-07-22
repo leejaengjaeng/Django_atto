@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 from django.conf.urls import url
 import django.contrib.auth.views as auth_views
 from . import views
@@ -14,7 +15,6 @@ urlpatterns += [
 	url(r'^inputsign',views.inputsign,name='inputsign'),
 	url(r'^login/',
 		auth_views.login,
-		#'django.contrib.auth.views.login',
 		name='userLogin',
 		kwargs={ 'template_name':'userTemplate/loginPage.html', }
 		),
@@ -22,5 +22,6 @@ urlpatterns += [
     url(r'^checkid',views.checkid,name="checkid"),
 	url(r'^shop', views.shop, name="shop"),
 	url(r'^myaccount', views.myaccount,name="myaccount"),
+	url(r'^testUp',views.TestUpload,name='tu'),
 ]
 

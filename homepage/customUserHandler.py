@@ -10,6 +10,7 @@ def getMenu(reqeust):
         ('Intro', '#'),
         ('Q&A', '#'),
         ('Shop', '/shop'),
+        ('Download', '#'),
         ('(dev) ID : attocube / PW : attocube', '#'),
     ]
     return menu
@@ -43,12 +44,12 @@ def getSliderImages(request):
         imgList = SliderImages.objects.filter(role=user_role)
         for t in imgList:
             if t.isAppear == True:
-                sendSliderImgs.insert(0, t.imgPath)
+                sendSliderImgs.insert(0, t)
     except ObjectDoesNotExist:
         imgList = SliderImages.objects.all()
         for t in imgList:
             if t.isAppear == True:
-                sendSliderImgs.insert(0, t.imgPath)
+                sendSliderImgs.insert(0, t)
 
     return sendSliderImgs
 
