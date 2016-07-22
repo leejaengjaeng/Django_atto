@@ -102,31 +102,7 @@ def myaccount(request):
         return render(request,'registration/myaccount.html',
                       {'ids':id,'emails':mail,'names':name,'addr1s':addr1,'addr2s':addr2,'phonenums':phonenum,'roles':role})
 
-<<<<<<< HEAD
-from homepage.forms import TestImageUploadForm
-from homepage.models import shopItem
-from django.template import RequestContext
 
-def TestUpload(request):
-    if request.method == 'POST' :
-        form = TestImageUploadForm(request.POST, request.FILES)
-        if form.is_valid():
-            newItem = shopItem(img=request.FILES['docfile'])
-            newItem.save()
-            return redirect('/testUp')
-    else :
-        form = TestImageUploadForm()
-
-    items = shopItem.objects.all()
-
-    return render_to_response(
-        'itemList.html',
-        {'items':items, 'form':form},
-        context_instance=RequestContext(request)
-    )
-
-
-=======
 def editaccount(request):
     currentuser=request.user
     if currentuser.is_authenticated():
@@ -162,4 +138,3 @@ def editaccountsave(request):
     user.userprofile.role = newrole
     user.userprofile.save()
     return redirect('/home')
->>>>>>> 6e459906c18ada4f095b42a4cd9417a417ba2ded
