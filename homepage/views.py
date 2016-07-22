@@ -135,4 +135,3 @@ def editaccountsave(request):
     user.userprofile.role = newrole
     user.userprofile.save()
     return redirect('/home')
-    
