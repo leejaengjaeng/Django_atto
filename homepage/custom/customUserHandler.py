@@ -7,11 +7,11 @@ def getMenu(reqeust):
     # 사용자에 맞는 메뉴 수와 이름 가지고 오기
     # TODO: 메뉴 사용자에 맞게 나타나게 고치기
     menu = [
-        ('Intro', '#'),
-        ('Q&A', '#'),
-        ('Shop', '/shop'),
-        ('Download', '#'),
-        ('(dev) ID : attocube / PW : attocube', '#'),
+        (u'Intro', '#'),
+        (u'Q&A', '#'),
+        (u'Shop', '/shop'),
+        (u'Download', '#'),
+        (u'(dev) ID : attocube / PW : attocube', '#'),
     ]
     return menu
 
