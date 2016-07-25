@@ -4,7 +4,7 @@ from django.contrib.auth.models import User
 import django.contrib.auth as django_auth
 from django.http import HttpResponse
 import json
-import custom.customUserHandler as cuh
+import application.common.customUserHandler as cuh
 
 # Create your views here.
 

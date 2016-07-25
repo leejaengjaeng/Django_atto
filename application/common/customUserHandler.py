@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from homepage.models import SliderImages, shopItem
+from application.homepage.models import SliderImages, shopItem
 from django.core.exceptions import ObjectDoesNotExist
 
 #메뉴바 왼쪽 부분
@@ -61,5 +61,4 @@ def getItemList(request):
     except ObjectDoesNotExist:
         itemList = []
     return itemList
-
 
