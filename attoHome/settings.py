@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 import os
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
@@ -25,7 +26,11 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'homepage'
+
+    # 홈페이지 관련 App
+    'application.common',
+    'application.homepage',
+    'application.qa',
 ]
 
 MIDDLEWARE_CLASSES = [

@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from homepage.models import SliderImages
+from application.homepage.models import SliderImages
 from django.core.exceptions import ObjectDoesNotExist
 
 #메뉴바 왼쪽 부분
@@ -7,11 +7,11 @@ def getMenu(reqeust):
     # 사용자에 맞는 메뉴 수와 이름 가지고 오기
     # TODO: 메뉴 사용자에 맞게 나타나게 고치기
     menu = [
-        (u'Intro', '#'),
-        (u'Q&A', '#'),
-        (u'Shop', '/shop'),
-        (u'Download', '#'),
-        (u'(dev) ID : attocube / PW : attocube', '#'),
+        (u'제품 소개', '/shop'),
+        (u'고객 센터', '#'),
+        (u'브랜드 소개', '#'),
+        (u'콘텐츠', '#'),
+        (u'다운로드', '#'),
     ]
     return menu
 

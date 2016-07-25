@@ -2,7 +2,7 @@ from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
 from django.contrib.auth.models import User
 
-from homepage.models import userProfile, SliderImages, shopItem
+from .models import userProfile, SliderImages, shopItem
 # Register your models here.
 
 class userProfileInline(admin.StackedInline):
