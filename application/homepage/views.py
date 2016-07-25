@@ -10,30 +10,27 @@ import application.common.customUserHandler as cuh
 
 def home(request):
     request.encoding = 'utf-8'
-    print request.encoding
     currentUser = request.user
-    menu_right = cuh.getMenuRight(request)
-    menu = cuh.getMenu(request)
     sliderImgs = cuh.getSliderImages(request)
 
     # 로그인 체크
     if currentUser.is_authenticated():
         if currentUser.userprofile.role == 0:
             return render(request, 'userTemplate/customerTemplate.html',
-                          {'imgs':  sliderImgs, 'menu': menu, 'menu_right': menu_right, })
+                          {'imgs':  sliderImgs})
 
         elif currentUser.userprofile.role == 1:
             return render(request, 'userTemplate/teacherTemplate.html',
-                          {'imgs':  sliderImgs, 'menu': menu, 'menu_right': menu_right, })
+                          {'imgs':  sliderImgs})
 
         elif currentUser.userprofile.role == 2:
             return render(request, 'userTemplate/investorTemplate.html',
-                          {'imgs': sliderImgs, 'menu': menu, 'menu_right': menu_right, })
+                          {'imgs': sliderImgs})
         else: #role이 입력되어있지 않은경우
             return HttpResponse('user role Error')
     else:
         return render(request, 'userTemplate/default_template.html',
-                      {'imgs':  sliderImgs, 'menu': menu, 'menu_right': menu_right, })
+                      {'imgs':  sliderImgs, })
 
 
 def signup(request):
@@ -83,13 +80,11 @@ def logout(request):
 
 def shop(request):
 
-    menu_right = cuh.getMenuRight(request)
-    menu = cuh.getMenu(request)
     sliderImgs = cuh.getSliderImages(request)
     items = cuh.getItemList(request)
 
     return render(request, 'homepage/shop.html',
-                  {'imgs': sliderImgs, 'menu': menu, 'menu_right': menu_right,'items':items})
+                  {'imgs': sliderImgs, 'items':items})
 
 def myaccount(request):
     currentuser = request.user;

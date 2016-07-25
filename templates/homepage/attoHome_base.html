@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 {% load staticfiles %}
+{% load custom_tags %}
 <html>
 <head>
         <meta charset="UTF-8" name="viewport" content="width=device-width">
@@ -26,15 +27,67 @@
             bottom : 0px;
         }
         </style>
+        {% setSession request %}
 </head>
 
 <body class="container">
-{% include 'homepage/navigation_bar.html' with menuNav=menu menuRightNav=menu_right %}
+<!-- 네비게이션 바 -->
+    <div class = "navbar navbar-default" >
+        <div class = "container-fluid">
+            <div class = "navbar-header">
+                <!-- 햄버거 메뉴-->
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    {% if request.session.nav_left %}
+                        {% for menu in request.session.nav_left %}
+                            <span class="icon-bar"></span>
+                        {% endfor %}
+                    {% else %}
+                        <!-- 메뉴가 없는경우 = 유저 role 이 없는경우 일듯 -->
+                    {% endif %}
+                </button>
+                <a class = "navbar-brand" href="/home" style="padding:8px 10px 8px 10px" >
+                    <img src="{% static 'assets/img/logo.png' %}" width="40px">
+                </a>
+            </div>
+            <!-- 사이즈 줄어들면 사라질 부분 -->
+            <div class="collapse navbar-collapse" id="navbar-collapse">
+                <!--기본메뉴-->
+                <ul class="nav navbar-nav">
+                {% if request.session.nav_left %}
+                    {% for key,value in request.session.nav_left %}
+                        {% ifequal 0 forloop.counter0 %}
+                            <li role="presentation" class="active"><a href={{value}}> {{key}} </a></li>
+                        {% else %}
+                            <li role="presentation"><a href={{value}}> {{key}} </a></li>
+                        {% endifequal %}
+                    {% endfor %}
+                {% else %}
+                        <!-- 메뉴가 없는경우 = 유저 role 이 없는경우 일듯 -->
+                {% endif %}
+                </ul>
+                <!-- 로그인 부분(네비게이션바 오른쪽) 메뉴 -->
+                <ul class="nav navbar-nav navbar-right" id="navbar-collapse-loginForm">
+                {% if request.session.nav_right %}
+                    {% for key,value in request.session.nav_right %}
+                        <li role="presentation">
+                            <button type="button"  class="btn btn-default navbar-btn" onclick={{value}}>
+                            {{key}}
+                            </button>
+                        </li>
+                    {% endfor %}
+                {% else %}
+                        <!-- 메뉴가 없는경우 = 유저 role 이 없는경우 일듯 -->
+                {% endif %}
+                </ul>
+            </div>
+        </div>
+    </div>
+<!-- 네비게이션바 종료 -->
+
 {% block slider %}{% endblock slider %}
 {% block main_content %}{% endblock main_content %}
-<div id="fixed">
-{#<div style="cursor:pointer;" onclick="window.scrollTo(0,0);"><img src="{% static 'assets/img/' %}topbtn.png"></div>#}
-</div>
+
 <div id = "footersty">
 {% include 'homepage/footer.html' %}
 </div>
