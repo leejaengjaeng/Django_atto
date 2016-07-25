@@ -3,6 +3,9 @@
 {% load staticfiles %}
 {% load custom_tags %}
 
+{% block additional_assets %}
+   <link rel="stylesheet" href="{% static 'assets/css/custom.css' %}" />
+{% endblock additional_assets %}
 
 {% block slider %}
     {% include 'homepage/main_slider.html' with images=imgs %}
@@ -22,17 +25,20 @@
                 <div class="item active">
                     <div class="row">
                 {% endif %}
-                        <div class="col-sm-4">
-                            <a href="#">
-                                <img src="{% static 'downloads' %}/{{item.image}}" alt="Image" class="img-responsive">
-                                {{item.itemName}} <br>
-                                {% if item.sale == 0 %}
-                                    <p>{{item.price}}</p>
+                    <div class="col-sm-4" style="align:center">
+                        <a href="#">
+                            <img src="{% static 'downloads' %}/{{item.image}}" alt="Image" class="img-responsive">
+                        </a>
+                        <div >
+                            {{item.itemName}} <br>
+                            {% if item.sale == 0 %}
+                               <p class="price">{{item.price}}</p>
                                 {% else %}
-                                    <p>{% sub item.price item.sale %}</p>
+                                    <s><small class="center">{{ item.price }}</small></s>
+                                    <p class="center">{% sub item.price item.sale %}</p>
                                 {% endif %}
-                            </a>
                         </div>
+                    </div>
                 {% if forloop.counter|divisibleby:3 %}
                     </div><!--/row-->
                 </div><!--/item-->
