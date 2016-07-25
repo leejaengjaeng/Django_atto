@@ -27,9 +27,9 @@
                                 <img src="{% static 'downloads' %}/{{item.image}}" alt="Image" class="img-responsive">
                                 {{item.itemName}} <br>
                                 {% if item.sale == 0 %}
-                                    {{item.price}}
+                                    <p>{{item.price}}</p>
                                 {% else %}
-                                    {% sub item.price item.sale %}
+                                    <p>{% sub item.price item.sale %}</p>
                                 {% endif %}
                             </a>
                         </div>
