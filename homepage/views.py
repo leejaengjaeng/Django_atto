@@ -4,7 +4,7 @@ from django.contrib.auth.models import User
 import django.contrib.auth as django_auth
 from django.http import HttpResponse
 import json
-import customUserHandler
+import custom.customUserHandler as cuh
 
 # Create your views here.
 
@@ -12,9 +12,9 @@ def home(request):
     request.encoding = 'utf-8'
     print request.encoding
     currentUser = request.user
-    menu_right = customUserHandler.getMenuRight(request)
-    menu = customUserHandler.getMenu(request)
-    sliderImgs = customUserHandler.getSliderImages(request)
+    menu_right = cuh.getMenuRight(request)
+    menu = cuh.getMenu(request)
+    sliderImgs = cuh.getSliderImages(request)
 
     # 로그인 체크
     if currentUser.is_authenticated():
@@ -83,10 +83,10 @@ def logout(request):
 
 def shop(request):
 
-    menu_right = customUserHandler.getMenuRight(request)
-    menu = customUserHandler.getMenu(request)
-    sliderImgs = customUserHandler.getSliderImages(request)
-    items = customUserHandler.getItemList(request)
+    menu_right = cuh.getMenuRight(request)
+    menu = cuh.getMenu(request)
+    sliderImgs = cuh.getSliderImages(request)
+    items = cuh.getItemList(request)
     return render(request, 'homepage/shop.html',
                   {'imgs': sliderImgs, 'menu': menu, 'menu_right': menu_right,'items':items})
 
