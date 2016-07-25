@@ -1,35 +1,51 @@
 # -*- coding: utf-8 -*-
 from application.homepage.models import SliderImages, shopItem
 from django.core.exceptions import ObjectDoesNotExist
+import json
 
 #메뉴바 왼쪽 부분
-def getMenu(reqeust):
-    # 사용자에 맞는 메뉴 수와 이름 가지고 오기
-    # TODO: 메뉴 사용자에 맞게 나타나게 고치기
-    menu = [
-        (u'Intro', '#'),
-        (u'Q&A', '#'),
-        (u'Shop', '/shop'),
-        (u'Download', '#'),
-        (u'(dev) ID : attocube / PW : attocube', '#'),
-    ]
-    return menu
+def setMenuToSession(request):
 
-# 메뉴바 오른쪽 부분
-def getMenuRight(request):
-    # 로그인 된 유저인지 확인
-    currentUser = request.user
-    if currentUser.is_authenticated():
+    # TODO: 메뉴 사용자에 맞게 나타나게 고치기
+
+    menu_right = []
+    menu_left = []
+    role =0
+
+    if request.user.is_authenticated():
         menu_right = [
-            (currentUser.get_full_name, "location.href='/myaccount'"),
+            (request.user.get_full_name(), "location.href='/myaccount'"),
             ("로그 아웃", "location.href='/logout'"),
         ]
+        role = request.user.userprofile.role
     else:
         menu_right = [
             ("로그인", "location.href='/login'"),
             ("회원 가입", "location.href='/signup'"),
         ]
-    return menu_right
+        role = 0
+
+
+    if role == 0 :
+        menu_left = [
+            (u'Intro', '#'),
+            (u'Q&A', '/qa'),
+            (u'Shop', '/shop'),
+            (u'Download', '#'),
+            (u'디폴트,구매자', '#'),
+        ]
+    else :
+        menu_left = [
+            (u'Intro', '#'),
+            (u'Q&A', '/qa'),
+            (u'Shop', '/shop'),
+            (u'Download', '#'),
+            (u'다른것들', '#'),
+        ]
+
+    request.session['nav_left'] = menu_left
+    request.session['nav_right'] = menu_right
+    return
 
 
 # 사용자에 맞는 이미지 가지고오기
