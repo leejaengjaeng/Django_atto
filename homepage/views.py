@@ -87,6 +87,7 @@ def shop(request):
     menu = cuh.getMenu(request)
     sliderImgs = cuh.getSliderImages(request)
     items = cuh.getItemList(request)
+
     return render(request, 'homepage/shop.html',
                   {'imgs': sliderImgs, 'menu': menu, 'menu_right': menu_right,'items':items})
 

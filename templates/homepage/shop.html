@@ -1,7 +1,7 @@
 {% extends "homepage/attoHome_base.html" %}
 
 {% load staticfiles %}
-
+{% load custom_tags %}
 
 
 {% block slider %}
@@ -24,8 +24,13 @@
                 {% endif %}
                         <div class="col-sm-4">
                             <a href="#">
-                            <img src="{% static 'downloads' %}/{{item.image}}" alt="Image" class="img-responsive">
-                            <
+                                <img src="{% static 'downloads' %}/{{item.image}}" alt="Image" class="img-responsive">
+                                {{item.itemName}} <br>
+                                {% if item.sale == 0 %}
+                                    {{item.price}}
+                                {% else %}
+                                    {% sub item.price item.sale %}
+                                {% endif %}
                             </a>
                         </div>
                 {% if forloop.counter|divisibleby:3 %}
