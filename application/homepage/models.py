@@ -13,8 +13,6 @@ from django.dispatch.dispatcher import receiver
 # TODO; 업로드한 파일 이름이 imgName 으로 저장되도록
 
 class SliderImages(models.Model):
-	imgId = models.AutoField(primary_key=True)
-	# imgPath = models.CharField(max_length=256)
 	image = models.ImageField(upload_to='sliderImages')
 	isAppear = models.BooleanField(default=True)
 	imgName = models.CharField(max_length=100)
@@ -64,12 +62,11 @@ class userProfile(models.Model):
 
 class shopItem(models.Model):
 	# Setting.py에 있는 MEDIA_ROOT 이후 경로
-	itemId = models.AutoField(primary_key=True)
 	image = models.ImageField(upload_to='shopItemImgs')
 	itemName = models.CharField(max_length=100)
 	price = models.PositiveSmallIntegerField(default=0)
 	stock = models.PositiveSmallIntegerField(default=0)
-	isSale = models.BooleanField(default=False)
+	sale = models.PositiveSmallIntegerField(default=0)
 
 	class Meta:
 		verbose_name = '상품 이미지'
