@@ -1,6 +1,7 @@
 {% extends "homepage/attoHome_base.html" %}
 {% load staticfiles %}
-
+<link rel="stylesheet" href = "{% static 'assets/css/bootstrap.min.css' %}" />
+    <link rel="stylesheet" href="{% static 'assets/css/bootstrap.min.css' %}" />
 <h1> 로그인 </h1>
 {% block main_content %}
     <form method="post" action="{% url 'userLogin' %}">
@@ -8,10 +9,14 @@
     <!--<p>User name : {{ form.username }}</p>
         <p>password : {{ form.password }}</p>
           -->
-        <input type="text" name="username" value="" placeholder="id"/>
-        <input type="password" name="password" value="" placeholder="password"/>
+        <div class="col-xs-3">
+        <input type="text" name="username" value="" placeholder="id" class="form-control"/>
+            </div>
+        <div class="col-xs-3">
+        <input type="password" name="password" value="" placeholder="password" class="form-control"/>
+            </div>
 
-        <input type="submit" value="로그인" />
+        <input type="submit" value="로그인" class="btn btn-default"/>
         <input type="hidden" name="next" value="/home"/>
     </form>
 
