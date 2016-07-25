@@ -12,4 +12,4 @@ def sub(var1, var2):
 @register.simple_tag
 def setSession(request):
     cuh.setMenuToSession(request)
-    return
+    return " "
