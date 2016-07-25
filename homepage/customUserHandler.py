@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from homepage.models import SliderImages
+from homepage.models import SliderImages, shopItem
 from django.core.exceptions import ObjectDoesNotExist
 
 #메뉴바 왼쪽 부분
@@ -52,4 +52,14 @@ def getSliderImages(request):
                 sendSliderImgs.insert(0, t)
 
     return sendSliderImgs
+
+def getItemList(request):
+    itemList =[]
+    try:
+        itemList = shopItem.objects.all()
+    #TODO:나타낼 상품이 하나도 없는 경우, 어떻게 할지 결정하기
+    except ObjectDoesNotExist:
+        itemList = []
+    return itemList
+
 

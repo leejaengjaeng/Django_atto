@@ -10,3 +10,30 @@
     <br>
     {% include 'homepage/item_slider.html' %}
 {% endblock slider %}
+
+{% block main_content %}
+    {% if items %}
+    <div id="items">
+        <!-- Carousel items -->
+        <div class="carousel-inner">
+            {% for item in items %}
+                <!-- modulo 연산 (built in)-->
+                {% if forloop.counter|divisibleby:3 %}
+                <div class="item active">
+                    <div class="row">
+                {% endif %}
+                        <div class="col-sm-4">
+                            <a href="#">
+                            <img src="{% static 'downloads' %}/{{item.image}}" alt="Image" class="img-responsive">
+                            <
+                            </a>
+                        </div>
+                {% if forloop.counter|divisibleby:3 %}
+                    </div><!--/row-->
+                </div><!--/item-->
+                {% endif %}
+            {% endfor %}
+        </div>
+    </div>
+    {% endif %}
+{% endblock main_content %}
