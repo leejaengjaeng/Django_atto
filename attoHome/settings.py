@@ -28,6 +28,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     # 홈페이지 관련 App
+    'application',
     'application.common',
     'application.homepage',
     'application.qa',
