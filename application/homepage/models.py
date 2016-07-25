@@ -23,25 +23,21 @@ class SliderImages(models.Model):
 	def image_thumb(self):
 		if self.image:
 			return u'<img src="/media/%s" width="100" height="100" />' % (self.image)
-
-
 	image_thumb.allow_tags = True
 
+	# registDate = models.DateField.auto_now
+	# expireDate = models.DateField
+	class Meta:
+		verbose_name = '메인 슬라이더 이미지'
+		verbose_name_plural = '메인 슬라이더 이미지들'
 
-# registDate = models.DateField.auto_now
-# expireDate = models.DateField
-class Meta:
-	verbose_name = '메인 슬라이더 이미지'
-	verbose_name_plural = '메인 슬라이더 이미지들'
-
-
-def __str__(self):
-	return self.imgName
-
+	def __unicode__(self):
+		return self.imgName
 
 @receiver(pre_delete, sender=SliderImages)
 def SliderImage_delete(sender, instance, **kwargs):
 	instance.image.delete(False)
+
 
 
 class userProfile(models.Model):
@@ -68,4 +64,20 @@ class userProfile(models.Model):
 
 class shopItem(models.Model):
 	# Setting.py에 있는 MEDIA_ROOT 이후 경로
-	img = models.ImageField(upload_to='shopItemImgs')
+	itemId = models.AutoField(primary_key=True)
+	image = models.ImageField(upload_to='shopItemImgs')
+	itemName = models.CharField(max_length=100)
+	price = models.PositiveSmallIntegerField(default=0)
+	stock = models.PositiveSmallIntegerField(default=0)
+	isSale = models.BooleanField(default=False)
+
+	class Meta:
+		verbose_name = '상품 이미지'
+		verbose_name_plural = '상품 이미지들'
+
+	def __unicode__(self):
+		return self.itemName
+
+@receiver(pre_delete, sender=shopItem)
+def shopItem_delete(sender, instance, **kwargs):
+	instance.image.delete(False)

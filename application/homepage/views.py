@@ -86,8 +86,9 @@ def shop(request):
     menu_right = cuh.getMenuRight(request)
     menu = cuh.getMenu(request)
     sliderImgs = cuh.getSliderImages(request)
+    items = cuh.getItemList(request)
     return render(request, 'homepage/shop.html',
-                  {'imgs': sliderImgs, 'menu': menu, 'menu_right': menu_right,})
+                  {'imgs': sliderImgs, 'menu': menu, 'menu_right': menu_right,'items':items})
 
 def myaccount(request):
     currentuser = request.user;
