@@ -1,9 +1,6 @@
 # encoding: utf-8
-import socket
-from time import sleep
 from fabric import colors
 from fabric.api import hosts, env, local, run, cd, puts, prefix, sudo
-from fabric.contrib.console import confirm
 
 REMOTE_WORKDIR = '/home/ubuntu/VirtualEnvs/djangoServerVirtual/attoHome'
 SERVERS = ['attocu.be','52.78.90.137']
