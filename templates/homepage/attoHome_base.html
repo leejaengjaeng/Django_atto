@@ -16,32 +16,22 @@
 
 		{% block additional_assets %} {% endblock %}
         <style type="text/css">
-        #fixed {
-            width: 50px;
-            height: 50px;
-            position: fixed;
-            bottom: 100px;
-            right: 20px;
-        }
-        #footersty{
-            bottom : 0px;
-        }
-        </style>
 
+        </style>
         {% setSession request %}
 </head>
 
 <body>
 <div id="mainContainer" class="container" style='background-image: url("{% static 'assets/img/background.png' %}");'>
-<!-- TODO: 모바일에서 두줄로 나오는거 수정 -->
-<!-- 고정 툴바 -->
+    <!-- TODO: 모바일에서 두줄로 나오는거 수정 -->
+    <!-- 고정 툴바 -->
     <nav id="top_Toolbar" class="navbar navbar-default navbar-fixed-top">
       <div class="container">
           <ul class="nav navbar-nav navbar-right">
               {% if request.session.nav_right %}
               {% for key,value in request.session.nav_right %}
                   <li role="presentation">
-                      <a href={{value}}>{{key}}</a>
+                      <a href={{value}}><strong>{{key}}</strong></a>
                   </li>
               {% endfor %}
               {% else %}
@@ -77,7 +67,7 @@
                 {% if request.session.nav_left %}
                     {% for key,value in request.session.nav_left %}
                         {% ifequal 0 forloop.counter0 %}
-                            <li role="presentation" class="active" id="navItem{{ forloop.counter }}"><a href={{value}}><center>{{key}}</center></a></li>
+                            <li role="presentation" id="navItem{{ forloop.counter }}"><a href={{value}}><center>{{key}}</center></a></li>
                         {% else %}
                             <li role="presentation" id="navItem{{ forloop.counter }}"><a href={{value}}><center>{{key}}</center></a></li>
                         {% endifequal %}
@@ -89,14 +79,14 @@
             </div>
         </div>
     </nav>
-<!-- 네비게이션바 종료 -->
+    <!-- 네비게이션바 종료 -->
 
-{% block slider %}{% endblock slider %}
-{% block main_content %}{% endblock main_content %}
+    {% block slider %}{% endblock slider %}
+    {% block main_content %}{% endblock main_content %}
 
-<div id = "footersty">
-{% include 'homepage/footer.html' %}
-</div>
+    <div id = "footersty">
+    {% include 'homepage/footer.html' %}
+    </div>
 </div>
 </body>
 </html>
