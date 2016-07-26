@@ -24,7 +24,8 @@ body {
 #bodyID
 {
     padding : 30px 15px 0px 15px;
-
+    background-size: 80%;
+    background-clip:content-box;
 }
 
 .navbar-fixed-top {
