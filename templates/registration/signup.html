@@ -12,7 +12,7 @@
         function changeEmail ( email ) {
             if(email == "1") {
                 document.getElementById("email3").style.visibility = "visible";
-                document.frm.email3.value = "";
+                document.form1.email3.value = "";
             } else {
                 document.getElementById("email3").style.visibility = "hidden";
                 document.form1.email3.value = email;
@@ -70,7 +70,18 @@
     </script>
     <style>
         .alignsignup{
-            width:30%; text-align: right;
+            width:20%; text-align: right;padding-top: 20px;
+        }
+        .outer{
+            width:50%; border-right:solid 1px #9d9d9d;float:left;
+        }
+        .selectrole{
+            padding:50px;
+        }
+        .btnOK{
+            clear:both;
+            padding-top:50px;
+            padding-bottom:50px;
         }
     @media screen and (max-width: 480px){
         .alignsignup{
@@ -82,6 +93,21 @@
     <h1 style="padding-bottom: 20px">SIGN UP</h1>
     <form method="POST" name="form1" action="/inputsign" onsubmit="return execute()">
         {% csrf_token %}
+    <div class="selectrole">
+        <div class="form group">
+            <label for="exampleInputNmae2"class="alignsignup">구분</label>
+            <label class="radio-inline">
+                <input type="radio" name="major" value="0"><img src="{% static 'assets/img/customer.png' %}" class="img-responsive">
+            </label>
+            <label class="radio-inline">
+                <input type="radio" name="major" value="1" checked="checked"><img src="{% static 'assets/img/teacher.png' %}" class="img-responsive">
+            </label>
+            <label class="radio-inline">
+                <input type="radio" name="major" value="2"><img src="{% static 'assets/img/etc.png' %}" class="img-responsive">
+            </label>
+        </div>
+    </div>
+        <div class="outer">
         <div class="form-inline">
         <div class="form group">
             <label for="exampleInputNmae2" class="alignsignup">아이디</label>
@@ -169,9 +195,12 @@
                 <option value="korea.com">@korea.com</option>
                 <option value="1">직접입력</option>
             </select>
+
+        </div>
+        <div class="form group">
+            <label for="exampleInputNmae2"class="alignsignup"></label>
             <input type="text" name="email3" id = "email3" class="form-control" style="visibility:hidden">
         </div>
-
         <div class="form group">
             <label for="exampleInputNmae2"class="alignsignup">핸드폰번호</label>
             <input type="text" name="phonenum" size="10" placeholder="핸드폰번호"id="phonenumber" class="form-control">
@@ -185,6 +214,9 @@
         <div class="form group">
             <label for="exampleInputNmae2"class="alignsignup"></label>
             <input type="text" id="sample4_roadAddress" placeholder="도로명주소" name="addr2" class="form-control">
+        </div>
+        <div class="form group">
+            <label for="exampleInputNmae2"class="alignsignup"></label>
             <input type="text" id="sample4_jibunAddress" placeholder="나머지 주소" name="addr3" class="form-control">
         </div>
 
@@ -242,30 +274,15 @@
                     }
                 }).open();
             }</script><br/>
-
-        <div class="form group">
-            <label for="exampleInputNmae2"class="alignsignup">구분</label>
-            <label class="radio-inline">
-                <input type="radio" name="major" value="0"><img src="{% static 'assets/img/' %}customer.png">
-            </label>
-            <label class="radio-inline">
-                <input type="radio" name="major" value="1" checked="checked"><img src="{% static 'assets/img/' %}teacher.png">
-            </label>
-            <label class="radio-inline">
-                <input type="radio" name="major" value="2"><img src="{% static 'assets/img/' %}etc.png">
-            </label>
         </div>
-        <div class="form group">
-            <label for="exampleInputNmae2"style="width:30%; text-align: right"></label>
-            <input type="submit" value="확인" class="btn btn-default">
-            <input type="reset" value ="초기화" class="btn btn-default">
-
         </div>
+    <div><!--이미지넣기-->
 
-
-
-
-
-        </div>
+    </div>
+        <center>
+                <div class="btnOK"><!--확인버튼-->
+                    <input type="submit" value="확인" class="btn btn-default btn-lg">
+                </div>
+        </center>
     </form>
 {% endblock main_content %}
