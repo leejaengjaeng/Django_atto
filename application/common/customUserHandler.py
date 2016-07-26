@@ -7,6 +7,7 @@ import json
 def setMenuToSession(request):
 
     # TODO: 메뉴 사용자에 맞게 나타나게 고치기
+    menu = []
 
     menu_right = []
     menu_left = []
@@ -14,16 +15,14 @@ def setMenuToSession(request):
 
     if request.user.is_authenticated():
         menu_right = [
-            (request.user.get_full_name(), "location.href='/myaccount'"),
-            ("로그 아웃", "location.href='/logout'"),
+            (request.user.get_full_name(), "/myaccount"),
+            ("로그 아웃", "/logout"),
         ]
-        role = request.user.userprofile.role
     else:
         menu_right = [
-            ("로그인", "location.href='/login'"),
-            ("회원 가입", "location.href='/signup'"),
+            ("로그인", "/login"),
+            ("회원 가입", "/signup"),
         ]
-        role = 0
 
 
     if role == 0 :
@@ -32,6 +31,7 @@ def setMenuToSession(request):
             (u'Q&A', '/qa'),
             (u'Shop', '/shop'),
             (u'Download', '#'),
+            (u'제품 후기', '#'),
             (u'디폴트,구매자', '#'),
         ]
     else :
@@ -40,7 +40,7 @@ def setMenuToSession(request):
             (u'Q&A', '/qa'),
             (u'Shop', '/shop'),
             (u'Download', '#'),
-            (u'다른것들', '#'),
+            (u'제품 후기', '#'),
         ]
 
     request.session['nav_left'] = menu_left

@@ -6,15 +6,15 @@
         <meta charset="UTF-8" name="viewport" content="width=device-width">
         <title>아토큐브 | ATTOCUBE</title>
         <link rel="shortcut icon" type="image/x-icon" href="{% static 'assets/img/logo.png' %}"/>
+
 		<link rel="stylesheet" href = "{% static 'assets/css/bootstrap.min.css' %}" />
         <link rel="stylesheet" href="{% static 'assets/css/bootstrap.min.css' %}" />
+        <link rel="stylesheet" href="{% static 'assets/css/custom.css' %}" />
 
 		<script src="{% static 'assets/js/jquery-3.0.0.min.js' %}"></script>
         <script src="{% static 'assets/js/bootstrap.min.js' %}"></script>
 
-
-		{% block additional_assets %}
-		{% endblock additional_assets %}
+		{% block additional_assets %} {% endblock %}
         <style type="text/css">
         #fixed {
             width: 50px;
@@ -27,15 +27,33 @@
             bottom : 0px;
         }
         </style>
+
         {% setSession request %}
 </head>
 
-<body class="container">
-
+<body>
+<div id="mainContainer" class="container" style='background-image: url("{% static 'assets/img/background.png' %}");'>
+<!-- TODO: 모바일에서 두줄로 나오는거 수정 -->
+<!-- 고정 툴바 -->
+    <nav id="top_Toolbar" class="navbar navbar-default navbar-fixed-top">
+      <div class="container">
+          <ul class="nav navbar-nav navbar-right">
+              {% if request.session.nav_right %}
+              {% for key,value in request.session.nav_right %}
+                  <li role="presentation">
+                      <a href={{value}}>{{key}}</a>
+                  </li>
+              {% endfor %}
+              {% else %}
+              <!-- 메뉴가 없는경우 = 유저 role 이 없는경우 일듯 -->
+              {% endif %}
+          </ul>
+      </div>
+    </nav>
+<!-- 고정 툴바 끝-->
 <!-- 네비게이션 바 -->
-    <div class = "navbar navbar-default" >
-
-        <div class = "container-fluid">
+    <nav class = "navbar navbar-default" id="navMenu" >
+        <div class = "container">
             <div class = "navbar-header">
                 <!-- 햄버거 메뉴-->
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-collapse">
@@ -55,28 +73,14 @@
             <!-- 사이즈 줄어들면 사라질 부분 -->
             <div class="collapse navbar-collapse" id="navbar-collapse">
                 <!--기본메뉴-->
-                <ul class="nav navbar-nav">
+                <ul id="navbar" class="nav navbar-nav">
                 {% if request.session.nav_left %}
                     {% for key,value in request.session.nav_left %}
                         {% ifequal 0 forloop.counter0 %}
-                            <li role="presentation" class="active"><a href={{value}}> {{key}} </a></li>
+                            <li role="presentation" class="active" id="navItem{{ forloop.counter }}"><a href={{value}}><center>{{key}}</center></a></li>
                         {% else %}
-                            <li role="presentation"><a href={{value}}> {{key}} </a></li>
+                            <li role="presentation" id="navItem{{ forloop.counter }}"><a href={{value}}><center>{{key}}</center></a></li>
                         {% endifequal %}
-                    {% endfor %}
-                {% else %}
-                        <!-- 메뉴가 없는경우 = 유저 role 이 없는경우 일듯 -->
-                {% endif %}
-                </ul>
-                <!-- 로그인 부분(네비게이션바 오른쪽) 메뉴 -->
-                <ul class="nav navbar-nav navbar-right" id="navbar-collapse-loginForm">
-                {% if request.session.nav_right %}
-                    {% for key,value in request.session.nav_right %}
-                        <li role="presentation">
-                            <button type="button"  class="btn btn-default navbar-btn" onclick={{value}}>
-                            {{key}}
-                            </button>
-                        </li>
                     {% endfor %}
                 {% else %}
                         <!-- 메뉴가 없는경우 = 유저 role 이 없는경우 일듯 -->
@@ -84,7 +88,7 @@
                 </ul>
             </div>
         </div>
-    </div>
+    </nav>
 <!-- 네비게이션바 종료 -->
 
 {% block slider %}{% endblock slider %}
@@ -92,6 +96,7 @@
 
 <div id = "footersty">
 {% include 'homepage/footer.html' %}
+</div>
 </div>
 </body>
 </html>
