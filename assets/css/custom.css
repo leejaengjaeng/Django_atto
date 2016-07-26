@@ -121,3 +121,14 @@ center
 {
     color: #ffffff;
 }
+
+.shopItem
+{
+    border:5px solid #6CCEF5;
+    margin: 10px;
+}
+
+.shopitem img
+{
+    width: 50%;
+}
