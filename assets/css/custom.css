@@ -1,3 +1,13 @@
+body
+{
+  padding-top : 0px;
+}
+center
+{
+    font-size:15px;
+    font-style:strong;
+}
+
 .price {
     font-size: 10px;
 }
@@ -6,28 +16,68 @@
     font-size: 7px;
 }
 
-body {
-    padding-top: 65px;
-}
-
 #top_Toolbar
 {
+    position: relative;
+    width:100%;
+    min-height: 20px;
     background-color: rgba(0,0,0,0);
-    //border-color:rgba(0,0,0,0);
+    border-color:rgba(0,0,0,0);
 }
 #top_Toolbar a
 {
-    font-size: 11px;
-    padding: 5px 10px 5px 10px;
+    font-size: 12px;
+    padding: 5px 30px 5px 0px;
 }
 
-#bodyID
+#mainContainer
 {
-    padding : 30px 15px 0px 15px;
     background-size: 80%;
     background-clip:content-box;
 }
 
-.navbar-fixed-top {
-    min-height: 20px;
+#navMenu
+{
+    background-color: rgba(0,0,0,0);
+    border-color:rgba(0,0,0,0);
+    border-bottom:5px solid #EF86AE;
+
+}
+.navbar-header
+{
+    border-right:2px soild #6CCEF5;
+    width:5%;
+}
+#navbar
+{
+    width:95%;
+}
+#navbar li
+{
+    width:16%;
+}
+
+#navItem1
+{
+    border-top:10px solid #EF86AE;
+}
+#navItem2
+{
+    border-top:10px solid #6CCEF5;
+}
+#navItem3
+{
+    border-top:10px solid #099A55;
+}
+#navItem4
+{
+    border-top:10px solid #F4883D;
+}
+#navItem5
+{
+    border-top:10px solid #6CCEF5;
+}
+#navItem6
+{
+    border-top:10px solid #A6D060;
 }

@@ -30,8 +30,8 @@
         {% setSession request %}
 </head>
 
-<body id="bodyID" >
-<div class="container" style='background-image: url("{% static 'assets/img/background.png' %}");'>
+<body>
+<div id="mainContainer" class="container" style='background-image: url("{% static 'assets/img/background.png' %}");'>
 <!-- TODO: 모바일에서 두줄로 나오는거 수정 -->
 <!-- 고정 툴바 -->
     <nav id="top_Toolbar" class="navbar navbar-default navbar-fixed-top">
@@ -50,9 +50,8 @@
       </div>
     </nav>
 <!-- 고정 툴바 끝-->
-
 <!-- 네비게이션 바 -->
-    <div class = "navbar navbar-default" >
+    <nav class = "navbar navbar-default" id="navMenu" >
         <div class = "container">
             <div class = "navbar-header">
                 <!-- 햄버거 메뉴-->
@@ -73,13 +72,13 @@
             <!-- 사이즈 줄어들면 사라질 부분 -->
             <div class="collapse navbar-collapse" id="navbar-collapse">
                 <!--기본메뉴-->
-                <ul class="nav navbar-nav">
+                <ul id="navbar" class="nav navbar-nav">
                 {% if request.session.nav_left %}
                     {% for key,value in request.session.nav_left %}
                         {% ifequal 0 forloop.counter0 %}
-                            <li role="presentation" class="active"><a href={{value}}> {{key}} </a></li>
+                            <li role="presentation" class="active" id="navItem{{ forloop.counter }}"><a href={{value}}><center>{{key}}</center></a></li>
                         {% else %}
-                            <li role="presentation"><a href={{value}}> {{key}} </a></li>
+                            <li role="presentation" id="navItem{{ forloop.counter }}"><a href={{value}}><center>{{key}}</center></a></li>
                         {% endifequal %}
                     {% endfor %}
                 {% else %}
@@ -88,7 +87,7 @@
                 </ul>
             </div>
         </div>
-    </div>
+    </nav>
 <!-- 네비게이션바 종료 -->
 
 {% block slider %}{% endblock slider %}

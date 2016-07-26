@@ -31,6 +31,7 @@ def setMenuToSession(request):
             (u'Q&A', '/qa'),
             (u'Shop', '/shop'),
             (u'Download', '#'),
+            (u'제품 후기', '#'),
             (u'디폴트,구매자', '#'),
         ]
     else :
@@ -39,7 +40,7 @@ def setMenuToSession(request):
             (u'Q&A', '/qa'),
             (u'Shop', '/shop'),
             (u'Download', '#'),
-            (u'다른것들', '#'),
+            (u'제품 후기', '#'),
         ]
 
     request.session['nav_left'] = menu_left
