@@ -30,7 +30,7 @@
             {% for img in images %}
                 {% ifequal 0 forloop.counter0 %}
                         <div class="item active">
-                          <img src="{% static 'downloads' %}/{{img.image}}" />
+                          <img src="{{MEDIA_URL}}{{img.image}}" />
                         </div>
                 {% else %}
                         <div class="item">
