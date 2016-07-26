@@ -18,8 +18,7 @@ def deploy():
     env.password = 'dkxhcube!@'
 
     with cd(REMOTE_WORKDIR):
-        puts(colors.blue("%s:%s -> 프로젝트를 업데이트 합니다.") %
-             (env.host, env.port))
+        puts(colors.blue("%s:%s -> 프로젝트를 업데이트 합니다.") % (env.host, env.port))
         if env.host in SERVERS:
             run('git pull origin master')
             puts(colors.blue("프론트엔드 의존성 패키지를 업데이트합니다."))
