@@ -30,12 +30,12 @@
         {% setSession request %}
 </head>
 
-<body class="container">
-
+<body>
+<!--<body class="container">-->
+<div class="container" style='background-size: 80%; background-image: url("{% static 'assets/img/background.png' %}"); background-clip:content-box;'>
 <!-- 네비게이션 바 -->
     <div class = "navbar navbar-default" >
-
-        <div class = "container-fluid">
+        <div class = "container">
             <div class = "navbar-header">
                 <!-- 햄버거 메뉴-->
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-collapse">
@@ -92,6 +92,7 @@
 
 <div id = "footersty">
 {% include 'homepage/footer.html' %}
+</div>
 </div>
 </body>
 </html>
