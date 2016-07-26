@@ -64,6 +64,37 @@
             document.addjoin.submit();
         }
     </script>
+    <script>
+        function radiochange(id) {
+            if(id=="0"){
+                var a=document.getElementById("image1");
+                var b=document.getElementById("image2");
+                var c=document.getElementById("image3");
+                b.style.borderWidth='0px';
+                c.style.borderWidth='0px';
+                a.style.border="5px solid #00A153";
+                a.style.borderRadius="17px";
+            }
+            if(id=="1"){
+                var a=document.getElementById("image1");
+                var b=document.getElementById("image2");
+                var c=document.getElementById("image3");
+                a.style.borderWidth='0px';
+                c.style.borderWidth='0px';
+                b.style.border="5px solid #00A153";
+                b.style.borderRadius="17px";
+            }
+            if(id=="2"){
+                var a=document.getElementById("image1");
+                var b=document.getElementById("image2");
+                var c=document.getElementById("image3");
+                a.style.borderWidth='0px';
+                b.style.borderWidth='0px';
+                c.style.border="5px solid #00A153";
+                c.style.borderRadius="17px";
+            }
+        }
+    </script>
     <style>
         .alignsignup{
             width:20%; text-align: right;padding-top: 20px;
@@ -112,17 +143,17 @@
         <div class="wantservice">
 
             <label class="radio-inline">
-                <input type="radio" name="major" value="0" checked="checked"><img src="{% static 'assets/img/customer.png' %}" width="200px">
+                <input type="radio" id="radiocus" name="major" value="0" checked="checked" style="visibility: hidden; "><img src="{% static 'assets/img/customer.png' %}"  id="image1"width="200px" onclick="radiochange(0)">
             </label>
 
 
             <label class="radio-inline">
-                <input type="radio" name="major" value="1" ><img src="{% static 'assets/img/teacher.png' %}" width="200px">
+                <input type="radio" id="radiotea" name="major" value="1" style="visibility: hidden;"><img src="{% static 'assets/img/teacher.png' %}" width="200px" id="image2" onclick="radiochange(1)">
             </label>
 
 
             <label class="radio-inline">
-                <input type="radio" name="major" value="2"><img src="{% static 'assets/img/business.png' %}" width="200px">
+                <input type="radio" id="radiobus" name="major" value="2" style="visibility: hidden;"><img src="{% static 'assets/img/business.png' %}" width="200px" id="image3" onclick="radiochange(2)">
             </label>
 
         </div>
