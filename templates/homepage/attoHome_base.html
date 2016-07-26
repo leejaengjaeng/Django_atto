@@ -23,72 +23,70 @@
 </head>
 
 <body>
-<div id="mainContainer" class="container-fluid">
-    <div class="container" style='background-image: url("{% static 'assets/img/background.png' %}");'>
-        <!-- TODO: 모바일에서 두줄로 나오는거 수정 -->
-        <!-- 고정 툴바 -->
-        <nav id="top_Toolbar" class="navbar navbar-default navbar-fixed-top">
-          <div class="container">
-              <ul class="nav navbar-nav navbar-right">
-                  {% if request.session.nav_right %}
-                  {% for key,value in request.session.nav_right %}
-                      <li role="presentation">
-                          <a href={{value}}>{{key}}</a>
-                      </li>
-                  {% endfor %}
-                  {% else %}
-                  <!-- 메뉴가 없는경우 = 유저 role 이 없는경우 일듯 -->
-                  {% endif %}
-              </ul>
-          </div>
-        </nav>
-    <!-- 고정 툴바 끝-->
-    <!-- 네비게이션 바 -->
-        <nav class = "navbar navbar-default" id="navMenu" >
-            <div class = "container">
-                <div class = "navbar-header">
-                    <!-- 햄버거 메뉴-->
-                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-collapse">
-                        <span class="sr-only">Toggle navigation</span>
-                        {% if request.session.nav_left %}
-                            {% for menu in request.session.nav_left %}
-                                <span class="icon-bar"></span>
-                            {% endfor %}
-                        {% else %}
-                            <!-- 메뉴가 없는경우 = 유저 role 이 없는경우 일듯 -->
-                        {% endif %}
-                    </button>
-                    <a class = "navbar-brand" href="/home" style="padding:8px 10px 8px 10px" >
-                        <img src="{% static 'assets/img/logo.png' %}" width="40px">
-                    </a>
-                </div>
-                <!-- 사이즈 줄어들면 사라질 부분 -->
-                <div class="collapse navbar-collapse" id="navbar-collapse">
-                    <!--기본메뉴-->
-                    <ul id="navbar" class="nav navbar-nav">
+<div id="mainContainer" class="container" 'background-image: url("{% static 'assets/img/background.png' %}");'>
+    <!-- TODO: 모바일에서 두줄로 나오는거 수정 -->
+    <!-- 고정 툴바 -->
+    <nav id="top_Toolbar" class="navbar navbar-default navbar-fixed-top">
+      <div class="container">
+          <ul class="nav navbar-nav navbar-right">
+              {% if request.session.nav_right %}
+              {% for key,value in request.session.nav_right %}
+                  <li role="presentation">
+                      <a href={{value}}>{{key}}</a>
+                  </li>
+              {% endfor %}
+              {% else %}
+              <!-- 메뉴가 없는경우 = 유저 role 이 없는경우 일듯 -->
+              {% endif %}
+          </ul>
+      </div>
+    </nav>
+<!-- 고정 툴바 끝-->
+<!-- 네비게이션 바 -->
+    <nav class = "navbar navbar-default" id="navMenu" >
+        <div class = "container">
+            <div class = "navbar-header">
+                <!-- 햄버거 메뉴-->
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-collapse">
+                    <span class="sr-only">Toggle navigation</span>
                     {% if request.session.nav_left %}
-                        {% for key,value in request.session.nav_left %}
-                            {% ifequal 0 forloop.counter0 %}
-                                <li role="presentation" class="active" id="navItem{{ forloop.counter }}"><a href={{value}}><center>{{key}}</center></a></li>
-                            {% else %}
-                                <li role="presentation" id="navItem{{ forloop.counter }}"><a href={{value}}><center>{{key}}</center></a></li>
-                            {% endifequal %}
+                        {% for menu in request.session.nav_left %}
+                            <span class="icon-bar"></span>
                         {% endfor %}
                     {% else %}
-                            <!-- 메뉴가 없는경우 = 유저 role 이 없는경우 일듯 -->
+                        <!-- 메뉴가 없는경우 = 유저 role 이 없는경우 일듯 -->
                     {% endif %}
-                    </ul>
-                </div>
+                </button>
+                <a class = "navbar-brand" href="/home" style="padding:8px 10px 8px 10px" >
+                    <img src="{% static 'assets/img/logo.png' %}" width="40px">
+                </a>
             </div>
-        </nav>
-        <!-- 네비게이션바 종료 -->
-
-        {% block slider %}{% endblock slider %}
-        {% block main_content %}{% endblock main_content %}
-
-        <div id = "footersty">
-        {% include 'homepage/footer.html' %}
+            <!-- 사이즈 줄어들면 사라질 부분 -->
+            <div class="collapse navbar-collapse" id="navbar-collapse">
+                <!--기본메뉴-->
+                <ul id="navbar" class="nav navbar-nav">
+                {% if request.session.nav_left %}
+                    {% for key,value in request.session.nav_left %}
+                        {% ifequal 0 forloop.counter0 %}
+                            <li role="presentation" class="active" id="navItem{{ forloop.counter }}"><a href={{value}}><center>{{key}}</center></a></li>
+                        {% else %}
+                            <li role="presentation" id="navItem{{ forloop.counter }}"><a href={{value}}><center>{{key}}</center></a></li>
+                        {% endifequal %}
+                    {% endfor %}
+                {% else %}
+                        <!-- 메뉴가 없는경우 = 유저 role 이 없는경우 일듯 -->
+                {% endif %}
+                </ul>
+            </div>
         </div>
+    </nav>
+    <!-- 네비게이션바 종료 -->
+
+    {% block slider %}{% endblock slider %}
+    {% block main_content %}{% endblock main_content %}
+
+    <div id = "footersty">
+    {% include 'homepage/footer.html' %}
     </div>
 </div>
 </body>
