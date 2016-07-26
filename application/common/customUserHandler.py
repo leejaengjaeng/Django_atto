@@ -15,13 +15,13 @@ def setMenuToSession(request):
 
     if request.user.is_authenticated():
         menu_right = [
-            (request.user.get_full_name(), "location.href='/myaccount'"),
-            ("로그 아웃", "location.href='/logout'"),
+            (request.user.get_full_name(), "/myaccount"),
+            ("로그 아웃", "/logout"),
         ]
     else:
         menu_right = [
-            ("로그인", "location.href='/login'"),
-            ("회원 가입", "location.href='/signup'"),
+            ("로그인", "/login"),
+            ("회원 가입", "/signup"),
         ]
 
 
