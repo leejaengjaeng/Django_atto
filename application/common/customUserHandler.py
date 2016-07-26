@@ -7,6 +7,7 @@ import json
 def setMenuToSession(request):
 
     # TODO: 메뉴 사용자에 맞게 나타나게 고치기
+    menu = []
 
     menu_right = []
     menu_left = []
@@ -17,13 +18,11 @@ def setMenuToSession(request):
             (request.user.get_full_name(), "location.href='/myaccount'"),
             ("로그 아웃", "location.href='/logout'"),
         ]
-        role = request.user.userprofile.role
     else:
         menu_right = [
             ("로그인", "location.href='/login'"),
             ("회원 가입", "location.href='/signup'"),
         ]
-        role = 0
 
 
     if role == 0 :
