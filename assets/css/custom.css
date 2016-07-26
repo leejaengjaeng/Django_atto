@@ -124,11 +124,12 @@ center
 
 .shopItem
 {
+    background : #ffffff;
     border:5px solid #6CCEF5;
     margin: 10px;
 }
 
-.shopitem img
+.shopitem a>img
 {
-    width: 50%;
+    max-width: 50%;
 }

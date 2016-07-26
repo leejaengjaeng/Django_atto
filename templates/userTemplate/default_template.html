@@ -11,15 +11,15 @@
 	<br>
 	<img src="{% static 'assets/img/slogan.jpg' %}" style="width:100%">
 	<br>
+<!-- 아이템 리스트 -->
  	{% if items %}
     <div id="items">
         <!-- Carousel items -->
-        <div class="carousel-inner">
+        <div class="container">
             {% for item in items %}
                 <!-- modulo 연산 (built in)-->
                 {% if forloop.counter|divisibleby:3 %}
-                <div class="item active">
-                    <div class="row">
+				<div class="row">
                 {% endif %}
                     <div class="shopItem col-sm-4" style="align:center">
                         <a href="#">
@@ -34,11 +34,11 @@
 							{% endif %}
                     </div>
                 {% if forloop.counter|divisibleby:3 %}
-                    </div><!--/row-->
-                </div><!--/item-->
+				</div><!--/row-->
                 {% endif %}
             {% endfor %}
         </div>
     </div>
     {% endif %}
+<!-- 아이템 리스트 끝 -->
 {% endblock main_content %}
