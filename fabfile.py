@@ -22,7 +22,6 @@ def deploy():
         if env.host in SERVERS:
             run('git pull origin master')
             puts(colors.blue("프론트엔드 의존성 패키지를 업데이트합니다."))
-            run('python ')
         else:
             puts('Deploy 대상이 잘못 되었습니다. [Deploy 가능 대상 : app]')
         with prefix(ACTIVATE):
