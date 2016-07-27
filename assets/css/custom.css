@@ -14,7 +14,9 @@ center
 .beforeSale {
     font-size: 7px;
 }
-
+.ham{
+    width:100%;
+}
 /*
     toolbar
 */
@@ -79,6 +81,11 @@ center
 #navbar li
 {
     width:16%;
+}
+@media screen and (max-width: 480px) {
+    #navbar li{
+        width : 100%;
+    }
 }
 .navbar-toggle li
 {
