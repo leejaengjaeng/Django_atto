@@ -65,137 +65,239 @@
             document.addjoin.submit();
         }
     </script>
-
+    <script>
+        function radiochange(id) {
+            if(id=="0"){
+                var a=document.getElementById("image1");
+                var b=document.getElementById("image2");
+                var c=document.getElementById("image3");
+                b.style.borderWidth='0px';
+                c.style.borderWidth='0px';
+                a.style.border="5px solid #6BCFEF";
+                a.style.borderRadius="17px";
+            }
+            if(id=="1"){
+                var a=document.getElementById("image1");
+                var b=document.getElementById("image2");
+                var c=document.getElementById("image3");
+                a.style.borderWidth='0px';
+                c.style.borderWidth='0px';
+                b.style.border="5px solid #6BCFEF";
+                b.style.borderRadius="17px";
+            }
+            if(id=="2"){
+                var a=document.getElementById("image1");
+                var b=document.getElementById("image2");
+                var c=document.getElementById("image3");
+                a.style.borderWidth='0px';
+                b.style.borderWidth='0px';
+                c.style.border="5px solid #6BCFEF";
+                c.style.borderRadius="17px";
+            }
+        }
+    </script>
+    <style>
+        .alignsignup{
+            width:20%; text-align: right;padding-top: 20px;
+        }
+        .outer{
+            width:50%; float:left;
+        }
+        .selectrole{
+            margin:auto;
+            padding-bottom: 50px;
+        }
+        .btnOK{
+            clear:both;
+            padding-top:50px;
+            padding-bottom:50px;
+        }
+        .rightside{
+            float:left;
+        }
+        .wantservice{
+            padding-top:30px;
+        }
+        .wantimage{
+            padding : 10px;
+        }
+    @media screen and (max-width: 480px){
+        .alignsignup{
+            width:100%;
+            text-align:left;
+        }
+        .rightside{
+            display:none;
+        }
+        .outer{
+            width:100%;
+        }
+        img{
+            width:75px;
+        }
+        .rightside{
+            display:none;
+        }
+    }
+    </style>
 <form method="POST" name="form1" action="/editsave" onsubmit="return execute()">
     {% csrf_token %}
-    아이디 <input type="text" name="id" size="10" id="inputid" value="{{ ids }}" readonly style="background-color: #e2e2e2;">
+    <center>
+    <div class="selectrole">
 
-    <script>
-      $(document).ready(function()
-        {
-            $("#loginbtn").click(function ()
-            {
-                     var inputID = document.getElementById('inputid').value;
-                    $.ajax(
-                            {
-                                method: 'POST',
-                                url: '/checkid',
-                                data: {'id': inputID, 'csrfmiddlewaretoken': '{{ csrf_token }}',},
-                                success: function (data) {
-                                    //alert("ajax sucess");
-                                    var retValue = data.reval;
-                                    //var dd =JSON.stringify(data)
+        <b style="font-size:20px">원하시는 서비스를 </b><b style="font-size:30px">선택</b><b style="font-size:20px">해주세요</b>
+        <div class="wantservice">
 
-                                    if (retValue == 1) {
+            <label class="radio-inline">
+                <input type="radio" id="radiocus" name="major" value="0" checked="checked" style="visibility: hidden; "><img src="{% static 'assets/img/customer.png' %}"  id="image1"width="200px" onclick="radiochange(0)">
+            </label>
 
-                                        var q = confirm(inputID + "는 사용할 수 있습니다. 사용하시겠습니까?");
-                                        if (q == true) {
-                                            var f = document.form1;
-                                            f.id.readOnly = true;
-                                        }
-                                        else {
-                                            var f = document.form1;
-                                            f.id.value = "";
-                                        }
-                                    }
-                                    else {
-                                        alert("중복된 아이디 입니다");
-                                        //var f = document.form1;
-                                         document.form1.id.value = "";
-                                    }
-                                },
-                                error: function () {
-                                    alert('error');
+
+            <label class="radio-inline">
+                <input type="radio" id="radiotea" name="major" value="1" style="visibility: hidden;"><img src="{% static 'assets/img/teacher.png' %}" width="200px" id="image2" onclick="radiochange(1)">
+            </label>
+
+
+            <label class="radio-inline">
+                <input type="radio" id="radiobus" name="major" value="2" style="visibility: hidden;"><img src="{% static 'assets/img/business.png' %}" width="200px" id="image3" onclick="radiochange(2)">
+            </label>
+
+        </div>
+    </div>
+            </center>
+    <div class="outer">
+            <div class="form-inline">
+                <div class="form group">
+                    <label for="exampleInputNmae2"  class="alignsignup">아이디</label>
+                    <input  type="text" name="id" size="20" id="inputid" class="form-control" readonly="readonly" value="{{ ids }}">
+                </div>
+                <div class="form goup">
+                    <label for="exampleInputNmae2"class="alignsignup">비밀번호</label>
+                    <input type="password" placeholder="비밀번호"name="pwd" size="20" id="pwd" class="form-control">
+                </div>
+
+
+                <div class="form group">
+                    <label for="exampleInputNmae2"class="alignsignup">비밀번호 확인</label>
+                    <input type="password" placeholder="비밀번호확인"name="repwd" size="20" id="repwd" class = "form-control">
+                </div>
+
+
+
+
+                <div class="form group">
+                    <label for="exampleInputNmae2"class="alignsignup">이름</label>
+                    <input type="text" name="name" size="20" id="name"placeholder="이름"class = "form-control" value="{{ names }}">
+                </div>
+
+                <div class="form group">
+                    <label for="exampleInputNmae2"class="alignsignup">이메일</label>
+                    <input name="email1" placeholder="이메일"type="text"  class="form-control">
+
+
+
+
+                    <select name="email2" onChange=changeEmail(this.value) class="form-control">
+
+                        <option value="" selected>이메일선택</option>
+                        <option value="naver.com">@naver.com</option>
+                        <option value="hanmail.com">@hanmail.com</option>
+                        <option value="daum.net">@daum.net</option>
+                        <option value="nate.com">@nate.com</option>
+                        <option value="gmail.com">@gmail.com</option>
+                        <option value="hotmail.com">@hotmail.com</option>
+                        <option value="dreamwiz.com">@dreamwiz.com</option>
+                        <option value="korea.com">@korea.com</option>
+                        <option value="1">직접입력</option>
+                    </select>
+
+                </div>
+                <div class="form group">
+                    <label for="exampleInputNmae2"class="alignsignup"></label>
+                    <input type="text" name="email3" id = "email3" class="form-control" style="visibility:hidden">
+                </div>
+                <div class="form group">
+                    <label for="exampleInputNmae2"class="alignsignup">핸드폰번호</label>
+                    <input type="text" name="phonenum" size="20" placeholder="핸드폰번호"id="phonenumber" class="form-control" value="{{ phonenums }}">
+                </div>
+
+                <div class="form group">
+                    <label for="exampleInputNmae2"class="alignsignup">주소입력</label>
+                    <input type="text" id="sample4_postcode" placeholder="우편번호" name="addr1" class="form-control" >
+                    <input type="button" onclick="sample4_execDaumPostcode()" value="우편번호 찾기" class="btn btn-default">
+                </div>
+                <div class="form group">
+                    <label for="exampleInputNmae2"class="alignsignup"></label>
+                    <input type="text" id="sample4_roadAddress" placeholder="도로명주소" name="addr2" class="form-control">
+                </div>
+                <div class="form group">
+                    <label for="exampleInputNmae2"class="alignsignup"></label>
+                    <input type="text" id="sample4_jibunAddress" placeholder="나머지 주소" name="addr3" class="form-control">
+                </div>
+
+                <span id="guide" style="color:#999"></span>
+
+                <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
+                <script>
+                    //본 예제에서는 도로명 주소 표기 방식에 대한 법령에 따라, 내려오는 데이터를 조합하여 올바른 주소를 구성하는 방법을 설명합니다.
+                    function sample4_execDaumPostcode() {
+                        new daum.Postcode({
+                            oncomplete: function(data) {
+                                // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
+
+                                // 도로명 주소의 노출 규칙에 따라 주소를 조합한다.
+                                // 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
+                                var fullRoadAddr = data.roadAddress; // 도로명 주소 변수
+                                var extraRoadAddr = ''; // 도로명 조합형 주소 변수
+
+                                // 법정동명이 있을 경우 추가한다. (법정리는 제외)
+                                // 법정동의 경우 마지막 문자가 "동/로/가"로 끝난다.
+                                if(data.bname !== '' && /[동|로|가]$/g.test(data.bname)){
+                                    extraRoadAddr += data.bname;
                                 }
-                            });
-            });
-        });
-    </script>
+                                // 건물명이 있고, 공동주택일 경우 추가한다.
+                                if(data.buildingName !== '' && data.apartment === 'Y'){
+                                    extraRoadAddr += (extraRoadAddr !== '' ? ', ' + data.buildingName : data.buildingName);
+                                }
+                                // 도로명, 지번 조합형 주소가 있을 경우, 괄호까지 추가한 최종 문자열을 만든다.
+                                if(extraRoadAddr !== ''){
+                                    extraRoadAddr = ' (' + extraRoadAddr + ')';
+                                }
+                                // 도로명, 지번 주소의 유무에 따라 해당 조합형 주소를 추가한다.
+                                if(fullRoadAddr !== ''){
+                                    fullRoadAddr += extraRoadAddr;
+                                }
 
-<br/>
-<br/>
-    비밀번호        <input type="password" name="pwd" size="10" id="pwd"><br/>
-    비밀번호 확인   <input type="password" name="repwd" size="10" id="repwd"><br/>
-    이름            <input type="text" name="name" size="10" id="name" value="{{ names }}"><br/>
-    <input name="email1" type="text" class="box" value="{{ mails }}"> @
+                                // 우편번호와 주소 정보를 해당 필드에 넣는다.
+                                document.getElementById('sample4_postcode').value = data.zonecode; //5자리 새우편번호 사용
+                                document.getElementById('sample4_roadAddress').value = fullRoadAddr;
+                                //document.getElementById('sample4_jibunAddress').value = data.jibunAddress;
 
-    <select name="email2" onChange=changeEmail(this.value)>
-        <option value="" selected>이메일선택</option>
-        <option value="naver.com">naver.com</option>
-        <option value="hanmail.com">hanmail.com</option>
-        <option value="daum.net">daum.net</option>
-        <option value="nate.com">nate.com</option>
-        <option value="gmail.com">gmail.com</option>
-        <option value="hotmail.com">hotmail.com</option>
-        <option value="dreamwiz.com">dreamwiz.com</option>
-        <option value="korea.com">korea.com</option>
-        <option value="1">직접입력</option>
+                                // 사용자가 '선택 안함'을 클릭한 경우, 예상 주소라는 표시를 해준다.
+                                if(data.autoRoadAddress) {
+                                    //예상되는 도로명 주소에 조합형 주소를 추가한다.
+                                    var expRoadAddr = data.autoRoadAddress + extraRoadAddr;
+                                    document.getElementById('guide').innerHTML = '(예상 도로명 주소 : ' + expRoadAddr + ')';
 
-    </select>  <input type="text" name="email3" id = "email3" style="display:none"><br/>
-    핸드폰 번호   <input type="text" name="phonenum" size="10" id="phonenumber" value="{{ phonenums }}"><br/>
-    <input type="text" id="sample4_postcode" placeholder="우편번호" name="addr1" >
-    <input type="button" onclick="sample4_execDaumPostcode()" value="우편번호 찾기"><br>
-    <input type="text" id="sample4_roadAddress" placeholder="도로명주소" name="addr2">
-    <input type="text" id="sample4_jibunAddress" placeholder="나머지 주소" name="addr3">
-    <span id="guide" style="color:#999"></span>
+                                } else if(data.autoJibunAddress) {
+                                    var expJibunAddr = data.autoJibunAddress;
+                                    document.getElementById('guide').innerHTML = '(예상 지번 주소 : ' + expJibunAddr + ')';
 
-    <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
-    <script>
-        //본 예제에서는 도로명 주소 표기 방식에 대한 법령에 따라, 내려오는 데이터를 조합하여 올바른 주소를 구성하는 방법을 설명합니다.
-        function sample4_execDaumPostcode() {
-            new daum.Postcode({
-                oncomplete: function(data) {
-                    // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
-
-                    // 도로명 주소의 노출 규칙에 따라 주소를 조합한다.
-                    // 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
-                    var fullRoadAddr = data.roadAddress; // 도로명 주소 변수
-                    var extraRoadAddr = ''; // 도로명 조합형 주소 변수
-
-                    // 법정동명이 있을 경우 추가한다. (법정리는 제외)
-                    // 법정동의 경우 마지막 문자가 "동/로/가"로 끝난다.
-                    if(data.bname !== '' && /[동|로|가]$/g.test(data.bname)){
-                        extraRoadAddr += data.bname;
-                    }
-                    // 건물명이 있고, 공동주택일 경우 추가한다.
-                    if(data.buildingName !== '' && data.apartment === 'Y'){
-                        extraRoadAddr += (extraRoadAddr !== '' ? ', ' + data.buildingName : data.buildingName);
-                    }
-                    // 도로명, 지번 조합형 주소가 있을 경우, 괄호까지 추가한 최종 문자열을 만든다.
-                    if(extraRoadAddr !== ''){
-                        extraRoadAddr = ' (' + extraRoadAddr + ')';
-                    }
-                    // 도로명, 지번 주소의 유무에 따라 해당 조합형 주소를 추가한다.
-                    if(fullRoadAddr !== ''){
-                        fullRoadAddr += extraRoadAddr;
-                    }
-
-                    // 우편번호와 주소 정보를 해당 필드에 넣는다.
-                    document.getElementById('sample4_postcode').value = data.zonecode; //5자리 새우편번호 사용
-                    document.getElementById('sample4_roadAddress').value = fullRoadAddr;
-                    //document.getElementById('sample4_jibunAddress').value = data.jibunAddress;
-
-                    // 사용자가 '선택 안함'을 클릭한 경우, 예상 주소라는 표시를 해준다.
-                    if(data.autoRoadAddress) {
-                        //예상되는 도로명 주소에 조합형 주소를 추가한다.
-                        var expRoadAddr = data.autoRoadAddress + extraRoadAddr;
-                        document.getElementById('guide').innerHTML = '(예상 도로명 주소 : ' + expRoadAddr + ')';
-
-                    } else if(data.autoJibunAddress) {
-                        var expJibunAddr = data.autoJibunAddress;
-                        document.getElementById('guide').innerHTML = '(예상 지번 주소 : ' + expJibunAddr + ')';
-
-                    } else {
-                        document.getElementById('guide').innerHTML = '';
-                    }
-                }
-            }).open();
-        }</script><br/>
-    구분            <input type="radio" name="major" value="0">고객
-    <input type="radio" name="major" value="1" checked="checked">선생님
-    <input type="radio" name="major" value="2">기타
-    <br>
-    <input type="submit" value="확인">
-    <input type="reset" value ="초기화">
+                                } else {
+                                    document.getElementById('guide').innerHTML = '';
+                                }
+                            }
+                        }).open();
+                    }</script><br/>
+            </div>
+        </div>
+        <div class="rightside"><!--이미지넣기-->
+            <img src="{% static 'assets/img/lenna.bmp' %}">
+        </div>
+        <center>
+            <div class="btnOK"><!--확인버튼-->
+                <input type="submit" value="  확인  " class="btn btn-default btn-lg">
+            </div>
+        </center>
 </form>
 {% endblock main_content %}

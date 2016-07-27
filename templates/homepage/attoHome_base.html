@@ -18,6 +18,22 @@
         <style type="text/css">
 
         </style>
+        <script>
+{#            var flag =0;#}
+{#            function mover(curobj) {#}
+{#                curobj.style.background="#6CCEF5";#}
+{##}
+{#            }#}
+{#            function mleave(curobj){#}
+{#                if(flag==1){return ;}#}
+{#                else{curobj.style.background="#FFFFFF";}#}
+{##}
+{#            }#}
+{#            function mclick(curobj){#}
+{#                curobj.style.background="#6CCEF5";#}
+{#                flag=1;#}
+{#            }#}
+        </script>
         {% setSession request %}
 </head>
 
@@ -69,7 +85,7 @@
                         {% ifequal 0 forloop.counter0 %}
                             <li role="presentation" id="navItem{{ forloop.counter }}"><a href={{value}}><center>{{key}}</center></a></li>
                         {% else %}
-                            <li role="presentation" id="navItem{{ forloop.counter }}"><a href={{value}}><center>{{key}}</center></a></li>
+                            <li role="presentation" id="navItem{{ forloop.counter }}" ><a href={{value}}><center>{{key}}</center></a></li>
                         {% endifequal %}
                     {% endfor %}
                 {% else %}
