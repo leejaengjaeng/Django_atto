@@ -55,20 +55,19 @@
     <nav class = "navbar navbar-default" id="navMenu" >
         <div class = "container">
             <div class = "navbar-header">
-                <!-- 햄버거 메뉴-->
+                <a class = "navbar-brand" href="/home" >
+                    <img src="{% static 'assets/img/logo.png' %}" width="50px">
+                </a>
+                  <!-- 햄버거 메뉴-->
                 <button type="button"class="navbar-toggle" data-toggle="collapse" data-target="#navbar-collapse">
                     <span class="sr-only">Toggle navigation</span>
-                    {% if request.session.nav_left %}
-                        {% for menu in request.session.nav_left %}
-                            <span class="icon-bar"></span>
-                        {% endfor %}
-                    {% else %}
-                        <!-- 메뉴가 없는경우 = 유저 role 이 없는경우 일듯 -->
-                    {% endif %}
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
                 </button>
-                <a class = "navbar-brand" href="/home" style="padding:8px 10px 8px 10px" >
-                    <img src="{% static 'assets/img/logo.png' %}" width="40px">
-                </a>
+
             </div>
             <!-- 사이즈 줄어들면 사라질 부분 -->
             <div class="collapse navbar-collapse" id="navbar-collapse">
@@ -80,7 +79,7 @@
                                 <a href={{link}}>
                                     <center>
                                         <p class="eName">{{eName}}</p>
-                                        <p class="kName">{{kName}}</p>
+                                        <p class="kName"><b>{{kName|linebreaks}}</b></p>
                                     </center>
                                 </a>
                             </li>

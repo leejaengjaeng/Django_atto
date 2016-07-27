@@ -41,6 +41,51 @@ center
 }
 
 /*
+------------------------------------------------------------
+    footer
+*/
+.footerout{
+    position: relative; bottom : 0px; border-top:5px solid #EF86AE; width:100%;
+    clear:both;
+    background-color: #ffffff;
+}
+.footer1{
+    float:left;padding-left:20px; width:60%;
+}
+.footer2{
+    float:left;padding-right:20px;width:40%;
+}
+
+.tel{
+    padding-left : 15px;
+}
+.fontsize{
+
+}
+
+@media screen and (max-width: 480px){
+       .footer1{
+        float:none;width:100%;margin:auto;padding-left: 0px;
+    }
+    .footer2{
+        float:none;width:100%;margin:auto;padding-right: 0px;
+    }
+    .tel{
+
+    }
+    h1{
+        font-size:20px;
+    }
+    h2{
+        font-size:15px;
+    }
+    h5{
+        font-size:12px;
+    }
+}
+
+/*
+------------------------------------------------------------
     toolbar
 */
 #top_Toolbar
@@ -82,10 +127,13 @@ center
 .navbar-brand
 {
     border-right:2px solid #6CCEF5;
+    height:100%;
+    padding:12px;
+    margin: 30% 0px 10% 0px;
 }
 #navbar
 {
-    width:95%;
+    width:90%;
     padding-left:5px;
 
 }
@@ -103,6 +151,20 @@ center
     #navbar li{
         width : 100%;
     }
+    .navbar-header
+    {
+        width:100%;
+        vertical-align:center;
+    }
+    .navbar-brand
+    {
+        margin:0px 0px 5px 0px;
+    }
+    .navbar-toggle
+    {
+        //display:table-cell;
+        margin: 11px 0px 0px 0px;
+    }
 }
 
 .navbar-toggle li
@@ -117,7 +179,8 @@ center
 
 }
 .kName{
-    font-size:12px;
+    margin-top:20px;
+    font-size:17px;
     font-weight:bold;
 }
 
@@ -217,5 +280,40 @@ center
     background : #ffffff;
     border:5px solid #6CCEF5;
 }
+/*
+------------------------------------------------------------
+    recruit
+*/
+#recruitPage
+{
+    padding: 3% 5% 3% 5%;
+}
 
+#recruitPage li
+{
+    float : left;
+}
 
+#recruitPreference
+{
+    text-align:center;
+}
+
+#recruitRequirement
+{
+    border:none;
+    background-color:rgba(255,255,255,0);
+}
+
+#recruitReq1
+{
+    padding:2%;
+    width:50%;
+    border-right: 1px solid rgb(0,0,0);
+}
+
+#recruitReq2
+{
+    width:50%;
+    padding:2%;
+}

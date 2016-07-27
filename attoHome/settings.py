@@ -33,7 +33,7 @@ INSTALLED_APPS = [
     'application.homepage',
     'application.qa',
     'application.download',
-
+    'application.recruit',
 ]
 
 MIDDLEWARE_CLASSES = [
