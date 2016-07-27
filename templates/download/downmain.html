@@ -1,0 +1,38 @@
+{% extends 'homepage/attoHome_base.html' %}
+{% load staticfiles %}
+{% block main_content %}
+    <style>
+    .toptop{
+        padding-top: 50px;
+    }
+    .topimg{
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+        padding-bottom: 50px;
+    }
+    </style>
+
+    <div class="topimg toptop">
+        <img src="{% static 'assets/img/downup.png' %}">
+    </div>
+
+    <center>
+        <div class="topimg">
+            <img src="{% static 'assets/img/downleft.png' %}">
+            <img src="{% static 'assets/img/downright.jpg' %}">
+        </div>
+    </center>
+    <center>
+        <div class="topimg">
+            <img src="{% static 'assets/img/downtext1.png' %}">
+        </div>
+    </center>
+    <center>
+        <div class="topimg">
+            <img src="{% static 'assets/img/downcircle1.png' %}">
+            <img src="{% static 'assets/img/downcircle2.png' %}">
+            <img src="{% static 'assets/img/downcircle3.png' %}">
+        </div>
+    </center>
+{% endblock %}
