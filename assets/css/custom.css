@@ -57,6 +57,10 @@ center
     width:16%;
 }
 
+
+/*
+    nav list
+*/
 #navItem1
 {
     border-top:10px solid #EF86AE;
@@ -122,14 +126,33 @@ center
     color: #ffffff;
 }
 
+/*
+    item list
+*/
+#itemContainer
+{
+    width:100%;
+    padding:0px;
+}
+
+
+.row
+{
+    width:100%;
+    margin:auto;
+    display:block;
+    text-align:center;
+    content-align:center;
+}
+
 .shopItem
+{
+    padding: 5%;
+}
+.shopItemInner
 {
     background : #ffffff;
     border:5px solid #6CCEF5;
-    margin: 10px;
 }
 
-.shopitem a>img
-{
-    max-width: 50%;
-}
+
