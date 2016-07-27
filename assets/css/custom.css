@@ -121,3 +121,15 @@ center
 {
     color: #ffffff;
 }
+
+.shopItem
+{
+    background : #ffffff;
+    border:5px solid #6CCEF5;
+    margin: 10px;
+}
+
+.shopitem a>img
+{
+    max-width: 50%;
+}

@@ -16,8 +16,9 @@ def home(request):
     # 로그인 체크
     if currentUser.is_authenticated():
         if currentUser.userprofile.role == 0:
+            itemList = cuh.getItemList(request)
             return render(request, 'userTemplate/customerTemplate.html',
-                          {'imgs':  sliderImgs})
+                          {'imgs':  sliderImgs, 'items':itemList})
 
         elif currentUser.userprofile.role == 1:
             return render(request, 'userTemplate/teacherTemplate.html',
@@ -29,8 +30,9 @@ def home(request):
         else: #role이 입력되어있지 않은경우
             return HttpResponse('user role Error')
     else:
+        itemList = cuh.getItemList(request)
         return render(request, 'userTemplate/default_template.html',
-                      {'imgs':  sliderImgs, })
+                      {'imgs':  sliderImgs, 'items':itemList})
 
 
 def signup(request):
