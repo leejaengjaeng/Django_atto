@@ -22,7 +22,6 @@ center
 {
     position: relative;
     width:100%;
-    min-height: 20px;
     background-color: rgba(255,255,255,1);
     border-color:rgba(0,0,0,0);
     margin-bottom:0px;
@@ -33,6 +32,15 @@ center
     padding: 5px 30px 5px 0px;
 }
 
+#top_Toolbar ul
+{
+    float:right;
+}
+
+#top_Toolbar ul li
+{
+    float:right;
+}
 
 /*
     mainContainer
