@@ -28,6 +28,11 @@
     .setcolor{
         padding-bottom:20px;
     }
+    .btndiv{
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+    }
     </style>
     <form method="post" action="{% url 'userLogin' %}">
         {% csrf_token %}
@@ -37,6 +42,7 @@
 
 
         <div class="setcolor">
+            <br/><br/><br/><br/><br/>
             <img src="{% static 'assets/img/logo.png' %}" width="150px" class="impad">
 
             <div class="loginbox">
@@ -44,7 +50,15 @@
                 <input type="password" name="password" value="" placeholder="password"  class="form-control"/>
                 <br/>
             </div>
-            <input type="submit" value="로그인" class="btn btn-default btnali"/>
+
+            <center>
+                <div style="margin-bottom: 50px">
+                    <input type="submit" value="로그인" class="btn btn-default btnali" style="display: inline;margin-right: 20px;"/>
+
+                    <a href="/signup" role="button" class="btn btn-default" >회원가입</a>
+                </div>
+            </center>
+
             <input type="hidden" name="next" value="/home"/>
         </div>
 
