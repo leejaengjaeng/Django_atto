@@ -15,32 +15,18 @@
 
 		{% block additional_assets %} {% endblock %}
         <style type="text/css">
-        #fixed {
-            width: 50px;
-            height: 50px;
-            position: fixed;
-            bottom: 100px;
-            right: 20px;
-        }
-        #footersty{
-            bottom : 0px;
-        }
+
         </style>
+        <!-- 햄버거 메뉴 사이즈 변경 스크립트 -->
         <script>
-{#            var flag =0;#}
-{#            function mover(curobj) {#}
-{#                curobj.style.background="#6CCEF5";#}
-{##}
-{#            }#}
-{#            function mleave(curobj){#}
-{#                if(flag==1){return ;}#}
-{#                else{curobj.style.background="#FFFFFF";}#}
-{##}
-{#            }#}
-{#            function mclick(curobj){#}
-{#                curobj.style.background="#6CCEF5";#}
-{#                flag=1;#}
-{#            }#}
+            $(document).ready(function()
+            {
+                $('.navbar-header').find('.navbar-toggle',function(e)
+                {
+                    alert('hi');
+                });
+
+            });
         </script>
         {% setSession request %}
 </head>

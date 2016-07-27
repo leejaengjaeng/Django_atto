@@ -15,6 +15,9 @@ center
     font-size: 7px;
 }
 
+/*
+    toolbar
+*/
 #top_Toolbar
 {
     position: relative;
@@ -30,12 +33,31 @@ center
     padding: 5px 30px 5px 0px;
 }
 
+
+/*
+    mainContainer
+*/
 #mainContainer
 {
     background-size: 80%;
     background-clip:content-box;
 }
 
+#fixed {
+    width: 50px;
+    height: 50px;
+    position: fixed;
+    bottom: 100px;
+    right: 20px;
+}
+
+#footersty{
+    bottom : 0px;
+}
+
+/*
+    navbar
+*/
 #navMenu
 {
     background-color: rgba(255,255,255,1);
@@ -43,20 +65,23 @@ center
     border-bottom:5px solid #EF86AE;
 
 }
-.navbar-header
+.navbar-brand
 {
-    border-right:2px soild #6CCEF5;
-    width:5%;
+    border-right:2px solid #6CCEF5;
 }
 #navbar
 {
     width:95%;
+    padding-left:5px;
 }
 #navbar li
 {
     width:16%;
 }
-
+.navbar-toggle li
+{
+    width:50%;
+}
 
 /*
     nav list
@@ -135,7 +160,6 @@ center
     padding:0px;
 }
 
-
 .row
 {
     width:100%;
@@ -149,6 +173,7 @@ center
 {
     padding: 5%;
 }
+
 .shopItemInner
 {
     background : #ffffff;
