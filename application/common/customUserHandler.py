@@ -27,20 +27,21 @@ def setMenuToSession(request):
 
     if role == 0 :
         menu_left = [
-            (u'Intro', '#'),
-            (u'Q&A', '/qa'),
-            (u'Shop', '/shop'),
-            (u'Download', '#'),
-            (u'제품 후기', '#'),
-            (u'디폴트,구매자', '#'),
+            (u'Shop',u'제품 소개', '/shop'),
+            (u'Q&A',u'고객 센터', '/qa'),
+            (u'Brand',u'브랜드 소개', '#'),
+            (u'Download',u'콘텐츠 & 다운로드', '#'),
+            (u'Recruit',u'인재 채용', '#'),
+            (u'News',u'홍보 소식', '#'),
         ]
     else :
         menu_left = [
-            (u'Intro', '#'),
-            (u'Q&A', '/qa'),
-            (u'Shop', '/shop'),
-            (u'Download', '#'),
-            (u'제품 후기', '#'),
+            (u'Shop', u'제품 소개', '/shop'),
+            (u'Q&A', u'고객 센터', '/qa'),
+            (u'Brand', u'브랜드 소개', '#'),
+            (u'Download', u'콘텐츠 & 다운로드', '#'),
+            (u'Recruit', u'인재 채용', '#'),
+            (u'News', u'홍보 소식', '#'),
         ]
 
     request.session['nav_left'] = menu_left

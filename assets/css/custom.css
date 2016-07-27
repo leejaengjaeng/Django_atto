@@ -17,6 +17,29 @@ center
 .ham{
     width:100%;
 }
+
+
+/*
+    mainContainer
+*/
+#mainContainer
+{
+    background-size: 80%;
+    background-clip:content-box;
+}
+
+#fixed {
+    width: 50px;
+    height: 50px;
+    position: fixed;
+    bottom: 100px;
+    right: 20px;
+}
+
+#footersty{
+    bottom : 0px;
+}
+
 /*
     toolbar
 */
@@ -45,26 +68,6 @@ center
     float:left;
 }
 
-/*
-    mainContainer
-*/
-#mainContainer
-{
-    background-size: 80%;
-    background-clip:content-box;
-}
-
-#fixed {
-    width: 50px;
-    height: 50px;
-    position: fixed;
-    bottom: 100px;
-    right: 20px;
-}
-
-#footersty{
-    bottom : 0px;
-}
 
 /*
     navbar
@@ -87,18 +90,35 @@ center
 
 }
 
+#navbar a
+{
+    padding:0px;
+}
+
 #navbar li
 {
     width:16%;
 }
-@media screen and (max-width: 480px) {
+@media screen and (max-width: 767px) {
     #navbar li{
         width : 100%;
     }
 }
+
 .navbar-toggle li
 {
     width:50%;
+}
+
+.eName{
+    font-size:5px;
+    color:#EF86AE;
+    font-weight:bold;
+
+}
+.kName{
+    font-size:12px;
+    font-weight:bold;
 }
 
 /*

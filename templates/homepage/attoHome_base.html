@@ -75,12 +75,15 @@
                 <!--기본메뉴-->
                 <ul id="navbar" class="nav navbar-nav">
                 {% if request.session.nav_left %}
-                    {% for key,value in request.session.nav_left %}
-                        {% ifequal 0 forloop.counter0 %}
-                            <li role="presentation" id="navItem{{ forloop.counter }}"><a href={{value}}><center>{{key}}</center></a></li>
-                        {% else %}
-                            <li role="presentation" id="navItem{{ forloop.counter }}" ><a href={{value}}><center>{{key}}</center></a></li>
-                        {% endifequal %}
+                    {% for eName,kName,link in request.session.nav_left %}
+                            <li role="presentation" id="navItem{{ forloop.counter }}" >
+                                <a href={{link}}>
+                                    <center>
+                                        <p class="eName">{{eName}}</p>
+                                        <p class="kName">{{kName}}</p>
+                                    </center>
+                                </a>
+                            </li>
                     {% endfor %}
                 {% else %}
                         <!-- 메뉴가 없는경우 = 유저 role 이 없는경우 일듯 -->
