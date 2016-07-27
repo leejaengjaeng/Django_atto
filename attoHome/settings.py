@@ -32,6 +32,8 @@ INSTALLED_APPS = [
     'application.common',
     'application.homepage',
     'application.qa',
+    'application.download',
+
 ]
 
 MIDDLEWARE_CLASSES = [
