@@ -45,13 +45,15 @@ center
 }
 .navbar-header
 {
-    border-right:2px soild #6CCEF5;
-    width:5%;
+    border-right:2px solid #6CCEF5;
+
 }
 #navbar
 {
     width:95%;
+
 }
+
 #navbar li
 {
     width:16%;
