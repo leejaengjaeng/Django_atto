@@ -285,6 +285,19 @@ center
     border:5px solid #6CCEF5;
 }
 
+@media screen and (max-width: 768px) {
+
+    .shopItemInner
+    {
+        border:3px solid #6CCEF5;
+    }
+
+    .col-xs-12
+    {
+        margin:auto;
+        padding:5% 20% 5% 20%;
+    }
+}
 /*
 ------------------------------------------------------------
     recruit
