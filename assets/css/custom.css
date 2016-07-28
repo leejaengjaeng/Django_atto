@@ -165,6 +165,7 @@ center
         //display:table-cell;
         margin: 11px 0px 0px 0px;
     }
+
 }
 
 .navbar-toggle li
@@ -247,9 +248,13 @@ center
     background: #A6D060;
 }
 
-#navbar li a:hover
+#navbar li:hover a
 {
-    color: #ffffff;
+    color: #ffffff !important;
+}
+#navbar li
+{
+    height:100px;
 }
 
 /*
@@ -280,9 +285,11 @@ center
     background : #ffffff;
     border:5px solid #6CCEF5;
 }
+
 /*
 ------------------------------------------------------------
     recruit
+------------------------------------------------------------
 */
 #recruitPage
 {
@@ -317,3 +324,25 @@ center
     width:50%;
     padding:2%;
 }
+
+@media screen and (max-width: 767px) {
+    #recruitReq1
+    {
+        padding:2%;
+        width:100%;
+        border:none;
+    }
+
+    #recruitReq2
+    {
+        width:100%;
+        padding:2%;
+    }
+
+}
+
+/*
+------------------------------------------------------------
+    news
+------------------------------------------------------------
+*/

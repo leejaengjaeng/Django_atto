@@ -32,7 +32,7 @@ def setMenuToSession(request):
             (u'Brand',u'브랜드 소개', '#'),
             (u'Download',u'콘텐츠 \n 다운로드', '#'),
             (u'Recruit',u'인재 채용', '/recruit'),
-            (u'News',u'홍보 소식', '#'),
+            (u'News',u'홍보 소식', '/news'),
         ]
     else :
         menu_left = [
@@ -41,7 +41,7 @@ def setMenuToSession(request):
             (u'Brand', u'브랜드 소개', '#'),
             (u'Download', u'콘텐츠 \n 다운로드', '#'),
             (u'Recruit', u'인재 채용', '/recruit'),
-            (u'News', u'홍보 소식', '#'),
+            (u'News', u'홍보 소식', '/news'),
         ]
 
     request.session['nav_left'] = menu_left
