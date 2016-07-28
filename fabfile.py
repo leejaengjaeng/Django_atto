@@ -27,5 +27,6 @@ def deploy():
         with prefix(ACTIVATE):
             puts(colors.blue("Reqirements를 자동으로 설치합니다."))
             run('pip install -r install/requirement.txt')
+            run('python manage.py migrate')
             run('python manage.py collectstatic --noinput')
             sudo('supervisorctl restart all', quiet=True)
