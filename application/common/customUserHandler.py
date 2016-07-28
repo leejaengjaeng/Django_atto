@@ -27,21 +27,21 @@ def setMenuToSession(request):
 
     if role == 0 :
         menu_left = [
-            (u'Shop',u'제품 소개', '/shop'),
-            (u'Q&A',u'고객 센터', '/qa'),
-            (u'Brand',u'브랜드 소개', '#'),
+            (u'Shop',u'제품 소개\n\n', '/shop'),
+            (u'Q&A',u'고객 센터\n\n', '/qa'),
+            (u'Brand',u'브랜드 소개\n\n', '#'),
             (u'Download',u'콘텐츠 \n 다운로드', '#'),
-            (u'Recruit',u'인재 채용', '/recruit'),
-            (u'News',u'홍보 소식', '#'),
+            (u'Recruit',u'인재 채용\n\n', '/recruit'),
+            (u'News',u'홍보 소식\n\n', '#'),
         ]
     else :
         menu_left = [
-            (u'Shop', u'제품 소개', '/shop'),
-            (u'Q&A', u'고객 센터', '/qa'),
-            (u'Brand', u'브랜드 소개', '#'),
+            (u'Shop', u'제품 소개\n\n', '/shop'),
+            (u'Q&A', u'고객 센터\n\n', '/qa'),
+            (u'Brand', u'브랜드 소개\n\n', '#'),
             (u'Download', u'콘텐츠 \n 다운로드', '#'),
-            (u'Recruit', u'인재 채용', '/recruit'),
-            (u'News', u'홍보 소식', '#'),
+            (u'Recruit', u'인재 채용\n\n', '/recruit'),
+            (u'News', u'홍보 소식\n\n', '#'),
         ]
 
     request.session['nav_left'] = menu_left
