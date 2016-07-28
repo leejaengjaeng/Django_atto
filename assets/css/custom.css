@@ -345,3 +345,13 @@ center
     news
 ------------------------------------------------------------
 */
+#newsPage
+{
+    padding: 3% 5% 3% 5%;
+}
+.headLine
+{
+    width:100%;
+    color:#FFFFFF;
+    background-color:#6CCEF5;
+}

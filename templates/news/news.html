@@ -3,4 +3,35 @@
 {% load custom_tags %}
 
 {% block main_content %}
+
+<div id="newsPage">
+    <img src="{% static 'assets/img/news/kingmonim.jpg' %}" style="width:100%">
+    <br>
+    <img src="{% static 'assets/img/news/logo.png' %}" style="width:100%">
+    <br>
+    <div id="feeds">
+        {% if posts %}
+            <div class="container" id="itemContainer">
+                {% for post in posts %}
+                    <!-- modulo 연산 (built in)-->
+                    {% if forloop.counter0|divisibleby:3 %}
+                    <div class="row">
+                    {% endif %}
+                        <div class="feed col-xs-4 col-md-4">
+                            <a href="{{post.contentsLink}}">
+                                <img src="{{MEDIA_URL}}/{{post.image}}" alt="post_Image" class="img-responsive">
+                            </a>
+                            <div class="headLine">
+                                <p>{{post.headLine}}</p>
+                            </div>
+                        </div>
+                    {% if forloop.counter|divisibleby:3 %}
+                    </div><!--/row-->
+                    {% endif %}
+                {% endfor %}
+            </div>
+        {% endif %}
+    </div>
+</div>
+
 {% endblock main_content %}
