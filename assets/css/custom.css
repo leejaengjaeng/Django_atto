@@ -251,19 +251,9 @@ center
     background: #A6D060;
 }
 
-<<<<<<< HEAD
 #navbar li:hover .kName, li:hover .eName
 {
     color: white;
-=======
-#navbar li:hover a
-{
-    color: #ffffff !important;
-}
-#navbar li
-{
-    height:100px;
->>>>>>> 5981da8b20f7aa6b9361549d21d218b0a8cb4c50
 }
 
 /*
