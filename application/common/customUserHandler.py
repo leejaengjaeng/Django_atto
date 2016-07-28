@@ -30,7 +30,7 @@ def setMenuToSession(request):
             (u'Shop',u'제품 소개', '/shop'),
             (u'Q&A',u'고객 센터', '/qa'),
             (u'Brand',u'브랜드 소개', '#'),
-            (u'Download',u'콘텐츠 \n 다운로드', '#'),
+            (u'Download',u'콘텐츠 \n 다운로드', '/download'),
             (u'Recruit',u'인재 채용', '/recruit'),
             (u'News',u'홍보 소식', '/news'),
         ]

@@ -6,5 +6,6 @@ from . import views
 # base
 urlpatterns = [
 	url(r'^$',views.delThis, name='delThis'),
+	url(r'^downcontents/',views.downcontents ,name='downcontents'),
 ]
 
