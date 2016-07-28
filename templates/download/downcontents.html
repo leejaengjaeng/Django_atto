@@ -18,7 +18,7 @@
         </div>
         <div>
             <div style="padding-top: 20px">
-                <h4><b>{{ content.text }}</b></h4>
+                <h4><b>{{ content.text|linebreaksbr }}</b></h4>
             </div>
             <div style="margin-top: 40px">
                 <a href="{{ MEDIA_URL }}{{ content.video }}" download><img src="{% static 'assets/img/downloadbtn.png' %}"></a>
