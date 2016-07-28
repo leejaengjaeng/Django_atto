@@ -174,12 +174,14 @@ center
 }
 
 .eName{
+    text-align: center;
     font-size:5px;
     color:#EF86AE;
     font-weight:bold;
-
 }
+
 .kName{
+    text-align: center;
     margin-top:20px;
     font-size:17px;
     font-weight:bold;
@@ -236,6 +238,7 @@ center
 #navItem5:hover
 {
     background: #6CCEF5;
+
 }
 
 #navItem6
@@ -248,13 +251,9 @@ center
     background: #A6D060;
 }
 
-#navbar li:hover a
+#navbar li:hover .kName, li:hover .eName
 {
-    color: #ffffff !important;
-}
-#navbar li
-{
-    height:100px;
+    color: white;
 }
 
 /*

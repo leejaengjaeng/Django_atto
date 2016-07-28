@@ -77,10 +77,8 @@
                     {% for eName,kName,link in request.session.nav_left %}
                             <li role="presentation" id="navItem{{ forloop.counter }}" >
                                 <a href={{link}}>
-                                    <center>
-                                        <p class="eName">{{eName}}</p>
-                                        <p class="kName"><b>{{kName|linebreaks}}</b></p>
-                                    </center>
+                                    <p class="eName">{{eName}}</p>
+                                    <p class="kName">{{kName|linebreaksbr}}</p>
                                 </a>
                             </li>
                     {% endfor %}
