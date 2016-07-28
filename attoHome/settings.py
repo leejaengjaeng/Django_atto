@@ -34,6 +34,7 @@ INSTALLED_APPS = [
     'application.qa',
     'application.download',
     'application.recruit',
+    'application.news',
 ]
 
 MIDDLEWARE_CLASSES = [
