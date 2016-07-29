@@ -4,61 +4,67 @@
 
 {% block main_content %}
 
-<div id="recruitPage">
+<div class="container-fluid">
     <li style="color:RED";><b>Recruit</b></li>
     <br>
-    <img src="{% static 'assets/img/recruit/recruittext.png' %}" style="width:100%">
+    <img src="{% static 'assets/img/recruit/recruittext.png' %}" class="downcontentstext img-responsive" alt="Responsive image">
     <br>
-    <img src="{% static 'assets/img/recruit/people.jpg' %}" style="width:100%">
+    <img src="{% static 'assets/img/recruit/people.jpg' %}" class="downcontentstext img-responsive" alt="Responsive image">
     <br>
-    <div id="recruitPreference">
-        <b>
-            <h4><b>■ 우대 조건</b></h4>
-            어린이를 사랑하고 유아 콘텐츠에 관심이 있으신 분<br>
-            커뮤니케이션에 능하신 분<br>
-            스타트업에 대한 이해가 있으신 분<br>
-        </b>
+    <div class="container-fluid">
+        <p class="text-center">
+            <b style="font-size: 18px;">■ 우대 조건</b><br>
+            <b>
+                어린이를 사랑하고 유아 콘텐츠에 관심이 있으신 분<br>
+                커뮤니케이션에 능하신 분<br>
+                스타트업에 대한 이해가 있으신 분<br>
+            </b>
+        </p>
     </div>
     <br>
-    <div id="recruitRequirement" class="footerout container">
-        <div id ="recruitReq1" class="footer1">
-            <p><b>1.지원시기</b> : 상시지원 </p>
-
-            <p>
+    <div class="container-fluid row">
+        <div class="col-sm-6 col-xs-12">
+            <p class="text-left"><b>1.지원시기</b> : 상시지원 </p><br>
+            <p class="text-left">
                 <b>2.전형방법</b><br>
-                <ul>
-                    <li>1차 - 포트폴리오 및 입사지원서 전형</li><br>
-                    <li>2차 - 실무 면접</li><br>
-                    <li>3차 - 임원 면접</li><br>
-                    <li>1차 심사 후 합격자에 한하여 개별 통보</li><br>
-                    <li>제출하신 포트폴리오 및 입사지원서는 반환하지 않습니다.</li><br>
-                </ul>
             </p>
+                <ul class="list-unstyled" style="text-align: left;">
+                    <li>1) 1차 - 포트폴리오 및 입사지원서 전형</li>
+                    <li>2) 2차 - 실무 면접</li>
+                    <li>3) 3차 - 임원 면접</li>
+                    <li>*1차 심사 후 합격자에 한하여 개별 통보</li>
+                    <li>*제출하신 포트폴리오 및 입사지원서는 반환하지 않습니다.</li>
+                </ul>
+
             <br>
-            <p>
+            <p class="text-left">
                 <b>3.포트폴리오 및 입사지원서</b><br>
-                <ul>
+                <ul class="list-unstyled">
                     <li>
-                        입사지원서는 자유 포맷이며, 자신의 역량을 잘 보여줄 수 있는 포맷으로 지원 바랍니다.
+                        <p class="text-left">*입사지원서는 자유 포맷이며, 자신의 역량을 잘 보여줄 수 있는 포맷으로 지원 바랍니다.</p>
                     </li>
                 </ul>
             </p>
         </div>
-        <div id ="recruitReq2" class="footer2">
-            <p>
+        <div class="col-sm-6 col-xs-12">
+            <p class="text-left">
                 <b>4.제출방법</b><br>
-                <ul>
-                    <li>e-mail 접수 : <a href="mailto:attocube@attocube.co.kr">attocube@attocube.co.kr</a></li><br>
-                    <li>입사지원서 및 포트폴리오를 첨부파일로 보내주시기 바랍니다.</li><br>
-                    <li>기타 다른 방법(우편,팩스 등)으로는 입사 지원 하실 수 없습니다.</li><br>
+                <ul class="list-unstyled" style="text-align: left">
+
+                    <li>1)e-mail 접수 : <a href="mailto:attocube@attocube.co.kr">attocube@attocube.co.kr</a></li>
+                    <li>2)입사지원서 및 포트폴리오를 첨부파일로 보내주시기 바랍니다.</li>
+                    <li>
+                        <p class="text-left">
+                            3)기타 다른 방법(우편,팩스 등)으로는 입사 지원 하실 수 없습니다.
+                        </p>
+                    </li><br>
                 </ul>
             </p>
-            <br>
-            <p>
+            <p class="text-left">
                 <b>5.문의</b><br>
-                <ul>
-                    <li>e-mail : <a href="mailto:attocube@attocube.co.kr">attocube@attocube.co.kr</a></li><br>
-                    <li>전화 : <a href="tel:031-1833-7912">031-1833-7912</a></li><br>
+                <ul class="list-unstyled" style="text-align:left">
+                    <li>1)e-mail : <a href="mailto:attocube@attocube.co.kr">attocube@attocube.co.kr</a></li>
+                    <li>2)전화 : <a href="tel:031-1833-7912">031-1833-7912</a></li><br>
                 </ul>
             </p>
         </div>
