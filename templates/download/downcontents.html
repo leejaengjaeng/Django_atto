@@ -25,11 +25,11 @@
     <img src="{% static 'assets/img/downcontentstext1.png' %}"class="downcontentstext img-responsive" alt="Responsive image">
     {% for content in contents %}
         <div class="downcontentstext" style="width:75%;margin-top: 50px; clear:both">
-            <div style="float:left; margin-right: 15px;margin-top: 30px">
+            <div style="float:left; margin-right: 15px;margin-top: 15px; margin-bottom: 30px">
             {% ifequal flag 0 %}
                     <iframe class="utube" src="{{ content.source }}" frameborder="0" allowfullscreen  ></iframe>
             {% else %}
-                    <img class="utube" src="{{ MEDIA_URL }}{{ content.file }}" >
+                    <img class="utube" src="{{ MEDIA_URL }}{{ content.file }}" class="downcontentstext img-responsive" alt="Responsive image">
             {% endifequal %}
             </div>
             <div>

@@ -12,6 +12,10 @@ class singcontents(models.Model):
     def __str__(self):
         return self.file.name
 
+    class Meta:
+        verbose_name = '동요 자료'
+        verbose_name_plural = '동요 다운로드'
+
 class doccontents(models.Model):
     file=models.FileField(upload_to='docucontents')
     text=models.TextField(default="")
@@ -19,3 +23,7 @@ class doccontents(models.Model):
 
     def __str__(self):
         return self.file.name
+
+    class Meta:
+        verbose_name = '교육 가이드'
+        verbose_name_plural = '교육 가이드 다운로드'
