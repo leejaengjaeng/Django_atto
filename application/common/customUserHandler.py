@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 from application.homepage.models import SliderImages, shopItem
+from application.news.models import Posts,Comments
 from django.core.exceptions import ObjectDoesNotExist
 import json
 
@@ -32,16 +33,16 @@ def setMenuToSession(request):
             (u'Brand',u'브랜드 소개\n\n', '#'),
             (u'Download',u'콘텐츠 \n 다운로드', '/download'),
             (u'Recruit',u'인재 채용\n\n', '/recruit'),
-            (u'News',u'홍보 소식\n\n', '#'),
+            (u'News',u'홍보 소식\n\n', '/news'),
         ]
     else :
         menu_left = [
             (u'Shop', u'제품 소개\n\n', '/shop'),
             (u'Q&A', u'고객 센터\n\n', '/qa'),
             (u'Brand', u'브랜드 소개\n\n', '#'),
-            (u'Download', u'콘텐츠 \n 다운로드', '#'),
+            (u'Download', u'콘텐츠 \n 다운로드', '/download'),
             (u'Recruit', u'인재 채용\n\n', '/recruit'),
-            (u'News', u'홍보 소식\n\n', '#'),
+            (u'News', u'홍보 소식\n\n', '/news'),
         ]
 
     request.session['nav_left'] = menu_left
@@ -79,3 +80,12 @@ def getItemList(request):
         itemList = []
     return itemList
 
+
+def getPosts(request):
+    posts = []
+    try:
+        posts = Posts.objects.all()
+    except ObjectDoesNotExist:
+        posts =[]
+        #뭔가 예외처리하기
+    return posts

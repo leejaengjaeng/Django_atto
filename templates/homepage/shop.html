@@ -9,42 +9,32 @@
 
 {% block slider %}
     {% include 'homepage/main_slider.html' with images=imgs %}
-    <br>
-    <br>
-    {% include 'homepage/item_slider.html' %}
 {% endblock slider %}
 
 {% block main_content %}
-    {% if items %}
-    <div id="items">
-        <!-- Carousel items -->
-        <div class="carousel-inner">
-            {% for item in items %}
-                <!-- modulo 연산 (built in)-->
-                {% if forloop.counter|divisibleby:3 %}
-                <div class="item active">
-                    <div class="row">
-                {% endif %}
-                    <div class="col-sm-4" style="align:center">
-                        <a href="#">
-                            <img src="{% static 'downloads' %}/{{item.image}}" alt="Image" class="img-responsive">
-                        </a>
-                        <div >
-                            {{item.itemName}} <br>
-                            {% if item.sale == 0 %}
-                               <p class="price">{{item.price}}</p>
-                                {% else %}
-                                    <s><small class="center">{{ item.price }}</small></s>
-                                    <p class="center">{% sub item.price item.sale %}</p>
-                                {% endif %}
-                        </div>
-                    </div>
-                {% if forloop.counter|divisibleby:3 %}
-                    </div><!--/row-->
-                </div><!--/item-->
-                {% endif %}
-            {% endfor %}
+   {% if items %}
+        <div class="container" id="itemContainer">
+            <div class="row">
+				{% for item in items %}
+					<!-- modulo 연산 (built in)-->
+						<div class="shopItem col-sm-4 col-xs-12 ">
+							<div class="shopItemInner">
+								<a href="#">
+									<img src="{{MEDIA_URL}}/{{item.image}}" alt="Image" class="img-responsive">
+								</a>
+									{{item.itemName}} <br>
+									{% if item.sale == 0 %}
+										<p class="price">{{item.price}}</p>
+									{% else %}
+										<p class="price center">
+										<del><small>{{ item.price }}</small></del>
+										{% sub item.price item.sale %}
+										</p>
+									{% endif %}
+							</div>
+						</div>
+				{% endfor %}
+			</div><!--/row-->
         </div>
-    </div>
     {% endif %}
 {% endblock main_content %}
