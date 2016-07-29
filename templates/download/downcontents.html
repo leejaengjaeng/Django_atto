@@ -15,8 +15,8 @@
     @media screen and (max-width: 480px) {
 
         .utube{
-             width:188px;
-            height:105px
+             width:256px;
+            height:192px
 
         }
     }
@@ -25,17 +25,13 @@
     <img src="{% static 'assets/img/downcontentstext1.png' %}"class="downcontentstext img-responsive" alt="Responsive image">
     {% for content in contents %}
         <div class="downcontentstext" style="width:75%;margin-top: 50px; clear:both">
+            <div style="float:left; margin-right: 15px;margin-top: 30px">
             {% ifequal flag 0 %}
-                <div style="float:left; margin-right: 15px;margin-top: 30px">
                     <iframe class="utube" src="{{ content.source }}" frameborder="0" allowfullscreen  ></iframe>
-                </div>
             {% else %}
-                <div>
-                    <a href="#" class="thumnail">
-                        <img src="{{ MEDIA_URL }}{{ content.file }}">
-                    </a>
-                </div>
+                    <img class="utube" src="{{ MEDIA_URL }}{{ content.file }}" >
             {% endifequal %}
+            </div>
             <div>
                 <div style="padding-top: 20px">
                     <h4><b>{{ content.text|linebreaksbr }}</b></h4>
