@@ -2,7 +2,7 @@
 from application.homepage.models import SliderImages, shopItem
 from application.news.models import Posts,Comments
 from django.core.exceptions import ObjectDoesNotExist
-import json
+import datetime
 
 #메뉴바 왼쪽 부분
 def setMenuToSession(request):
@@ -89,3 +89,17 @@ def getPosts(request):
         posts =[]
         #뭔가 예외처리하기
     return posts
+
+def getComments(request):
+    postId = request.POST.get('postId')
+    comments = []
+    try:
+        data = Comments.objects.filter(postNum=postId)
+        for comment in data:
+            date = comment.makeTime.strftime('%Y.%m.%d - %H:%M')
+            comments.append({'id':comment.author.username,'date':date,'content':comment.content})
+
+#        comments = serializers.serialize('json',Comments.objects.filter(postNum=postId))
+    except ObjectDoesNotExist:
+        comments = {}
+    return comments

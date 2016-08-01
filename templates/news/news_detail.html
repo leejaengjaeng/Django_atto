@@ -1,0 +1,116 @@
+{% extends "homepage/attoHome_base.html" %}
+{% load staticfiles %}
+{% load custom_tags %}
+
+{% block additional_assets %}
+    {% if link %}
+        <!-- TODO: newsLink가 http://로 시작하지않으면 붙여주기 -->
+        <script>
+            location.href='{{link}}';
+        </script>
+    {% endif %}
+
+    <script>
+    $(document).ready(function()
+    {
+        postId = {{post.id}}
+        $.ajax(
+        {
+            method:'POST',
+            url:'getComments',
+            data:{'postId':postId, 'csrfmiddlewaretoken': '{{ csrf_token }}',},
+            success: function(data)
+            {
+                //comments = JSON.parse(data.comments)
+                comments = data.comments
+
+                for(flag in comments)
+                {
+                    console.log(comments[flag])
+                    var comment = comments[flag]
+
+                    $('#newsCommentsList').append('\
+                        <li>' + comment.id + '|' + comment.date + '|' + comment.content + '</li>\
+                    ')
+                }
+            },
+            error: function(error)
+            {
+                console.log(error)
+            },
+        });
+
+
+        $("#commentAddBtn").click(function()
+        {
+            var date = new Date()
+            var formatDate = date.getFullYear()+'.'+date.getMonth()+'.'+date.getDate()+' - '
+                            + date.getHours()+':'+date.getMinutes();
+
+            $('#newsCommentsList').append('\
+                <li> {{request.user.username}} |' + formatDate + '|' + $('#commentContent').val() + '</li>\
+            ');
+
+            $.ajax(
+            {
+                method:'POST',
+                url:'addComment',
+                data:{'content':$('#commentContent').val(),'postNum':"{{post.id}}", 'csrfmiddlewaretoken': '{{ csrf_token }}',},
+                success: function(data)
+                {
+                   console.log('댓글이 입력되었슝!')
+                },
+                error: function(error)
+                {
+                    console.log(error)
+                },
+            });
+        });
+
+    });
+    </script>
+{% endblock additional_assets %}
+
+{% block main_content %}
+<div id="newsDetailContainer">
+    {% if post.contentsImg %}
+        <div id="newsContent" class="row">
+          <div class="col-sm-12">
+            <div class="caption">
+                <h3>{{post.headLine}}</h3>
+            </div>
+            <div class="thumbnail">
+              <img src="{{MEDIA_URL}}/{{post.contentsImg}}">
+            </div>
+          </div>
+        </div>
+    {% else %}
+        <p>test:{{post.contentsImg }}</p>
+    {% endif %}
+
+    <div id="newsComments">
+        <h4>Comments</h4>
+        {% if request.user.is_authenticated %}
+            <div id="newsCommentAdd">
+                <form class="form-inline">
+                    <div class="form-group">
+                        <input type="text" class="form-control" id="commentContent">
+                    </div>
+                    <input type="hidden" id="postId" value="{{post.id}}">
+                    <div class="form-group">
+                        <button id="commentAddBtn" type="button" class="btn btn-default" >등록</button>
+                    </div>
+                </form>
+            </div>
+        {% else %}
+            <div id="newsCommentAdd">
+                <button onclick="window.location.href='/login'"> 로그인 </button>
+                <button onclick="window.location.href='/signup'"> 회원 가입 </button>
+            </div>
+        {% endif %}
+        <div id="newsCommentsList">
+        </div>
+    </div>
+
+</div>
+{% endblock main_content %}

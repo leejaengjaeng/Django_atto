@@ -18,6 +18,11 @@ center
     width:100%;
 }
 
+.imgBtn
+{
+    cursor:pointer;
+}
+
 
 /*
     mainContainer
@@ -368,3 +373,14 @@ center
     color:#FFFFFF;
     background-color:#6CCEF5;
 }
+/*
+------------------------------------------------------------
+    news_detail
+------------------------------------------------------------
+*/
+
+#newsComments
+{
+    border-top:2px solid #000000;
+}
+
