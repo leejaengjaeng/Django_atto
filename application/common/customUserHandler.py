@@ -30,7 +30,7 @@ def setMenuToSession(request):
         menu_left = [
             (u'Shop',u'제품 소개\n\n', '/shop'),
             (u'Q&A',u'고객 센터\n\n', '/qa'),
-            (u'Brand',u'브랜드 소개\n\n', '#'),
+            (u'Brand',u'브랜드 소개\n\n', '/brand'),
             (u'Download',u'콘텐츠 \n 다운로드', '/download'),
             (u'Recruit',u'인재 채용\n\n', '/recruit'),
             (u'News',u'홍보 소식\n\n', '/news'),
@@ -39,7 +39,7 @@ def setMenuToSession(request):
         menu_left = [
             (u'Shop', u'제품 소개\n\n', '/shop'),
             (u'Q&A', u'고객 센터\n\n', '/qa'),
-            (u'Brand', u'브랜드 소개\n\n', '#'),
+            (u'Brand', u'브랜드 소개\n\n', '/brand'),
             (u'Download', u'콘텐츠 \n 다운로드', '/download'),
             (u'Recruit', u'인재 채용\n\n', '/recruit'),
             (u'News', u'홍보 소식\n\n', '/news'),
