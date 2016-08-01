@@ -133,8 +133,8 @@ center
 {
     border-right:2px solid #6CCEF5;
     height:100%;
-    padding:12px;
-    margin: 30% 0px 10% 0px;
+    /*padding:12px;*/
+    /*margin: 30% 0px 10% 0px;*/
 }
 #navbar
 {
@@ -243,7 +243,6 @@ center
 #navItem5:hover
 {
     background: #6CCEF5;
-
 }
 
 #navItem6
