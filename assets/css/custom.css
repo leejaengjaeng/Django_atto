@@ -329,7 +329,7 @@ center
     border-top:2px solid #000000;
 }
 
-*
+/*
 ------------------------------------------------------------
     item_news_detail
 ------------------------------------------------------------
@@ -344,4 +344,30 @@ center
 {
     text-align:center;
     border:2px solid black;
+}
+/*
+------------------------------------------------------------
+    qa
+------------------------------------------------------------
+*/
+.bests{
+    cursor: pointer;
+    font-size: medium;
+    padding: 1.5%;
+    border-bottom: 1px solid #d5d5d5;
+}
+
+#hidden0, #hidden1, #hidden2, #hidden3, #hidden4 {
+    padding: 1.5%;
+    font-size: medium;
+    cursor:pointer;
+    display: none;
+    background-color: #2b669a;
+    border: 3px solid #2b669a;
+    border-radius: 3px;
+    color: white;
+}
+
+.text-label{
+    margin:0 auto;
 }

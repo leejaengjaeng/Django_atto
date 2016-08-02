@@ -1,57 +1,70 @@
 {% extends 'homepage/attoHome_base.html' %}
 {% load staticfiles %}
 {% block main_content %}
-    <script>
-        function ClickEvent(index){
-            for ( var i = 0; i < 5; i++ ){
-                var classname = "hidden" + i;
-                var docu = document.getElementById(classname)
-                if ( index == i ){
-                    if ( docu.style.display == "table" ){
-                        docu.style.display = "none";
-                    }
-                    else {
-                        docu.style.display = "table";
-                    }
-                }
-                else {
-                    docu.style.display = "none";
-                }
-            }
-        }
 
-        function ClickEventClose(index){
-            document.getElementById("hidden" + index).style.display = "none";
-        }
-    </script>
-    <style>
-        .bests{
-            cursor: pointer;
-            font-size: medium;
-            padding: 1.5%;
-            border-bottom: 1px solid #d5d5d5;
-        }    
-    
-        #hidden0, #hidden1, #hidden2, #hidden3, #hidden4 {
-            padding: 1.5%;
-            font-size: medium;
-            cursor:pointer;
-            display: none;
-            background-color: #2b669a;
-            border: 3px solid #2b669a;
-            border-radius: 3px;
-            color: white;
-        }
+    <div class="modal fade" id="qna" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+         <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">1:1문의하기</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="input-email">이메일 주소</label>
+                        <input type="email" class="form-control" name="ie" id="input-email" placeholder="이메일을 입력하세요" value="{{email}}">
+                    </div>
+                    <div class="form-group">
+                        <label for="input-name">이름</label>
+                        <input type="text" class="form-control" name="in" id="input-name" placeholder="이름을 입력하세요" value="{{name}}">
+                        <input type="text" class="form-control" name="in" id="input-username" placeholder="이름을 입력하세요" value="{{username}}" style="display: none">
+                    </div>
+                    <div class="form-group">
+                        <label for="input-tel">전화번호</label>
+                        <input type="tel" class="form-control" name="it" id="input-tel" placeholder="전화번호를 입력하세요" value="{{tel}}">
+                    </div>
+                    <div class="form-group">
+                        <label for="input-query">문의사항</label>
+                        <textarea class="form-control" rows="6" name="iq" id="input-query"></textarea>
+                    </div>
 
-        .text-left{
-            margin:0 auto;
-        }
-    </style>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">닫기</button>
+                    <button type="button" class="btn btn-primary submit-button">문의하기</button>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+
+    <div class="modal fade" id="popup">
+         <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title">안 내</h4>
+                </div>
+                <div class="modal-body">
+                    <p id="input-label"></p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">닫기</button>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+
+    <script src="{% static 'assets/js/qa.js' %}"></script>
+
     <div class="container-fluid">
         <div class="jumbotron" style="background-color: #d5d5d5">
-              <h2>1:1 문의사항은 이곳으로!</h2>
-              <p>여러분들의 문의사항을 받습니다 :)</p>
-              <p><a class="btn btn-primary btn-md" data-toggle="modal" data-target="#mymodal" role="button">1:1문의</a></p>
+            <h2>1:1 문의사항은 이곳으로!</h2>
+            <p>여러분들의 문의사항을 받습니다 :)</p>
+            {% if username != "" %}
+                <p><a class="btn btn-primary btn-md" data-toggle="modal" href="#qna" role="button">1:1문의</a></p>
+            {% else %}
+                <p><a class="btn btn-primary btn-md" onclick="ClickGoLogin()" role="button">1:1문의</a></p>
+            {% endif %}
         </div>
     </div>
 
@@ -63,11 +76,8 @@
             <div class="col-md-1 col-xs-1">
                 <span class="glyphicon glyphicon-question-sign" aria-hidden="true"></span>
             </div>
-            <div class="col-md-10 col-xs-10">
-                <p class="text-left">아토큐브만의 특징을 알려주세요.</p>
-            </div>
-            <div class="col-md-1 col-xs-1">
-                <span class="glyphicon glyphicon-chevron-down" aria-hidden="true"></span>
+            <div class="col-md-11 col-xs-11">
+                <p class="text-label text-left">아토큐브만의 특징을 알려주세요.</p>
             </div>
         </div>
         <div id="hidden0" class="row" onclick="ClickEventClose(0)">
@@ -75,7 +85,7 @@
                 <span class="glyphicon glyphicon-ok-sign" aria-hidden="true"></span>
             </div>
             <div class="col-md-11 col-xs-11">
-                <p class="text-left">
+                <p class="text-label text-left">
                     아토큐브는 디지털과 아날로그를 접목하여 기존에 없었던 새로운 놀이문화를 제공합니다.<br>
                     더불어 만질 수 있는 친환경 블럭을 통해 아이들은 공감각적 체험을 함께 하며,<br>
                     아이에게 필요한 공간감각, 사고력, 판단력, 창의력을 동시에 키울 수 있습니다.
@@ -86,11 +96,8 @@
             <div class="col-md-1 col-xs-1">
                 <span class="glyphicon glyphicon-question-sign" aria-hidden="true"></span>
             </div>
-            <div class="col-md-10 col-xs-10">
-                <p class="text-left">아토큐브 종류는 총 몇가지 인가요?</p>
-            </div>
-            <div class="col-md-1 col-xs-1">
-                <span class="glyphicon glyphicon-chevron-down" aria-hidden="true"></span>
+            <div class="col-md-11 col-xs-11">
+                <p class="text-label text-left">아토큐브 종류는 총 몇가지 인가요?</p>
             </div>
         </div>
         <div id="hidden1" class="row" onclick="ClickEventClose(1)">
@@ -98,7 +105,7 @@
                 <span class="glyphicon glyphicon-ok-sign" aria-hidden="true"></span>
             </div>
             <div class="col-md-11 col-xs-11">
-                <p class="text-left">
+                <p class="text-label text-left">
                     아토큐브의 6면의 모양은 모두 동일하고 색상은 10가지가 있습니다.<br>
                     (빨강, 주황, 노랑, 연두, 민트, 파랑, 보라, 핑크, 밤색, 혼합)
                 </p>
@@ -108,11 +115,8 @@
             <div class="col-md-1 col-xs-1">
                 <span class="glyphicon glyphicon-question-sign" aria-hidden="true"></span>
             </div>
-            <div class="col-md-10 col-xs-10">
-                <p class="text-left">아토큐브 스마트 인터렉티브 버전에 대하여</p>
-            </div>
-            <div class="col-md-1 col-xs-1">
-                <span class="glyphicon glyphicon-chevron-down" aria-hidden="true"></span>
+            <div class="col-md-11 col-xs-11">
+                <p class="text-label text-left">아토큐브 스마트 인터렉티브 버전에 대하여</p>
             </div>
         </div>
         <div id="hidden2" class="row" onclick="ClickEventClose(2)">
@@ -120,7 +124,7 @@
                 <span class="glyphicon glyphicon-ok-sign" aria-hidden="true"></span>
             </div>
             <div class="col-md-11 col-xs-11">
-                <p class="text-left">
+                <p class="text-label text-left">
                     Q1 아토큐브 스마트버전(카메라 연동)은 현재 구매가 가능한가요?<br>
                     A1 스마트버전의 경우 8월 출시 예정입니다.<br>
                     -<br>
@@ -133,11 +137,8 @@
             <div class="col-md-1 col-xs-1">
                 <span class="glyphicon glyphicon-question-sign" aria-hidden="true"></span>
             </div>
-            <div class="col-md-10 col-xs-10">
-                <p class="text-left">아토큐브는 아이들 입에 들어갈 경우 위험하지 않나요?</p>
-            </div>
-            <div class="col-md-1 col-xs-1">
-                <span class="glyphicon glyphicon-chevron-down" aria-hidden="true"></span>
+            <div class="col-md-11 col-xs-11">
+                <p class="text-label text-left">아토큐브는 아이들 입에 들어갈 경우 위험하지 않나요?</p>
             </div>
         </div>
         <div id="hidden3" class="row" onclick="ClickEventClose(3)">
@@ -145,7 +146,7 @@
                 <span class="glyphicon glyphicon-ok-sign" aria-hidden="true"></span>
             </div>
             <div class="col-md-11 col-xs-11">
-                <p class="text-left">
+                <p class="text-label text-left">
                     아토큐브는 3cmX3cm 로 입에 넣을 수는 있지만 삼킬 수 없게 제작하였습니다.<br>
                     입에 넣어도 친환경 나무(유럽산 화이트 비취목)와 무화학를 사용하여 인체에 무해합니다.
                 </p>
@@ -155,11 +156,8 @@
             <div class="col-md-1 col-xs-1">
                 <span class="glyphicon glyphicon-question-sign" aria-hidden="true"></span>
             </div>
-            <div class="col-md-10 col-xs-10">
-                <p class="text-left">아토큐브를 가지고 놀기에 가장 적합한 연령은 어떻게 되나요?</p>
-            </div>
-            <div class="col-md-1 col-xs-1">
-                <span class="glyphicon glyphicon-chevron-down" aria-hidden="true"></span>
+            <div class="col-md-11 col-xs-11">
+                <p class="text-label text-left">아토큐브를 가지고 놀기에 가장 적합한 연령은 어떻게 되나요?</p>
             </div>
         </div>
         <div id="hidden4" class="row" onclick="ClickEventClose(4)">
@@ -167,7 +165,7 @@
                 <span class="glyphicon glyphicon-ok-sign" aria-hidden="true"></span>
             </div>
             <div class="col-md-11 col-xs-11">
-                <p class="text-left">
+                <p class="text-label text-left">
                     아토큐브 1set(9개 블럭)의 경우 3세 부터 8세까지 블럭을 통한 이미지 및 문자, 숫자 공부가 가능합니다.<br>
                     초등학교 고학년의 경우 1set(9개 블럭) 가 아닌 2set(18개),2set(27개),3set(36개) 등<br>
                     확장을 통한 영어 단어 및 한글, 숫자 놀이가 가능합니다.
@@ -175,42 +173,5 @@
             </div>
         </div>
 
-    <div class="modal fade" id="mymodal">
-         <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title">1:1문의하기</h4>
-                </div>
-                <form action="oneqa">
-                    <div class="modal-body">
-                        <div class="form-group">
-                            <label for="input-email">이메일 주소</label>
-                            <input type="email" class="form-control" id="input-email" placeholder="이메일을 입력하세요">
-                        </div>
-                        <div class="form-group">
-                            <label for="input-name">이름</label>
-                            <input type="text" class="form-control" id="input-name" placeholder="이름을 입력하세요">
-                        </div>
-                        <div class="form-group">
-                            <label for="input-username">유저네임</label>
-                            <input type="text" class="form-control" id="input-username" placeholder="유저네임을 입력하세요">
-                        </div>
-                        <div class="form-group">
-                            <label for="input-tel">전화번호</label>
-                            <input type="tel" class="form-control" id="input-tel" placeholder="전화번호를 입력하세요">
-                        </div>
-                        <div class="form-group">
-                            <label for="input-query">문의사항</label>
-                            <textarea class="form-control" rows="6" id="input-query"></textarea>
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-default" data-dismiss="modal">닫기</button>
-                        <button type="button" class="btn btn-primary">문의하기</button>
-                    </div>
-                </form>
-            </div><!-- /.modal-content -->
-        </div><!-- /.modal-dialog -->
-    </div><!-- /.modal -->
+
 {% endblock %}
