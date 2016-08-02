@@ -35,6 +35,7 @@ INSTALLED_APPS = [
     'application.download',
     'application.recruit',
     'application.news',
+    'application.store',
 ]
 
 MIDDLEWARE_CLASSES = [

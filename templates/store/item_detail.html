@@ -1,0 +1,171 @@
+{% extends "homepage/attoHome_base.html" %}
+{% load staticfiles %}
+{% load custom_tags %}
+
+{% block additional_assets %}
+<script>
+$(document).ready(function()
+{
+    $('#itemQuantityMinus').click(function()
+    {
+        var currentQuantity = $('#itemQantity').val()*1;
+        if(currentQuantity > 0)
+            $('#itemQantity').val(currentQuantity-1);
+    });
+
+    $('#itemQuantityPlus').click(function()
+    {
+        var currentQuantity = $('#itemQantity').val()*1;
+        if(currentQuantity < {{item.stock}})
+            $('#itemQantity').val(currentQuantity+1);
+        else
+            alert('재고가 부족합니다');
+    });
+
+    var isNotNull = "{{item}}";
+    if( isNotNull !='' && isNotNull !='undefined' )
+    {
+        itemId = {{item.id}}
+        $.ajax(
+        {
+            method:'GET',
+            url:'getReviews',
+            data:{'itemId':itemId, 'csrfmiddlewaretoken': '{{ csrf_token }}',},
+            success: function(data)
+            {
+                reviews = data.reviews
+
+                for(flag in reviews)
+                {
+                    var review = reviews[flag]
+
+                    $('#reviewList').append('\
+                        <li><img src="' + review.img + '">|'+ review.id + '|' + review.date + '|' + review.content + '</li>\
+                    ')
+                }
+            },
+            error: function(error)
+            {
+                console.log(error)
+            },
+        });
+    }
+
+    var uploadCnt = 0;
+    $("#reviewAddBtn").click(function()
+    {
+        var date = new Date()
+        var formatDate = date.getFullYear()+'.'+date.getMonth()+'.'+date.getDate()+' - '+ date.getHours()+':'+date.getMinutes();
+
+        $('#reviewList').append('\
+            <li><img class="newReviewImg"+uploadCnt src="">| {{request.user.username}} |' + formatDate + '|' + $('#reviewContent').val() + '</li>\
+        ');
+
+        if( $('#reviewImgId').files && $('#reviewImgId').files[0])
+        {
+            var reader = new FileReader();
+            reader.onload = function(e)
+            {
+                $('newReviewImg'+uploadCnt).attr('src',e.target.result);
+            }
+            reader.readAsDataURL($('#reviewImgId').files[0]);
+            uploadCnt++;
+        }
+
+        $.ajax(
+        {
+           method:'POST',
+           url:'addReview',
+           data:{'content':$('#reviewContent').val(),'itemNum':"{{item.id}}",'image':"$('#reviewImgId').files[0]", 'csrfmiddlewaretoken': '{{ csrf_token }}',},
+           success: function(data)
+           {
+               console.log('댓글이 입력되었슝!')
+           },
+           error: function(error)
+           {
+               console.log(error)
+           },
+        });
+    });
+});
+
+</script>
+
+{% endblock additional_assets %}
+
+{% block main_content %}
+<div id="itemDetailContainer">
+    {% if item %}
+    <!-- 상품 디테일 -->
+        <div id="itemContent" class="row">
+            <div class="col-xs-12 col-sm-6">
+                <img src="{{MEDIA_URL}}/{{item.image}}" class="img-responsive">
+            </div>
+            <div class="col-xs-12 col-sm-6">
+                <div class="row">
+                    <h3>{{item.itemName}}</h3>
+                </div>
+                <div class="row">
+                    {% if item.sale == 0 %}
+                        <p>{{item.price}} 원</p>
+                    {% else %}
+                        <p>
+                            <del><small>{{ item.price }}</small></del>
+                            {% sub item.price item.sale %} 원
+                        </p>
+                    {% endif%}
+                </div>
+                <div class="row">
+                    <button id="itemQuantityMinus">
+                        <img src="{{MEDIA_URL}}icons/minus.png">
+                    </button>
+                    <input type="text" id="itemQantity" value="1" size ="1vw">
+                    <button id="itemQuantityPlus">
+                            <img src="{{MEDIA_URL}}icons/plus.png">
+                    </button>
+                </div>
+                <br>
+                <div class="row">
+                    <div class="col-xs-6">
+                        <button class="btn btn-default">
+                            장바구니
+                        </button>
+                    </div>
+                    <div class="col-xs-6">
+                        <button class="btn btn-primary">
+                            바로구매
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    <!-- 리뷰 -->
+        <div id="itemReviews">
+            <h4>Review</h4>
+            {% if request.user.is_authenticated %}
+                <div id="ReviewAdd">
+                    <form class="form-inline">
+                        <div class="form-group">
+                            <input type="text" class="form-control" id="reviewContent">
+                        </div>
+                        <input type="file" name="reviewImgName" id="reviewImgId">
+                        <input type="hidden" id="itemId" value="{{item.id}}">
+                        <div class="form-group">
+                            <button id="reviewAddBtn" type="button" class="btn btn-default" >리뷰 등록</button>
+                        </div>
+                    </form>
+                </div>
+            {% else %}
+                <div id="reviewAdd">
+                    <button onclick="window.location.href='/login'"> 로그인 </button>
+                    <button onclick="window.location.href='/signup'"> 회원 가입 </button>
+                </div>
+            {% endif %}
+            <div id="reviewList">
+            </div>
+        </div>
+    {% else %}
+        <h2>error<br>Can not find Item</h2>
+    {% endif %}
+</div>
+{% endblock main_content %}

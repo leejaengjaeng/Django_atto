@@ -6,6 +6,10 @@ register = template.Library()
 
 @register.simple_tag
 def sub(var1, var2):
+    if type(var1) != int:
+        var1 = int(var1)
+    if type(var2) != int:
+        var2 = int(var2)
     return var1 - var2
 
 
