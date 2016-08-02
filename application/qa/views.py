@@ -41,6 +41,7 @@ def oneqa(request):
         user.email = email
         user.first_name = name
         user.userprofile.mobilePhoneNumber = tel
+        user.userprofile.save()
         user.save()
 
         qna = QnA.objects.create(user=user, query=query)
