@@ -20,7 +20,6 @@ urlpatterns += [
 		),
 	url(r'^logout/',views.logout,name="logout"),
     url(r'^checkid',views.checkid,name="checkid"),
-	url(r'^shop', views.shop, name="shop"),
 	url(r'^myaccount', views.myaccount,name="myaccount"),
 	url(r'^editaccount',views.editaccount,name="editaccount"),
 	url(r'^editsave',views.editaccountsave,name="editaccountsave"),

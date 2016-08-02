@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
-from application.homepage.models import SliderImages, shopItem
+from application.homepage.models import SliderImages
+from application.store.models import ShopItem,Review
 from application.news.models import Posts,Comments
 from django.core.exceptions import ObjectDoesNotExist
-import datetime
 
 #메뉴바 왼쪽 부분
 def setMenuToSession(request):
@@ -74,7 +74,7 @@ def getSliderImages(request):
 def getItemList(request):
     itemList =[]
     try:
-        itemList = shopItem.objects.all()
+        itemList = ShopItem.objects.all()
     #TODO:나타낼 상품이 하나도 없는 경우, 어떻게 할지 결정하기
     except ObjectDoesNotExist:
         itemList = []
@@ -103,3 +103,16 @@ def getComments(request):
     except ObjectDoesNotExist:
         comments = {}
     return comments
+
+def getReviews(request):
+    itemId = request.GET.get('itemId')
+    reviews = []
+    try:
+        data = Review.objects.filter(itemNum=itemId)
+        for review in data:
+            date = Review.makeTime.strftime('%Y.%m.%d - %H:%M')
+            reviews.append({'id':review.author.username,'date':date,'content':review.content,'img':review.image})
+
+    except ObjectDoesNotExist:
+        reviews = {}
+    return reviews
