@@ -6,5 +6,6 @@ from . import views
 # base
 urlpatterns = [
 	url(r'^$',views.qa, name='qa'),
+	url(r'^oneqa/', views.oneqa, name='oneqa'),
 ]
 
