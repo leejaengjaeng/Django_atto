@@ -11,17 +11,90 @@ $(document).ready(function()
     $('#itemQuantityMinus').click(function()
     {
         var currentQuantity = $('#itemQantity').val()*1;
-        if(currentQuantity > 0)
+        if(currentQuantity > 1)
+        {
             $('#itemQantity').val(currentQuantity-1);
+
+            var beforeSale = $('#beforeSale').text() * 1.0;
+            var price = $('#itemPrice').text().slice(0,-1) * 1.0;
+
+            if( {{item.sale}} == 0 )
+            {
+                $('#itemPrice').text(price/2+'원')
+            }
+            else
+            {
+                $('#beforeSale').text(beforeSale/2)
+                $('#itemPrice').text(price/2+'원')
+            }
+        }
     });
+
+    $('#itemQantity').on('change',function()
+    {
+        var quantity = $('#itemQantity').val()*1.0
+        if(quantity < 1)
+        {
+            alert('1개보다 적게 주문할 수 없습니다.');
+            $('#itemQantity').val('1')
+        }
+        else if(quantity >30)
+        {
+            alert('대량 주문은 1대1 문의로 해주세요.');
+            $('#itemQantity').val('1')
+        }
+        else if(quantity > {{item.stock}})
+        {
+            alert('재고가 부족합니다 현재 재고는 {{item.stock}}개 입니다.');
+            $('#itemQantity').val('{{item.stock}}')
+        }
+        else
+        {
+
+            var beforeSale = {% sub item.price item.sale %} * 1.0;
+            var price = {{ item.price }} * 1.0;
+
+            if( {{item.sale}} == 0 )
+            {
+                $('#itemPrice').text(price*quantity+'원')
+            }
+            else
+            {
+                $('#beforeSale').text(beforeSale*quantity)
+                $('#itemPrice').text(price*quantity+'원')
+            }
+        }
+    });
+
 
     $('#itemQuantityPlus').click(function()
     {
         var currentQuantity = $('#itemQantity').val()*1;
-        if(currentQuantity < {{item.stock}})
+        if(currentQuantity < {{item.stock}} && currentQuantity<30)
+        {
             $('#itemQantity').val(currentQuantity+1);
+
+            var beforeSale = $('#beforeSale').text() * 1.0;
+            var price = $('#itemPrice').text().slice(0,-1) * 1.0;
+
+            if( {{item.sale}} == 0 )
+            {
+                $('#itemPrice').text(price*2+'원')
+            }
+            else
+            {
+                $('#beforeSale').text(beforeSale*2)
+                $('#itemPrice').text(price*2+'원')
+            }
+        }
+        else if(currentQuantity < 30)
+        {
+           alert('재고가 부족합니다');
+        }
         else
-            alert('재고가 부족합니다');
+        {
+            alert('대량 구매는 1:1 문의로 주시기 바랍니다');
+        }
     });
 
     var isNotNull = "{{item}}";
@@ -120,12 +193,10 @@ $(document).ready(function()
                 </div>
                 <div class="row">
                     {% if item.sale == 0 %}
-                        <p>{{item.price}} 원</p>
+                        <p id="itemPrice">{{item.price}}원</p>
                     {% else %}
-                        <p>
-                            <del><small>{{ item.price }}</small></del>
-                            {% sub item.price item.sale %} 원
-                        </p>
+                        <del><small id="beforeSale">{{ item.price }}</small></del>
+                        <p id="itemPrice">{% sub item.price item.sale %}원</p>
                     {% endif%}
                 </div>
                 <div class="row">
