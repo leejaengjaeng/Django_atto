@@ -27,6 +27,7 @@ def qa(request):
 
 def oneqa(request):
     import json
+    from datetime import datetime
 
     email = request.GET.get('email', None)
     username = request.GET.get('username', None)
@@ -44,7 +45,7 @@ def oneqa(request):
         user.userprofile.save()
         user.save()
 
-        QnA.objects.create(user=user, query=query)
+        QnA.objects.create(user=user, query=query, datetime=datetime.now())
     else :
         result = {'success': False}
         return HttpResponse(json.dumps(result))
