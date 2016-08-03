@@ -340,10 +340,60 @@ center
     border:1px solid #aaa;
 }
 
-#newsCommentsList
+#itemReviews
 {
-    text-align:center;
-    border:2px solid black;
+    border-top:2px solid #aaa;
+}
+
+#reviewList
+{
+    border-top:2px solid #aaa;
+}
+
+#itemInfo
+{
+    background-color: white;
+    margin:10% 0 10% 0;
+    padding:5%;
+    border: 2px solid #aaa;
+}
+
+#reviewContent
+{
+    width:100%;
+    box-sizing:border-box;
+}
+
+.reviewItem
+{
+    padding:5%;
+    border: 1px solid #aaa;
+}
+.reviewImg
+{
+    border: 1px solid #aaa;
+}
+.reviewTxt
+{
+    padding:5% 10% 5% 10%;
+    text-align:left;
+    background-color: white;
+}
+
+.reviewItem .col-xs-8
+{
+    padding:0px;
+}
+#reviewMenu
+{
+    position: relative;
+    padding: 3%;
+}
+#reviewAdd
+{
+    position: absolute;
+    right: 1%;
+    bottom: 20%;
 }
 /*
 ------------------------------------------------------------

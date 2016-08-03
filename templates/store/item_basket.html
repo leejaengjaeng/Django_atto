@@ -6,24 +6,28 @@
         {#    {% for list in basketlist %}#}
         {#        <h2>{{ basketlist.list }}</h2>#}
         {#    {%  endfor %}#}
-        <h2>장바구니({{ datas|length }})</h2>
+        <h2>장바구니({{ itemlist|length }})</h2>
     </div>
     <div>
         <table class="table">
-            <tr>
-                <th>상품정보</th>
-                <th>상품금액</th>
-                <th>배송비</th>
-            </tr>
-                {% for k in datas.values %}
+{#            <tr>#}
+{#                <th>상품정보</th>#}
+{#                <th>상품금액</th>#}
+{#                <th>배송비</th>#}
+{#            </tr>#}
+                {% for k in itemlist %}
                 <tr>
-{#                    {% for list in datas.data1.values %}#}
-                    <td>{{ k.name }}</td>
-                    <td>{{ k.price }}</td>
-                    <td>{{ k.deliprice }}</td>
-{#                    {% endfor %}#}
+                    <td><img src="{{ k.0 }}"></td>
+                    <td>{{ k.1 }}</td>
+                    <td>{{ k.2 }}</td>
+                    <td>{{ k.3 }}</td>
+                    <td>{{ k.4 }}</td>
+                    <td>{{ k.5 }}</td>
+                    <td>{{ k.6 }}</td>
+                    <td>{{ k.7 }}</td>
+                    <td>{{ k.8 }}</td>
                     <td>
-                        <button   class="btn btn-default" onclick="delete {{ datas }}.{{ k.name }}">{{ k.name }} </button>
+                        <button   class="btn btn-default">지우기 </button>
                     </td>
                 </tr>
                 {% endfor %}
