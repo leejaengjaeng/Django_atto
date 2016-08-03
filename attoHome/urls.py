@@ -27,5 +27,6 @@ urlpatterns = [
     url(r'^recruit/', include('application.recruit.urls')),
     url(r'^news/', include('application.news.urls')),
     url(r'^brand/', include('application.brand.urls')),
+    url(r'^shop/', include('application.store.urls')),
     url(r'^admin/', admin.site.urls),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

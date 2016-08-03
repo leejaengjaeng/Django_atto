@@ -60,21 +60,3 @@ class userProfile(models.Model):
 		return self.user.username
 
 
-class shopItem(models.Model):
-	# Setting.py에 있는 MEDIA_ROOT 이후 경로
-	image = models.ImageField(upload_to='shopItemImgs')
-	itemName = models.CharField(max_length=100)
-	price = models.PositiveSmallIntegerField(default=0)
-	stock = models.PositiveSmallIntegerField(default=0)
-	sale = models.PositiveSmallIntegerField(default=0)
-
-	class Meta:
-		verbose_name = '상품 이미지'
-		verbose_name_plural = '상품 이미지들'
-
-	def __unicode__(self):
-		return self.itemName
-
-@receiver(pre_delete, sender=shopItem)
-def shopItem_delete(sender, instance, **kwargs):
-	instance.image.delete(False)
