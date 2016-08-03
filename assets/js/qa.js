@@ -23,7 +23,6 @@ $('#qna').on('show.bs.modal', function (event) {
             data: $data,
             success: function(e)
             {
-                alert(e.success);
                 if ( e.success ){
                     document.getElementById('input-label').innerHTML = "등록되었습니다.";
                     $('#qna').modal('hide');
