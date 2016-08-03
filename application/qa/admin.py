@@ -5,4 +5,4 @@ from .models import *
 class QnAAdmin(admin.ModelAdmin):
     list_display = ('user', 'query')
 
-admin.site.register(QnA, QnAAdmin)
+admin.site.register(QnA)

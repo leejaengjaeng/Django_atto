@@ -44,7 +44,7 @@ def oneqa(request):
         user.userprofile.save()
         user.save()
 
-        qna = QnA.objects.create(user=user, query=query)
+        QnA.objects.create(user=user, query=query)
     else :
         result = {'success': False}
         return HttpResponse(json.dumps(result))
