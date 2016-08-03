@@ -8,6 +8,8 @@ import json
 from datetime import datetime
 from django.contrib.auth.models import User
 
+from django.template import RequestContext
+
 # Create your views here.
 def news(request):
     posts = cuh.getPosts(request)

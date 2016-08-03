@@ -6,6 +6,8 @@
 <script>
 $(document).ready(function()
 {
+    var itemId = {{item.id}};
+
     $('#itemQuantityMinus').click(function()
     {
         var currentQuantity = $('#itemQantity').val()*1;
@@ -25,12 +27,12 @@ $(document).ready(function()
     var isNotNull = "{{item}}";
     if( isNotNull !='' && isNotNull !='undefined' )
     {
-        itemId = {{item.id}}
+        itemId = {{item.id}};
         $.ajax(
         {
             method:'GET',
             url:'getReviews',
-            data:{'itemId':itemId, 'csrfmiddlewaretoken': '{{ csrf_token }}',},
+            data:{'itemId':itemId,},
             success: function(data)
             {
                 reviews = data.reviews
@@ -38,10 +40,33 @@ $(document).ready(function()
                 for(flag in reviews)
                 {
                     var review = reviews[flag]
-
-                    $('#reviewList').append('\
-                        <li><img src="' + review.img + '">|'+ review.id + '|' + review.date + '|' + review.content + '</li>\
-                    ')
+                    if(review.img != null)
+                    {
+                        $('#reviewList').append('\
+                            <div class="reviewItem row">\
+                                <div class="reviewImg col-xs-4">\
+                                    <a href="'+ review.img + '">\
+                                        <img class="img-responsive" src="' + review.img + '">\
+                                    </a>\
+                                </div>\
+                                <div class="col-xs-8">\
+                                    <p style="float:right; background-color: white;">'+ review.id + ' | ' + review.date + '</p>\
+                                    <div class="reviewTxt">' + review.content+'</div>\
+                                </div>\
+                            </div>\
+                        ')
+                    }
+                    else
+                    {
+                        $('#reviewList').append('\
+                            <div class="reviewItem row">\
+                                <div class="col-xs-12" style="padding:0px">\
+                                    <p style="float:right; background-color: white;">'+ review.id + ' | ' + review.date + '</p>\
+                                    <div class="reviewTxt">' + review.content+'</div>\
+                                </div>\
+                            </div>\
+                        ')
+                    }
                 }
             },
             error: function(error)
@@ -51,42 +76,6 @@ $(document).ready(function()
         });
     }
 
-    var uploadCnt = 0;
-    $("#reviewAddBtn").click(function()
-    {
-        var date = new Date()
-        var formatDate = date.getFullYear()+'.'+date.getMonth()+'.'+date.getDate()+' - '+ date.getHours()+':'+date.getMinutes();
-
-        $('#reviewList').append('\
-            <li><img class="newReviewImg"+uploadCnt src="">| {{request.user.username}} |' + formatDate + '|' + $('#reviewContent').val() + '</li>\
-        ');
-
-        if( $('#reviewImgId').files && $('#reviewImgId').files[0])
-        {
-            var reader = new FileReader();
-            reader.onload = function(e)
-            {
-                $('newReviewImg'+uploadCnt).attr('src',e.target.result);
-            }
-            reader.readAsDataURL($('#reviewImgId').files[0]);
-            uploadCnt++;
-        }
-
-        $.ajax(
-        {
-           method:'POST',
-           url:'addReview',
-           data:{'content':$('#reviewContent').val(),'itemNum':"{{item.id}}",'image':"$('#reviewImgId').files[0]", 'csrfmiddlewaretoken': '{{ csrf_token }}',},
-           success: function(data)
-           {
-               console.log('댓글이 입력되었슝!')
-           },
-           error: function(error)
-           {
-               console.log(error)
-           },
-        });
-    });
 });
 
 </script>
@@ -102,6 +91,10 @@ $(document).ready(function()
                 <img src="{{MEDIA_URL}}/{{item.image}}" class="img-responsive">
             </div>
             <div class="col-xs-12 col-sm-6">
+                <div class="row">
+                    <!--TODO:카테고리에 따른 이름 나오도록 -->
+                    <p>(DEV) 분류 : {{item.category}}</p>
+                </div>
                 <div class="row">
                     <h3>{{item.itemName}}</h3>
                 </div>
@@ -137,30 +130,29 @@ $(document).ready(function()
                         </button>
                     </div>
                 </div>
+                <div id="itemInfo" class="row">
+                    <p>
+                        {{item.info}}
+                    </p>
+                </div>
             </div>
         </div>
     <!-- 리뷰 -->
         <div id="itemReviews">
             <h4>Review</h4>
-            {% if request.user.is_authenticated %}
-                <div id="ReviewAdd">
-                    <form class="form-inline">
-                        <div class="form-group">
-                            <input type="text" class="form-control" id="reviewContent">
-                        </div>
-                        <input type="file" name="reviewImgName" id="reviewImgId">
-                        <input type="hidden" id="itemId" value="{{item.id}}">
-                        <div class="form-group">
-                            <button id="reviewAddBtn" type="button" class="btn btn-default" >리뷰 등록</button>
-                        </div>
-                    </form>
-                </div>
-            {% else %}
-                <div id="reviewAdd">
-                    <button onclick="window.location.href='/login'"> 로그인 </button>
-                    <button onclick="window.location.href='/signup'"> 회원 가입 </button>
-                </div>
-            {% endif %}
+            <div id="reviewMenu">
+                {% if request.user.is_authenticated %}
+                    <div id="reviewAdd">
+                        <button type="button" class="btn btn-default" data-toggle="modal" data-target="#myModal" >리뷰 등록</button>
+                    </div>
+                    <br><br>
+                {% else %}
+                    <div id="reviewAdd">
+                        <button type="button" class="btn btn-default" onclick="window.location.href='/login'"> 로그인 </button>
+                        <button type="button" class="btn btn-default" onclick="window.location.href='/signup'"> 회원 가입 </button>
+                    </div>
+                {% endif %}
+            </div>
             <div id="reviewList">
             </div>
         </div>
@@ -168,4 +160,40 @@ $(document).ready(function()
         <h2>error<br>Can not find Item</h2>
     {% endif %}
 </div>
+
+<!-- modal-->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">리뷰 등록</h4>
+      </div>
+      <form id="reviewForm" class="form-inline" method="post" action="addReview" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div class="modal-body">
+             <div class="row">
+                  <div class="col-xs-2">
+                      <p>{{request.user.username}}</p>
+                  </div>
+                  <div class="col-xs-10">
+                      <textarea class="form-control" rows="3" style="width:100%" name="reviewContent"></textarea>
+                  </div>
+             </div>
+             <div class="row">
+                  <div class="col-xs-12">
+                      <input type="file" name="uploadReviewImg">
+                  </div>
+             </div>
+             <input type="hidden" name="itemId" value="{{item.id}}">
+        </div>
+        <div class="modal-footer">
+              <button type="button" class="btn btn-default" data-dismiss="modal">취소</button>
+              <button id="reviewSendBtn" type="submit" class="btn btn-primary">등록</button>
+        </div>
+       </form>
+    </div>
+  </div>
+</div>
+<!-- modal End-->
 {% endblock main_content %}
