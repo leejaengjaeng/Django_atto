@@ -31,7 +31,6 @@ def addReview(request):
     author = User.objects.get(id=request.user.id)
     content = request.POST.get("reviewContent")
     makeTime = datetime.now()
-    print content
     item = ShopItem.objects.get(id=request.POST.get("itemId"))
 
     try:

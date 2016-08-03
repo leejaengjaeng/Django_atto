@@ -45,7 +45,16 @@ def oneqa(request):
         user.userprofile.save()
         user.save()
 
-        QnA.objects.create(user=user, query=query, datetime=datetime.now())
+        QnA.objects.create(user=user, query=query, time=datetime.now())
+        # from django.core.mail import send_mail
+        #
+        # send_mail(
+        #     'Subject here',
+        #     'Here is the message.',
+        #     'attocube@eattocube.co.kr',
+        #     ['johnny@attocube.co.kr'],
+        #     fail_silently=False,
+        # )
     else :
         result = {'success': False}
         return HttpResponse(json.dumps(result))
