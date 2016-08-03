@@ -39,11 +39,11 @@ def oneqa(request):
 
     if users.filter(username=username).exists():
         user = users.filter(username=username).get()
-        user.email = email
-        user.first_name = name
-        user.userprofile.mobilePhoneNumber = tel
-        user.userprofile.save()
-        user.save()
+        # user.email = email
+        # user.first_name = name
+        # user.userprofile.mobilePhoneNumber = tel
+        # user.userprofile.save()
+        # user.save()
 
         QnA.objects.create(user=user, query=query, time=datetime.now())
         # from django.core.mail import send_mail
