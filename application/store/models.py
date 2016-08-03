@@ -31,11 +31,11 @@ def shopItem_delete(sender, instance, **kwargs):
 
 
 class Review(models.Model):
-	author = models.ForeignKey(User)
+	author = models.ForeignKey(User, unique=False)
 	image = models.ImageField(upload_to='shopItemImgs/item')
 	content = models.TextField(null=False)
-	makeTime = models.DateTimeField()
-	itemNum = models.ForeignKey(ShopItem)
+	makeTime = models.DateTimeField(blank=True, null=True)
+	itemNum = models.ForeignKey(ShopItem, unique=False)
 
 	def __unicode__(self):
 		return self.content
@@ -43,3 +43,4 @@ class Review(models.Model):
 	class Meta:
 		verbose_name = '상품 댓글'
 		verbose_name_plural = '상품 댓글들 '
+
