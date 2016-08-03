@@ -11,9 +11,9 @@ class ShopItem(models.Model):
 	image = models.ImageField(upload_to='shopItemImgs/item')
 	detailImage = models.ImageField(upload_to='shopItemImgs/detail', blank=True)
 	itemName = models.CharField(max_length=100)
-	price = models.PositiveSmallIntegerField(default=0)
+	price = models.PositiveIntegerField(default=0)
 	stock = models.PositiveSmallIntegerField(default=0)
-	sale = models.PositiveSmallIntegerField(default=0)
+	sale = models.PositiveIntegerField(default=0)
 	category = models.PositiveSmallIntegerField(default=0)
 	info = models.TextField(blank=True)
 
