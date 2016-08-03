@@ -12,5 +12,5 @@ class QnA(models.Model):
     check = models.BooleanField(default=False)
 
     def __unicode__(self):
-        self.user.username
+        return self.user.username
 
