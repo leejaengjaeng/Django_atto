@@ -7,6 +7,7 @@ import json
 import application.common.customUserHandler as cuh
 
 from django.utils.datastructures import MultiValueDictKeyError
+from django.core import serializers
 
 # Create your views here.
 def itemDetail(request):
@@ -42,3 +43,29 @@ def addReview(request):
     newReview.save()
 
     return redirect('/shop/detail?itemId='+str(item.id))
+
+def addShopingBasket(request):
+    itemId = request.POST.get('itemId')
+    item = ShopItem.objects.get(id=itemId)
+
+    if item.detailImage:
+        detailImg = item.detailImage.url
+    else:
+        detailImg = None
+
+    if item.image:
+        itemImg = item.image.url;
+    else :
+        itemImg = None;
+
+    inputValue = [
+        (itemImg,detailImg,item.itemName,item.price,item.stock,item.sale,item.category,item.info),
+                   ]
+
+    if 'shopingBasket' in request.session:
+        request.session['shopingBasket'].append(inputValue)
+    else:
+        request.session['shopingBasket'] = inputValue
+
+    print request.session['shopingBasket']
+    return HttpResponse()

@@ -75,6 +75,26 @@ $(document).ready(function()
             },
         });
     }
+    $('#shopingBasketBtn').click(function()
+    {
+        itemId = {{item.id}}
+        $.ajax(
+        {
+            method:'POST',
+            url:'addShoppingBasket',
+            data:{'itemId':itemId,'csrfmiddlewaretoken':'{{ csrf_token }}'},
+            success: function(data)
+            {
+                alert('장바구니에 추가되었습니다.');
+            },
+            error: function(error)
+            {
+                alert('장바구니에 넣기 실패 하였습니다.');
+                console.log(error);
+            }
+        });
+
+    });
 
 });
 
@@ -120,7 +140,7 @@ $(document).ready(function()
                 <br>
                 <div class="row">
                     <div class="col-xs-6">
-                        <button class="btn btn-default">
+                        <button id="shopingBasketBtn" class="btn btn-default">
                             장바구니
                         </button>
                     </div>

@@ -17,6 +17,7 @@ def setMenuToSession(request):
 
     if request.user.is_authenticated():
         menu_right = [
+            ('장바구니',"#"),
             (request.user.get_full_name(), "/myaccount"),
             ("로그 아웃", "/logout"),
         ]
