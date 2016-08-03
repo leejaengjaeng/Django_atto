@@ -29,21 +29,13 @@ def oneqa(request):
     import json
     from datetime import datetime
 
-    email = request.GET.get('email', None)
     username = request.GET.get('username', None)
-    name = request.GET.get('name', None)
-    tel = request.GET.get('tel', None)
     query = request.GET.get('query', None)
 
     users = User.objects
 
     if users.filter(username=username).exists():
         user = users.filter(username=username).get()
-        # user.email = email
-        # user.first_name = name
-        # user.userprofile.mobilePhoneNumber = tel
-        # user.userprofile.save()
-        # user.save()
 
         QnA.objects.create(user=user, query=query, time=datetime.now())
         # from django.core.mail import send_mail
