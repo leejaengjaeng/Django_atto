@@ -7,11 +7,7 @@ $('#qna').on('show.bs.modal', function (event) {
     var button = modal.find('.submit-button');
     button.click(function (e) {
         $data = {
-                'email' : document.getElementById('input-email').value,
-                'name' : document.getElementById('input-name').value,
                 'username' : document.getElementById('input-username').value,
-                'tel' : document.getElementById('input-tel').value,
-                'query' : document.getElementById('input-query').value,
                 'csrfmiddlewaretoken': '{{ csrf_token }}'
             };
 
