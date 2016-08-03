@@ -7,7 +7,7 @@ from django.contrib.auth.models import User
 class QnA(models.Model):
     user = models.ForeignKey(User, unique=False)
     query = models.TextField(default="")
-    time = models.DateTimeField(default="")
+    time = models.DateTimeField(blank=True, null=True)
     check = models.BooleanField(default=False)
 
     def __unicode__(self):
