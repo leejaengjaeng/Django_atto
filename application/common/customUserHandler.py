@@ -3,6 +3,7 @@ from application.homepage.models import SliderImages
 from application.store.models import ShopItem,Review
 from application.news.models import Posts,Comments
 from django.core.exceptions import ObjectDoesNotExist
+from django.core import serializers
 
 #메뉴바 왼쪽 부분
 def setMenuToSession(request):
@@ -110,8 +111,14 @@ def getReviews(request):
     try:
         data = Review.objects.filter(itemNum=itemId)
         for review in data:
-            date = Review.makeTime.strftime('%Y.%m.%d - %H:%M')
-            reviews.append({'id':review.author.username,'date':date,'content':review.content,'img':review.image})
+            date = review.makeTime.strftime('%Y.%m.%d - %H:%M')
+
+            if review.image:
+                img = review.image.url
+            else:
+                img = None
+
+            reviews.append({'id':review.author.username,'date':date,'content':review.content,'img':img})
 
     except ObjectDoesNotExist:
         reviews = {}
