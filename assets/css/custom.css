@@ -327,22 +327,21 @@ center
     border:1px solid #aaa;
 }
 
+#itemInfo
+{
+    background-color: white;
+    padding:10%;
+}
+
+
 #itemReviews
 {
     border-top:2px solid #aaa;
 }
 
-#reviewList
+#itemReviews .row
 {
-    border-top:2px solid #aaa;
-}
-
-#itemInfo
-{
-    background-color: white;
-    margin:10% 0 10% 0;
-    padding:5%;
-    border: 2px solid #aaa;
+    border-top:1px solid #aaa;
 }
 
 #reviewContent
@@ -351,10 +350,15 @@ center
     box-sizing:border-box;
 }
 
+#reviewList
+{
+    padding:2%;
+}
+
 .reviewItem
 {
     padding:5%;
-    border: 1px solid #aaa;
+    border-top: 1px solid #aaa;
 }
 .reviewImg
 {
@@ -393,21 +397,51 @@ center
 #itemDetailNav
 {
     background-color:#FFF;
+    height:100%;
+    padding:0px;
 }
 
-#itemDetailNavList
+
+#itemDetailContainer .nav-tabs .active a
 {
-    padding:0px;
+    border: 2px solid #EF86AE;
+    //border-bottom: none;
 }
 
 #itemDetailContainer .nav-tabs li a
 {
-    color: #000
+    border-radius: 0;
+    margin:0;
 }
 
-#itemDetailContainer .nav-tabs .active
-{
-    color: #333
+
+#itemDetailNav .nav-tabs{
+    border-bottom: 2px solid #EF86AE;
+}
+
+#itemDetailNav .tab-content{
+    background-color:#303136;
+    padding:5px
+}
+
+#itemDetailNav .nav-tabs > li > a{
+    color : #777;
+    font-weight : bold;
+}
+
+#itemDetailNav .nav-tabs > li:hover{
+    cursor:pointer;
+    background-color :#EF86AE;
+    font-weight : bold;
+    text-align:center;
+    color:#FFF;
+}
+
+#itemDetailNav .nav-tabs > li > a:hover{
+    color : #FFF;
+    font-weight : bold;
+    background-color: #EF86AE !important;
+    border: medium none;
 }
 
 
