@@ -278,9 +278,15 @@ center
     content-align:center;
 }
 
+#itemContainer
+{
+    margin-top:5%;
+    margin-bottom:5%;
+}
+
 .shopItem
 {
-    padding: 5%;
+    padding: 1%;
 }
 
 .shopItemInner
@@ -296,7 +302,7 @@ center
         border:3px solid #6CCEF5;
     }
 
-    .col-xs-12
+    .col-xs-6
     {
         margin:auto;
         padding:5% 20% 5% 20%;
