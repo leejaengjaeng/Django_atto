@@ -7,6 +7,7 @@
 $(document).ready(function()
 {
     var itemId = {{item.id}};
+    var bigQuantity = 30;
 
     $('#itemQuantityMinus').click(function()
     {
@@ -38,7 +39,7 @@ $(document).ready(function()
             alert('1개보다 적게 주문할 수 없습니다.');
             $('#itemQantity').val('1')
         }
-        else if(quantity >30)
+        else if(quantity >bigQuantity)
         {
             alert('대량 주문은 1대1 문의로 해주세요.');
             $('#itemQantity').val('1')
@@ -70,7 +71,7 @@ $(document).ready(function()
     $('#itemQuantityPlus').click(function()
     {
         var currentQuantity = $('#itemQantity').val()*1;
-        if(currentQuantity < {{item.stock}} && currentQuantity<30)
+        if(currentQuantity < {{item.stock}} && currentQuantity<bigQuantity)
         {
             $('#itemQantity').val(currentQuantity+1);
 
@@ -87,7 +88,7 @@ $(document).ready(function()
                 $('#itemPrice').text(price*2+'원')
             }
         }
-        else if(currentQuantity < 30)
+        else if(currentQuantity < bigQuantity)
         {
            alert('재고가 부족합니다');
         }
@@ -166,9 +167,26 @@ $(document).ready(function()
                 console.log(error);
             }
         });
-
     });
 
+
+});
+
+//affix 높이 잡기
+$('#itemDetailContainer').ready(function()
+{
+    top_Toolbar_H = $('#top_Toolbar').outerHeight(true);
+    navbar_H = $('#navMenu').outerHeight(true);
+    itemContent_H = $('#itemContent').outerHeight(true);
+    position = top_Toolbar_H + navbar_H + itemContent_H;
+    $('#itemDetailNav').attr('data-offset-top',position);
+});
+
+//affix 넓이 잡기
+$('#itemDetailNav').ready(function()
+{
+     var parentWidth = $('#navMenu').width();
+    $('#itemDetailNav').css('width',parentWidth);
 });
 
 </script>
@@ -176,7 +194,7 @@ $(document).ready(function()
 {% endblock additional_assets %}
 
 {% block main_content %}
-<div id="itemDetailContainer">
+<div id="itemDetailContainer" data-spy="scroll" data-target="#itemDetailNav" data-offset="0">
     {% if item %}
     <!-- 상품 디테일 -->
         <div id="itemContent" class="row">
@@ -227,6 +245,21 @@ $(document).ready(function()
                     </p>
                 </div>
             </div>
+        </div>
+    <!-- 페이지 내부 nav 메뉴 -->
+        <nav id="itemDetailNav" class="navbar" data-spy="affix" data-offset-top = "0">
+              <div class="collapse navbar-collapse" id="itemDetailNavList" >
+                <ul class="nav nav-tabs">
+                  <li><a href="#">상품 정보</a></li>
+                  <li><a href="#itemDetailImage">상세 정보</a></li>
+                  <li><a href="#itemReviews">상품 리뷰</a></li>
+                </ul>
+          </div>
+        </nav>
+    <!-- 디테일 이미지-->
+        <div id="itemDetailImage">
+            Detail
+            <img class="img-responsive" src="{{MEDIA_URL}}{{item.detailImage}}">
         </div>
     <!-- 리뷰 -->
         <div id="itemReviews">

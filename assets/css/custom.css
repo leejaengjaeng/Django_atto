@@ -331,7 +331,7 @@ center
 
 /*
 ------------------------------------------------------------
-    item_news_detail
+    item_etail
 ------------------------------------------------------------
 */
 #itemQuantity
@@ -395,6 +395,35 @@ center
     right: 1%;
     bottom: 20%;
 }
+
+
+.affix
+{
+    top:0;
+    z-index: 9999 !important;
+}
+
+#itemDetailNav
+{
+    background-color:#FFF;
+}
+
+#itemDetailNavList
+{
+    padding:0px;
+}
+
+#itemDetailContainer .nav-tabs li a
+{
+    color: #000
+}
+
+#itemDetailContainer .nav-tabs .active
+{
+    color: #333
+}
+
+
 /*
 ------------------------------------------------------------
     qa
@@ -421,3 +450,4 @@ center
 .text-label{
     margin:0 auto;
 }
+
