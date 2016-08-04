@@ -421,3 +421,8 @@ center
 .text-label{
     margin:0 auto;
 }
+
+.downcontentbtn{
+    position:relative;
+    bottom: 0px;
+}

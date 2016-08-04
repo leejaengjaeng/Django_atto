@@ -41,7 +41,6 @@ def addReview(request):
 
     newReview = Review(author=author, content=content, makeTime=makeTime, itemNum=item, image=image)
     newReview.save()
-
     return redirect('/shop/detail?itemId='+str(item.id))
 
 def addShopingBasket(request):
@@ -58,14 +57,37 @@ def addShopingBasket(request):
     else :
         itemImg = None;
 
-    inputValue = [
-        (itemImg,detailImg,item.itemName,item.price,item.stock,item.sale,item.category,item.info),
-                   ]
+    inputValue = [itemImg,detailImg,item.itemName,item.price,item.stock,item.sale,item.category,item.info]
+
 
     if 'shopingBasket' in request.session:
-        request.session['shopingBasket'].append(inputValue)
+        sessionList = request.session['shopingBasket']
+        print sessionList
+        sessionList.append(inputValue)
+        print sessionList
+        request.session['shopingBasket'] = sessionList
+
+        #request.session['shopingBasket'].append(inputValue)
     else:
-        request.session['shopingBasket'] = inputValue
+        input = []
+        input.append(inputValue)
+        print input
+        request.session['shopingBasket'] = input
 
     print request.session['shopingBasket']
     return HttpResponse()
+
+def itembasket(request):
+    if(request.user.is_authenticated()):
+
+        return render(request,"store/item_basket.html",{"itemlist":request.session['shopingBasket']})
+    else:
+        return render(request,"userTemplate/loginPage.html")
+
+def removebasketitem(request):
+    # remove=request.POST.get("remove")
+    curuser=request.user.username
+    # h=json.load(request.session[curuser])
+    # for item in h:
+    #     del item[remove]
+    return HttpResponse(json.loads(request.session[curuser]))

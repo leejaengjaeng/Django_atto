@@ -67,7 +67,9 @@ TEMPLATES = [
         },
     },
 ]
-
+TEMPLATE_CONTEXT_PROCESSORS = (
+    'django.core.context_processors.request',
+)
 WSGI_APPLICATION = 'attoHome.wsgi.application'
 
 
@@ -134,3 +136,11 @@ STATICFILES_DIRS = [
 
 MEDIA_URL ='/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR,'media')
+
+#Email
+EMAIL_HOST = 'smtp.worksmobile.com'
+EMAIL_PORT = 465
+EMAIL_HOST_USER = 'johnny@attocube.co.kr'
+EMAIL_HOST_PASSWORD = 'dkxhcube!2'
+EMAIL_USE_SSL = True
+EMAIL_USE_TLS = False

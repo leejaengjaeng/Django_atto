@@ -9,6 +9,11 @@ urlpatterns = [
 	url(r'^detail$', views.itemDetail, name='itemDetail'),
 	url(r'^addReview$', views.addReview, name='addReview'),
 	url(r'^getReviews$', views.getReviews, name='getReviews'),
+
+	url(r'^itembasket$',views.itembasket,name='itembasket'),
+	url(r'^removebasketitem$',views.removebasketitem,name='removebasketitem'),
+
 	url(r'^addShoppingBasket$', views.addShopingBasket, name='addShopingBasket'),
+
 ]
 
