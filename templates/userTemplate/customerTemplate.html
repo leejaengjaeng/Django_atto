@@ -8,37 +8,61 @@
 {% endblock slider %}
 
 {% block main_content %}
-	<br>
-	<img src="{% static 'assets/img/slogan.jpg' %}" style="width:100%">
+<div id="itemContainer">
+	<img src="{% static 'assets/img/slogan.jpg' %}" style="width:100%; margin-top:2%;">
 <!-- 아이템 리스트 -->
- 	{% if items %}
-        <div class="container" id="itemContainer">
-            {% for item in items %}
-                <!-- modulo 연산 (built in)-->
-				{% if forloop.counter0|divisibleby:3 %}
-				<div class="row">
-				{% endif %}
-                    <div class="shopItem col-xs-4 col-md-4">
-						<div class="shopItemInner">
-							<a href="/shop/detail?itemId={{item.id}}">
-								<img src="{{MEDIA_URL}}/{{item.image}}" alt="Image" class="img-responsive">
-							</a>
-								{{item.itemName}} <br>
-								{% if item.sale == 0 %}
-									<p class="price">{{item.price}}</p>
-								{% else %}
-									<p class="price center">
-									<del><small>{{ item.price }}</small></del>
-									{% sub item.price item.sale %}
-									</p>
-								{% endif %}
-						</div>
-                    </div>
-                {% if forloop.counter|divisibleby:3 %}
-				</div><!--/row-->
-                {% endif %}
-            {% endfor %}
-        </div>
+	{% if items %}
+		{% for item in items %}
+		<!-- modulo 연산 (built in)-->
+			{% if forloop.counter0|divisibleby:4 %}
+			<div class="row">
+			{% endif %}
+				<div class="shopItem col-xs-6 col-sm-3">
+					<div class="shopItemInner">
+						<a href="/shop/detail?itemId={{item.id}}">
+							<img src="{{MEDIA_URL}}/{{item.image}}" alt="Image" class="img-responsive">
+						</a>
+						{{item.itemName}} <br>
+						{% if item.sale == 0 %}
+						<p class="price">{{item.price}}</p>
+						{% else %}
+						<p class="price center">
+							<del><small>{{ item.price }}</small></del>
+							{% sub item.price item.sale %}
+						</p>
+						{% endif %}
+					</div>
+				</div>
+			{% if forloop.counter|divisibleby:4 %}
+			</div><!--/row-->
+			{% endif %}
+		{% endfor %}
     {% endif %}
-<!-- 아이템 리스트 끝 -->
+	<div class="row">
+    	<center>
+        	<div class="col-sm-6 col-xs-12">
+            	<a href="#"> <img src="{% static 'assets/img/shop/newProduct.jpg' %}"  class="img-responsive" alt="Responsive image" ></a>
+			</div>
+			<div class="col-sm-6 col-xs-12">
+				<a href="#"><img src="{% static 'assets/img/shop/newProduct.jpg' %}" class="img-responsive" alt="Responsive image"></a>
+			</div>
+		</center>
+    </div>
+	<div class="row">
+    	<center>
+			<div class="col-sm-3 col-xs-6">
+				<img src="{% static 'assets/img/shop/atto_profit_01.png' %}" class="img-responsive" alt="Responsive image">
+			</div>
+			<div class="col-sm-3 col-xs-6">
+				<img src="{% static 'assets/img/shop/atto_profit_02.png' %}" class="img-responsive" alt="Responsive image">
+			</div>
+			<div class="col-sm-3 col-xs-6">
+				<img src="{% static 'assets/img/shop/atto_profit_03.png' %}" class="img-responsive" alt="Responsive image">
+			</div>
+			<div class="col-sm-3 col-xs-6">
+				<img src="{% static 'assets/img/shop/atto_profit_04.png' %}" class="img-responsive" alt="Responsive image">
+			</div>
+		</center>
+    </div>
+</div>
 {% endblock main_content %}

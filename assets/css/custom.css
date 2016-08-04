@@ -42,6 +42,7 @@ center
 }
 
 #footersty{
+    margin-top:2%;
     bottom : 0px;
 }
 
@@ -263,30 +264,10 @@ center
 /*
     item list
 */
-#itemContainer
-{
-    width:100%;
-    padding:0px;
-}
 
-.row
+#itemContainer .row
 {
-    width:100%;
-    margin:auto;
-    display:block;
-    text-align:center;
-    content-align:center;
-}
-
-#itemContainer
-{
-    margin-top:5%;
-    margin-bottom:5%;
-}
-
-.shopItem
-{
-    padding: 1%;
+    margin-top:2%;
 }
 
 .shopItemInner
