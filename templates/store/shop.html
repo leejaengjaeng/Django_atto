@@ -7,17 +7,18 @@
    <link rel="stylesheet" href="{% static 'assets/css/custom.css' %}" />
 {% endblock additional_assets %}
 
-{% block slider %}
-    {% include 'homepage/main_slider.html' with images=imgs %}
-{% endblock slider %}
-
 {% block main_content %}
+    <div class="container-fluid">
+        <div class="embed-responsive embed-responsive-16by9">
+            <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/_-7eNlO-fLQ"></iframe>
+        </div>
+    </div>
    {% if items %}
-        <div class="container" id="itemContainer">
+        <div class="container-fluid" id="itemContainer">
             <div class="row">
 				{% for item in items %}
 					<!-- modulo 연산 (built in)-->
-						<div class="shopItem col-sm-4 col-xs-12 ">
+						<div class="shopItem col-sm-3 col-xs-6 ">
 							<div class="shopItemInner">
 								<a href="/shop/detail?itemId={{item.id}}">
 									<img src="{{MEDIA_URL}}/{{item.image}}" alt="Image" class="img-responsive">
