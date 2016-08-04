@@ -46,7 +46,7 @@ def addReview(request):
 def addShopingBasket(request):
     itemId = request.POST.get('itemId')
     item = ShopItem.objects.get(id=itemId)
-
+    count=0
     if item.detailImage:
         detailImg = item.detailImage.url
     else:
@@ -85,9 +85,12 @@ def itembasket(request):
         return render(request,"userTemplate/loginPage.html")
 
 def removebasketitem(request):
-    # remove=request.POST.get("remove")
-    curuser=request.user.username
-    # h=json.load(request.session[curuser])
-    # for item in h:
-    #     del item[remove]
-    return HttpResponse(json.loads(request.session[curuser]))
+    count=request.POST.get('number')
+    n=int(count)
+    print count
+    list= request.session['shopingBasket']
+    print list[n]
+    list.pop(n)
+    print list
+    request.session['shopingBasket']=list
+    return redirect('/shop/itembasket')
