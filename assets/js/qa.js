@@ -6,8 +6,15 @@ $('#qna').on('show.bs.modal', function (event) {
     var modal = $(this);
     var button = modal.find('.submit-button');
     button.click(function (e) {
+        if ( document.getElementById('input-query').value == "" ){
+            document.getElementById('input-label').innerHTML = "문의사항을 입력해주세요.";
+            $('#popup').modal('show');
+            return;
+        }
+
         $data = {
                 'username' : document.getElementById('input-username').value,
+                'query' : document.getElementById('input-query').value,
                 'csrfmiddlewaretoken': '{{ csrf_token }}'
             };
 
