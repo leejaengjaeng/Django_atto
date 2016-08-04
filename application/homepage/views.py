@@ -93,7 +93,7 @@ def myaccount(request):
     if currentuser.is_authenticated():
         id=currentuser.username
         mail = currentuser.email
-        name = currentuser.last_name
+        name = currentuser.get_full_name()
         addr1 = currentuser.userprofile.address_line1
         addr2 = currentuser.userprofile.address_line2
         phonenum = currentuser.userprofile.mobilePhoneNumber

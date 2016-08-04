@@ -42,13 +42,12 @@ def addReview(request):
 
     newReview = Review(author=author, content=content, makeTime=makeTime, itemNum=item, image=image)
     newReview.save()
-
     return redirect('/shop/detail?itemId='+str(item.id))
 
 def addShopingBasket(request):
     itemId = request.POST.get('itemId')
     item = ShopItem.objects.get(id=itemId)
-
+    count=0
     if item.detailImage:
         detailImg = item.detailImage.url
     else:
@@ -59,14 +58,40 @@ def addShopingBasket(request):
     else :
         itemImg = None;
 
-    inputValue = [
-        (itemImg,detailImg,item.itemName,item.price,item.stock,item.sale,item.category,item.info),
-                   ]
+    inputValue = [itemImg,detailImg,item.itemName,item.price,item.stock,item.sale,item.category,item.info]
+
 
     if 'shopingBasket' in request.session:
-        request.session['shopingBasket'].append(inputValue)
+        sessionList = request.session['shopingBasket']
+        print sessionList
+        sessionList.append(inputValue)
+        print sessionList
+        request.session['shopingBasket'] = sessionList
+
+        #request.session['shopingBasket'].append(inputValue)
     else:
-        request.session['shopingBasket'] = inputValue
+        input = []
+        input.append(inputValue)
+        print input
+        request.session['shopingBasket'] = input
 
     print request.session['shopingBasket']
     return HttpResponse()
+
+def itembasket(request):
+    if(request.user.is_authenticated()):
+
+        return render(request,"store/item_basket.html",{"itemlist":request.session['shopingBasket']})
+    else:
+        return render(request,"userTemplate/loginPage.html")
+
+def removebasketitem(request):
+    count=request.POST.get('number')
+    n=int(count)
+    print count
+    list= request.session['shopingBasket']
+    print list[n]
+    list.pop(n)
+    print list
+    request.session['shopingBasket']=list
+    return redirect('/shop/itembasket')

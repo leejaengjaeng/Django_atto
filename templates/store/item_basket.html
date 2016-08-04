@@ -1,0 +1,64 @@
+{% extends 'homepage/attoHome_base.html' %}
+{% load staticfiles %}
+{% block main_content %}
+
+    <div xmlns="http://www.w3.org/1999/html">
+        {#    {% for list in basketlist %}#}
+        {#        <h2>{{ basketlist.list }}</h2>#}
+        {#    {%  endfor %}#}
+        <h2 style="margin-left: 20px">장바구니({{ itemlist|length }})</h2>
+        <br/><br/>
+    </div>
+    <div>
+        <center>
+            <table class="table" style="width:80%">
+                {#            <tr>#}
+                {#                <th>상품정보</th>#}
+                {#                <th>상품금액</th>#}
+                {#                <th>배송비</th>#}
+                {#            </tr>#}
+
+                {% for k in itemlist %}
+
+                    <tr>
+                        <td><img src="{{ k.0 }}" style="width:50px"></td>
+                        <td>{{ k.2 }}</td>
+                        <td>{{ k.3 }}</td>
+                        <td>{{ k.4 }}</td>
+                        <td>{{ k.5 }}</td>
+                        <td>{{ k.6 }}</td>
+                        <td>{{ k.7 }}</td>
+                        <td width="50px">
+                            <button class="btn btn-default" onclick="rmbasketitem({{ forloop.counter0 }})">삭제 </button>
+                        </td>
+                    </tr>
+
+                {% endfor %}
+            </table>
+        </center>
+    </div>
+    <script>
+        function rmbasketitem(count) {
+
+            $(document).ready(function()
+            {
+
+
+                $.ajax(
+                        {
+                            method: 'POST',
+                            url: '/shop/removebasketitem',
+                            data: {'number': count, 'csrfmiddlewaretoken': '{{ csrf_token }}',},
+                            success: function (data) {
+                                alert("ajax sucess");
+                                location.href='/shop/itembasket'
+                            },
+                            error: function () {
+                                alert('error');
+                            }
+                        });
+            });
+
+        }
+    </script>
+{% endblock %}
