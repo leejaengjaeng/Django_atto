@@ -42,6 +42,7 @@ center
 }
 
 #footersty{
+    margin-top:2%;
     bottom : 0px;
 }
 
@@ -263,24 +264,10 @@ center
 /*
     item list
 */
-#itemContainer
-{
-    width:100%;
-    padding:0px;
-}
 
-.row
+#itemContainer .row
 {
-    width:100%;
-    margin:auto;
-    display:block;
-    text-align:center;
-    content-align:center;
-}
-
-.shopItem
-{
-    padding: 5%;
+    margin-top:2%;
 }
 
 .shopItemInner
@@ -296,7 +283,7 @@ center
         border:3px solid #6CCEF5;
     }
 
-    .col-xs-12
+    .col-xs-6
     {
         margin:auto;
         padding:5% 20% 5% 20%;
@@ -331,7 +318,7 @@ center
 
 /*
 ------------------------------------------------------------
-    item_news_detail
+    item_etail
 ------------------------------------------------------------
 */
 #itemQuantity
@@ -340,22 +327,21 @@ center
     border:1px solid #aaa;
 }
 
+#itemInfo
+{
+    background-color: white;
+    padding:10%;
+}
+
+
 #itemReviews
 {
     border-top:2px solid #aaa;
 }
 
-#reviewList
+#itemReviews .row
 {
-    border-top:2px solid #aaa;
-}
-
-#itemInfo
-{
-    background-color: white;
-    margin:10% 0 10% 0;
-    padding:5%;
-    border: 2px solid #aaa;
+    border-top:1px solid #aaa;
 }
 
 #reviewContent
@@ -364,10 +350,15 @@ center
     box-sizing:border-box;
 }
 
+#reviewList
+{
+    padding:2%;
+}
+
 .reviewItem
 {
     padding:5%;
-    border: 1px solid #aaa;
+    border-top: 1px solid #aaa;
 }
 .reviewImg
 {
@@ -395,6 +386,65 @@ center
     right: 1%;
     bottom: 20%;
 }
+
+
+.affix
+{
+    top:0;
+    z-index: 9999 !important;
+}
+
+#itemDetailNav
+{
+    background-color:#FFF;
+    height:100%;
+    padding:0px;
+}
+
+
+#itemDetailContainer .nav-tabs .active a
+{
+    border: 2px solid #EF86AE;
+    //border-bottom: none;
+}
+
+#itemDetailContainer .nav-tabs li a
+{
+    border-radius: 0;
+    margin:0;
+}
+
+
+#itemDetailNav .nav-tabs{
+    border-bottom: 2px solid #EF86AE;
+}
+
+#itemDetailNav .tab-content{
+    background-color:#303136;
+    padding:5px
+}
+
+#itemDetailNav .nav-tabs > li > a{
+    color : #777;
+    font-weight : bold;
+}
+
+#itemDetailNav .nav-tabs > li:hover{
+    cursor:pointer;
+    background-color :#EF86AE;
+    font-weight : bold;
+    text-align:center;
+    color:#FFF;
+}
+
+#itemDetailNav .nav-tabs > li > a:hover{
+    color : #FFF;
+    font-weight : bold;
+    background-color: #EF86AE !important;
+    border: medium none;
+}
+
+
 /*
 ------------------------------------------------------------
     qa
@@ -421,6 +471,9 @@ center
 .text-label{
     margin:0 auto;
 }
+
+
+
 
 .downcontentbtn{
     position:relative;
