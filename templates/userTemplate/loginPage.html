@@ -4,14 +4,22 @@
     <link rel="stylesheet" href="{% static 'assets/css/bootstrap.min.css' %}" />
 <h1> 로그인 </h1>
 {% block main_content %}
-    <style>
-
-    </style>
     <form method="post" action="{% url 'userLogin' %}">
         {% csrf_token %}
         <!--<p>User name : {{ form.username }}</p>
         <p>password : {{ form.password }}</p>
           -->
+        {% if form.errors %}
+        <p class="text-center">ID나 비밀번호가 일치하지 않습니다.</p>
+        {% endif %}
+
+        {% if next %}
+            {% if user.is_authenticated %}
+                <p class="text-center">권한이 없는 페이지에 접근하였으니, 권한이 있는 계정으로 로그인하세요.</p>
+            {% else %}
+                <p class="text-center">이 페이지를 보려면 로그인을 해야 합니다.</p>
+            {% endif %}
+        {% endif %}
 
         <div class="container">
 {#            <br/><br/><br/><br/><br/>#}
@@ -46,16 +54,6 @@
         </div>
     </form>
 
-    {% if form.errors %}
-        <p class="textal">ID나 비밀번호가 일치하지 않습니다.</p>
-    {% endif %}
 
-    {% if next %}
-        {% if user.is_authenticated %}
-            <p class="textal">권한이 없는 페이지에 접근하였으니, 권한이 있는 계정으로 로그인하세요.</p>
-        {% else %}
-            <p class="textal">이 페이지를 보려면 로그인을 해야 합니다.</p>
-        {% endif %}
-    {% endif %}
 
 {% endblock main_content %}
