@@ -8,32 +8,86 @@
 {% endblock additional_assets %}
 
 {% block main_content %}
+    <script>
+    function ClickLink(url) {
+        alert(url);
+        location.href = url;
+    }
+    </script>
     <div class="container-fluid">
         <div class="embed-responsive embed-responsive-16by9">
             <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/_-7eNlO-fLQ"></iframe>
         </div>
     </div>
    {% if items %}
-        <div class="container-fluid" id="itemContainer">
+        <div class="container-fluid">
+            <h3>아토큐브</h3>
             <div class="row">
 				{% for item in items %}
-					<!-- modulo 연산 (built in)-->
-						<div class="shopItem col-sm-3 col-xs-6 ">
-							<div class="shopItemInner">
-								<a href="/shop/detail?itemId={{item.id}}">
-									<img src="{{MEDIA_URL}}/{{item.image}}" alt="Image" class="img-responsive">
-								</a>
-									{{item.itemName}} <br>
-									{% if item.sale == 0 %}
-										<p class="price">{{item.price}}</p>
-									{% else %}
-										<p class="price center">
-										<del><small>{{ item.price }}</small></del>
-										{% sub item.price item.sale %}
-										</p>
-									{% endif %}
-							</div>
-						</div>
+                    {% if item.category == 0 %}
+                       <!-- modulo 연산 (built in)-->
+                        <div class="col-md-3 col-xs-6 col-lg-3">
+                            <div class="thumbnail" style="cursor: pointer; border:2px solid #6CCEF5;" onclick="ClickLink('/shop/detail?itemId={{item.id}}');" >
+                                <img src="{{MEDIA_URL}}/{{item.image}}" alt="Responsive Image" class="img-responsive">
+                                <div class="caption">
+                                    <p class="lead" style="margin: 0 auto;"><strong style="font-size: x-large">{{item.itemName}}</strong><br>
+                                    {% if item.sale == 0 %}
+                                        {{item.price}}원</p>
+                                    {% else %}
+                                        <del><small>{{ item.price }}</small></del>
+                                        {% sub item.price item.sale %}원
+                                    </p>
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+                    {% endif %}
+				{% endfor %}
+			</div><!--/row-->
+            <h3>나무케이스</h3>
+            <div class="row">
+				{% for item in items %}
+                    {% if item.category == 1 %}
+                       <!-- modulo 연산 (built in)-->
+                        <div class="col-md-3 col-xs-6 col-lg-3">
+                            <div class="thumbnail" style="cursor: pointer; border:2px solid #6CCEF5;" onclick="ClickLink('/shop/detail?itemId={{item.id}}');" >
+                                <img src="{{MEDIA_URL}}/{{item.image}}" alt="Responsive Image" class="img-responsive">
+                                <div class="caption">
+                                    <p class="lead" style="margin: 0 auto;"><strong style="font-size: x-large">{{item.itemName}}</strong><br>
+                                    {% if item.sale == 0 %}
+                                        {{item.price}}원</p>
+                                    {% else %}
+                                        <del><small>{{ item.price }}</small></del>
+                                        {% sub item.price item.sale %}원
+                                    </p>
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+                    {% endif %}
+				{% endfor %}
+			</div><!--/row-->
+            <h3>이미지카드</h3>
+            <div class="row">
+				{% for item in items %}
+                    {% if item.category == 2 %}
+                       <!-- modulo 연산 (built in)-->
+                        <div class="col-md-3 col-xs-6 col-lg-3">
+                            <div class="thumbnail" style="cursor: pointer; border:2px solid #6CCEF5;" onclick="ClickLink('/shop/detail?itemId={{item.id}}');" >
+                                <img src="{{MEDIA_URL}}/{{item.image}}" alt="Responsive Image" class="img-responsive">
+                                <div class="caption">
+                                    <p class="lead" style="margin: 0 auto;"><strong style="font-size: x-large">{{item.itemName}}</strong><br>
+                                    {% if item.sale == 0 %}
+                                        {{item.price}}원</p>
+                                    {% else %}
+                                        <del><small>{{ item.price }}</small></del>
+                                        {% sub item.price item.sale %}원
+                                    </p>
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+                    {% endif %}
 				{% endfor %}
 			</div><!--/row-->
         </div>
