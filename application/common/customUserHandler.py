@@ -17,7 +17,7 @@ def setMenuToSession(request):
 
     if request.user.is_authenticated():
         menu_right = [
-            ('장바구니',"#"),
+            ('장바구니',"/shop/itembasket"),
             (request.user.get_full_name(), "/myaccount"),
             ("로그 아웃", "/logout"),
         ]
@@ -76,7 +76,7 @@ def getSliderImages(request):
 def getItemList(request):
     itemList =[]
     try:
-        itemList = ShopItem.objects.all()
+        itemList = ShopItem.objects.all()[0:4]
     #TODO:나타낼 상품이 하나도 없는 경우, 어떻게 할지 결정하기
     except ObjectDoesNotExist:
         itemList = []

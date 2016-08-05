@@ -181,7 +181,7 @@ center
 
 .eName{
     text-align: center;
-    font-size:5px;
+    font-size:1.1vw;
     color:#EF86AE;
     font-weight:bold;
 }
@@ -189,7 +189,7 @@ center
 .kName{
     text-align: center;
     margin-top:20px;
-    font-size:17px;
+    font-size:1.5vw;
     font-weight:bold;
 }
 
@@ -281,12 +281,6 @@ center
     .shopItemInner
     {
         border:3px solid #6CCEF5;
-    }
-
-    .col-xs-6
-    {
-        margin:auto;
-        padding:5% 20% 5% 20%;
     }
 }
 

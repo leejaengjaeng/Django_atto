@@ -13,26 +13,30 @@ def home(request):
     currentUser = request.user
     sliderImgs = cuh.getSliderImages(request)
 
-    # 로그인 체크
-    if currentUser.is_authenticated():
-        if currentUser.userprofile.role == 0:
-            itemList = cuh.getItemList(request)
-            return render(request, 'userTemplate/customerTemplate.html',
-                          {'imgs':  sliderImgs, 'items':itemList})
+    itemList = cuh.getItemList(request)
+    return render(request, 'userTemplate/default_template.html',
+                  {'imgs': sliderImgs, 'items': itemList})
 
-        elif currentUser.userprofile.role == 1:
-            return render(request, 'userTemplate/teacherTemplate.html',
-                          {'imgs':  sliderImgs})
-
-        elif currentUser.userprofile.role == 2:
-            return render(request, 'userTemplate/investorTemplate.html',
-                          {'imgs': sliderImgs})
-        else: #role이 입력되어있지 않은경우
-            return HttpResponse('user role Error')
-    else:
-        itemList = cuh.getItemList(request)
-        return render(request, 'userTemplate/default_template.html',
-                      {'imgs':  sliderImgs, 'items':itemList})
+    # # 로그인 체크
+    # if currentUser.is_authenticated():
+    #     if currentUser.userprofile.role == 0:
+    #         itemList = cuh.getItemList(request)
+    #         return render(request, 'userTemplate/customerTemplate.html',
+    #                       {'imgs':  sliderImgs, 'items':itemList})
+    #
+    #     elif currentUser.userprofile.role == 1:
+    #         return render(request, 'userTemplate/teacherTemplate.html',
+    #                       {'imgs':  sliderImgs})
+    #
+    #     elif currentUser.userprofile.role == 2:
+    #         return render(request, 'userTemplate/investorTemplate.html',
+    #                       {'imgs': sliderImgs})
+    #     else: #role이 입력되어있지 않은경우
+    #         return HttpResponse('user role Error')
+    # else:
+    #     itemList = cuh.getItemList(request)
+    #     return render(request, 'userTemplate/default_template.html',
+    #                   {'imgs':  sliderImgs, 'items':itemList})
 
 
 def signup(request):

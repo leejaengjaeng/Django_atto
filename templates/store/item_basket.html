@@ -6,7 +6,7 @@
         {#    {% for list in basketlist %}#}
         {#        <h2>{{ basketlist.list }}</h2>#}
         {#    {%  endfor %}#}
-        <h2 style="margin-left: 20px">장바구니({{ itemlist|length }})</h2>
+        <h2 style="margin-left: 20px"><b>장바구니({{ itemlist|length }})</b></h2>
         <br/><br/>
     </div>
     <div>
@@ -36,6 +36,13 @@
                 {% endfor %}
             </table>
         </center>
+
+    </div >
+    <div>
+        <b>합계 금액 : {{ totalp }}, 할인금액 : {{ salep }}, 최종결제금액 : {{ resultp }}</b>
+    </div>
+    <div style="padding-right:10%">
+        <button style="float:right;" class="btn btn-default" onclick="location.href='/shop/paypage'">구매하기</button>
     </div>
     <script>
         function rmbasketitem(count) {
@@ -50,11 +57,11 @@
                             url: '/shop/removebasketitem',
                             data: {'number': count, 'csrfmiddlewaretoken': '{{ csrf_token }}',},
                             success: function (data) {
-                                alert("ajax sucess");
+                                //alert("ajax sucess");
                                 location.href='/shop/itembasket'
                             },
                             error: function () {
-                                alert('error');
+                                //alert('error');
                             }
                         });
             });
