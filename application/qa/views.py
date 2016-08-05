@@ -14,7 +14,7 @@ def qa(request):
     if request.user.is_active :
         email = request.user.email
         username = request.user.username
-        name = request.user.first_name
+        name = request.user.get_full_name()
         tel = request.user.userprofile.mobilePhoneNumber
 
     context = {
