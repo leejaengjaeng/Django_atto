@@ -76,7 +76,7 @@ def getSliderImages(request):
 def getItemList(request):
     itemList =[]
     try:
-        itemList = ShopItem.objects.all()
+        itemList = ShopItem.objects.all()[0:4]
     #TODO:나타낼 상품이 하나도 없는 경우, 어떻게 할지 결정하기
     except ObjectDoesNotExist:
         itemList = []
