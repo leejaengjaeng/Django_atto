@@ -42,7 +42,7 @@
         <b>합계 금액 : {{ totalp }}, 할인금액 : {{ salep }}, 최종결제금액 : {{ resultp }}</b>
     </div>
     <div style="padding-right:10%">
-        <button style="float:right;" class="btn btn-default" onclick="location.href='/shop/paypage'">구매하기</button>
+        <button style="float:right;" class="btn btn-default" onclick="execute()">구매하기</button>
     </div>
     <script>
         function rmbasketitem(count) {
@@ -65,6 +65,16 @@
                             }
                         });
             });
+
+        }
+        function execute(){
+            var count = {{ itemlist|length }}
+            if(count==0){
+                alert("장바구니에 항목이 없습니다.");
+            }
+            else{
+                location.href='/shop/paypage';
+            }
 
         }
     </script>
