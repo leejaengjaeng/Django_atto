@@ -178,6 +178,14 @@ center
     {
         width:35.6px;
     }
+    #navbar li
+    {
+        width:100%;
+    }
+    #navbar
+    {
+        margin:0 auto;
+    }
 }
 
 
