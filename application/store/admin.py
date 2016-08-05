@@ -1,7 +1,7 @@
 from django.contrib import admin
 
 # Register your models here.
-from .models import ShopItem,Review
+from .models import ShopItem,Review,pay
 
 #class ItemReviews(Review):
 #    list_display = ('author','makeTime', 'image', 'content','itemNum')
@@ -11,3 +11,4 @@ from .models import ShopItem,Review
 admin.site.register(ShopItem)
 
 admin.site.register(Review)
+admin.site.register(pay)

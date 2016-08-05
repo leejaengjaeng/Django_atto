@@ -44,3 +44,22 @@ class Review(models.Model):
 		verbose_name = '상품 댓글'
 		verbose_name_plural = '상품 댓글들 '
 
+class pay(models.Model):
+	userid=models.ForeignKey(User,unique=False)
+	receivername=models.CharField(null=False,max_length=10)
+	receiverphonenumber=models.IntegerField(max_length=30)
+	receiveraddress=models.CharField(max_length=100)
+	receiverphonenumber2=models.CharField(max_length=100)
+	itemlist=models.TextField(max_length=500)
+	cost=models.IntegerField()
+	require=models.TextField(max_length=100)
+	ispay=models.BooleanField(default=False)
+	isreceive=models.BooleanField(default=False)
+	howToPay=models.CharField(max_length=50)
+
+	def __unicode__(self):
+		return self.userid.username
+
+	class Meta:
+		verbose_name = '결제건'
+		verbose_name_plural = '결제 항목들 '
