@@ -133,7 +133,7 @@ def paypage(request):
 def payresult(request):
     name=request.POST.get("rename")
     phone=request.POST.get("renum1")+request.POST.get("renum2")+request.POST.get("renum3")
-    addr=request.POST.get("addr1")+' '+request.POST.get("addr2")+' '+request.POST.get("addr3")
+    addr=request.POST.get("addr1")+' '+request.POST.get("addr2")
     phone2=request.POST.get("phone2")
     require=request.POST.get("require")
     howToPay=request.POST.get("howToPay")

@@ -58,7 +58,7 @@ class pay(models.Model):
 	howToPay=models.CharField(max_length=50)
 
 	def __unicode__(self):
-		return self.userid.username
+		return self.receivername
 
 	class Meta:
 		verbose_name = '결제건'
