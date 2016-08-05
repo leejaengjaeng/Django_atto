@@ -47,8 +47,10 @@ def addReview(request):
 
 def addShopingBasket(request):
     itemId = request.POST.get('itemId')
+    itemQuantity = request.POST.get('itemQantity')
+
     item = ShopItem.objects.get(id=itemId)
-    count=0
+
     if item.detailImage:
         detailImg = item.detailImage.url
     else:
@@ -59,7 +61,7 @@ def addShopingBasket(request):
     else :
         itemImg = None;
 
-    inputValue = [itemImg,detailImg,item.itemName,item.price,item.stock,item.sale,item.category,item.info]
+    inputValue = [itemImg,detailImg,item.itemName,item.price,item.stock,item.sale,item.category,item.info,itemQuantity]
 
 
     if 'shopingBasket' in request.session:
@@ -69,7 +71,6 @@ def addShopingBasket(request):
         print sessionList
         request.session['shopingBasket'] = sessionList
 
-        #request.session['shopingBasket'].append(inputValue)
     else:
         input = []
         input.append(inputValue)
