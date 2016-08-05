@@ -14,7 +14,7 @@ def qa(request):
     if request.user.is_active :
         email = request.user.email
         username = request.user.username
-        name = request.user.first_name
+        name = request.user.get_full_name()
         tel = request.user.userprofile.mobilePhoneNumber
 
     context = {
@@ -43,7 +43,7 @@ def oneqa(request):
             subject=u'[문의사항]',
             message=query,
             from_email='attocube@attocube.co.kr',
-            recipient_list=[user.email],
+            recipient_list=['contactus@attocube.co.kr'],
             fail_silently=False
         )
     else :

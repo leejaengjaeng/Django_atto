@@ -1,53 +1,55 @@
 {% extends 'homepage/attoHome_base.html' %}
 {% load staticfiles %}
 {% block main_content %}
-<h1>구매자정보</h1>
-    <div>
-        <table class="table">
-            <tr>
-                <th>이름</th>
-                <td>{{ user.last_name }}</td>
-            </tr>
-            <tr>
-                <th>이메일</th>
-                <td>{{ user.email }}</td>
-            </tr>
-            <tr>
-                <th>휴대폰 번호</th>
-                <td>{{ user.userprofile.mobilePhoneNumber }}</td>
-            </tr>
-        </table>
+<div class="container-fluid center-block" style="background-color: white;">
+    <h1>구매자정보</h1>
+    <table class="table table-striped">
+        <tr>
+            <th>이름</th>
+            <td>{{ user.get_full_name }}</td>
+        </tr>
+        <tr>
+            <th>이메일</th>
+            <td>{{ user.email }}</td>
+        </tr>
+        <tr>
+            <th>휴대폰 번호</th>
+            <td>{{ user.userprofile.mobilePhoneNumber }}</td>
+        </tr>
+    </table>
+</div>
+
+<div class="container-fluid center-block" style="background-color:white;">
+    <div class="row">
+        <div class="col-xs-6 col-sm-6">
+            <h1>받는 사람 정보</h1>
+        </div>
+        <div class="col-xs-6 col-sm-6">
+            <br>
+            <button class="btn btn-default" onclick="equal()" style="float: right;">구매자 정보와 같게</button>
+        </div>
     </div>
-<h1>받는 사람 정보</h1>
-    <button class="btn btn-default" onclick="equal()">구매자 정보와 같게</button>
-    <div>
     <form action="/shop/payresult" method="post">
         {% csrf_token %}
-        <table class="table">
+        <table class="table table-striped">
             <tr>
                 <th>이름</th>
-                <td><input type="text" size="3" id="renameid" name = "rename"></td>
+                <td><input type="text" class="form-control" size="3" id="renameid" name = "rename"></td>
             </tr>
             <tr>
                 <th>휴대폰</th>
-                <td><input type="tel" id="renum1id" name="renum1">-<input type="tel" id="renum2id" name="renum2">-<input type="tel" id="renum3id" name="renum3"></td>
+                <td><input type="tel" class="form-control" id="renumid" name="renum"></td>
             </tr>
             <tr>
                 <th>배송주소</th>
                 <td>
 
                 <div class="form group">
-
-                    <input type="text" id="sample4_postcode" placeholder="우편번호" name="addr1" >
+                    <label for="exampleInputNmae2"class="alignsignup"></label>
+                    <input type="text" class="form-control" id="sample4_postcode" placeholder="우편번호" name="addr1" >
+                    <input type="text" class="form-control" id="sample4_roadAddress" placeholder="도로명주소"  name="addr2">
+                    <input type="text" class="form-control" id="sample4_roadAddress" placeholder="나머지주소"  name="addr3">
                     <input type="button" onclick="sample4_execDaumPostcode()" value="우편번호 찾기" class="btn btn-default">
-                </div>
-                <div class="form group">
-                    <label for="exampleInputNmae2"class="alignsignup"></label>
-                    <input type="text" id="sample4_roadAddress" placeholder="도로명주소"  name="addr2">
-                </div>
-                <div class="form group">
-                    <label for="exampleInputNmae2"class="alignsignup"></label>
-                    <input type="text" id="sample4_jibunAddress" placeholder="나머지 주소" name="addr3">
                 </div>
 
                 <span id="guide" style="color:#999"></span>
@@ -108,88 +110,116 @@
             </tr>
             <tr>
                 <th>추가 연락처</th>
-                <td><input name="phone2" type="tel"></td>
+                <td><input name="phone2" class="form-control" type="tel"></td>
             </tr>
             <tr>
                 <th>
                     배송시 요청사항
                 </th>
                 <td>
-                    <input type="text" name="require">
+                    <input type="text" class="form-control" name="require">
                 </td>
             </tr>
         </table>
+</div>
 
-        <h1>상품정보</h1>
-        <div>
-            <table class="table">
-                <tr>
-                    <th>번호</th>
-                    <th>상품이름</th>
-                    <th>가격</th>
-                    <th>할인가격</th>
-                </tr>
-                {% for t in itemlist %}
-                    <tr>
-                        <td>
-                            {{ forloop.counter }}
-                        </td>
-                        <td>
-                            {{ t.2 }}
-                        </td>
-                        <td>
-                            {{ t.3 }}
-                        </td>
-                        <td>
-                            {{ t.5 }}
-                        </td>
-                    </tr>
+<div class="container-fluid center-block" style="background-color:white;">
+    <h1>상품정보</h1>
+    <table class="table table-striped">
+        <tr>
+            <th>번호</th>
+            <th>상품이름</th>
+            <th>가격</th>
+            <th>할인가격</th>
+        </tr>
+        {% for t in itemlist %}
+            <tr>
+                <td>
+                    {{ forloop.counter }}
+                </td>
+                <td>
+                    {{ t.2 }}
+                </td>
+                <td>
+                    {{ t.3 }}
+                </td>
+                <td>
+                    {{ t.5 }}
+                </td>
+            </tr>
 
-                {% endfor %}
+        {% endfor %}
 
-            </table>
-        </div>
-        <div>
-            <b>총 금액 : {{ totalp }}, 할인가격 : {{ salep }}, 최종 결제 금액 : {{ resultp }}</b>
-            <input type="text" hidden value="{{ resultp }}" name="cost">
-        </div>
-        <div>
-            <h1>
-                결제방법
-            </h1>
-        </div>
-        <div>
-            <label class = "radio-inline">
-                <input type="radio" value="이니시스" name="howToPay" checked="checked">이니시스 카드
-            </label>
-            <label class = "radio-inline">
-                <input type="radio" value="계좌이체" name="howToPay" checked="checked">계좌이체
-            </label>
-            <label class = "radio-inline">
-                <input type="radio" value="가상계좌" name="howToPay" checked="checked">가상계좌
-            </label>
-            <label class = "radio-inline">
-                <input type="radio" value="휴대폰 소액결제" name="howToPay" checked="checked">휴대폰 소액결제
-            </label>
+    </table>
+    <p class="text-right">
+        <b>총 금액 : {{ totalp }}, 할인가격 : {{ salep }}, 최종 결제 금액 : {{ resultp }}</b>
+        <input type="text" hidden value="{{ resultp }}" name="cost">
+    </p>
+</div>
+
+<div class="container-fluid">
+    <input id="pg" type="text" value="이니시스 카드 결제" name="howToPay" hidden />
+    <h1>결제방법</h1>
+
+    <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+        <div class="panel panel-default" id="pg1-parent" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+            <div class="panel-heading" role="tab" id="headingOne">
+                <h4 class="panel-title" id="pg1">이니시스 카드 결제</h4>
+            </div>
+            <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
+                <div class="panel-body"">이니시스 카드 결제 방법을 선택합니다.</div>
+            </div>
         </div>
 
-
-
-
-        <div>
-            <input class="btn btn-default" type="submit" value="결제">
+        <div class="panel panel-default" id="pg2-parent" class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+            <div class="panel-heading" role="tab" id="headingTwo">
+                <h4 class="panel-title" id="pg2">실시간 계좌이체</h4>
+            </div>
+            <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
+                <div class="panel-body">실시간 계좌이체 방법을 선택합니다.</div>
+            </div>
         </div>
-    </form>
+
+        <div class="panel panel-default" id="pg3-parent" class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+            <div class="panel-heading" role="tab" id="headingThree">
+                <h4 class="panel-title" id="pg3">가상 계좌이체</h4>
+            </div>
+            <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
+                <div class="panel-body">가상 계좌이체 방법을 선택합니다.</div>
+            </div>
+        </div>
+        <div class="panel panel-default" id="pg4-parent" class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+            <div class="panel-heading" role="tab" id="headingFour">
+                <h4 class="panel-title" id="pg4">휴대폰 소액 결제</h4>
+            </div>
+            <div id="collapseFour" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingFour">
+                <div class="panel-body">휴대폰으로 결제를 진행합니다.</div>
+            </div>
+        </div>
     </div>
+
+    <input class="btn btn-default" type="submit" value="결제">
+    </form>
+</div>
     <script>
+    function ff (){
+
+    }
+    $('#accordion').on('shown.bs.collapse', function () {
+        for ( var i = 1; i < 5; i++ ){
+            if ( document.getElementById('pg' + i + '-parent').getAttribute('aria-expanded') == 'true'){
+                document.getElementById('pg').value = document.getElementById('pg'+i).innerText;
+            }
+        }
+    });
+
     function equal(){
-        document.getElementById("renameid").value='{{ user.last_name }}';
-        document.getElementById("renum1id").value='{{ num1 }}';
-        document.getElementById("renum2id").value='{{ num2 }}';
-        document.getElementById("renum3id").value='{{ num3 }}';
+        document.getElementById("renameid").value='{{ user.get_full_name }}';
+        document.getElementById("renumid").value='{{ num }}';
         document.getElementById('sample4_postcode').value='{{ userprofile.address_line1 }}';
-        document.getElementById('sample4_roadAddress').value='{{ addrdetail1 }}';
-        document.getElementById('sample4_jibunAddress').value='{{ addrdetail2 }}';
+        document.getElementById('sample4_roadAddress').value='{{ addrdetail1 }}'+'{{ addrdetail2 }}';
+{#        document.getElementById('sample4_jibunAddress').value='{{ addrdetail2 }}';#}
     }
     </script>
+
 {% endblock %}
