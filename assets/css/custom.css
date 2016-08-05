@@ -327,16 +327,46 @@ center
     border:1px solid #aaa;
 }
 
-#itemInfo
+#itemContent b
 {
-    background-color: white;
-    padding:10%;
+    color:#777;
+}
+
+#itemContent .row
+{
+    padding-top:2%
+}
+
+#itemDetailContainer
+{
+    color:#777;
 }
 
 
+
+#itemPrice
+{
+    color:#a51717 !important; //red
+    font-size:15px;
+}
+
+#beforeSale
+{
+    color:#777;
+    font-weight:normal;
+}
+
+
+.shop_textBox
+{
+    color:#777;
+    background-color:#FFF;
+    padding-top:10%;
+}
+
 #itemReviews
 {
-    border-top:2px solid #aaa;
+    border-top:2px solid #EF86AE;
 }
 
 #itemReviews .row
@@ -368,7 +398,7 @@ center
 {
     padding:5% 10% 5% 10%;
     text-align:left;
-    background-color: white;
+    background-color: #fef6f9;
 }
 
 .reviewItem .col-xs-8
@@ -402,31 +432,14 @@ center
 }
 
 
-#itemDetailContainer .nav-tabs .active a
+#itemDetailContainer
 {
-    border: 2px solid #EF86AE;
-    //border-bottom: none;
-}
-
-#itemDetailContainer .nav-tabs li a
-{
-    border-radius: 0;
-    margin:0;
-}
-
-
-#itemDetailNav .nav-tabs{
-    border-bottom: 2px solid #EF86AE;
+    position:relative;
 }
 
 #itemDetailNav .tab-content{
     background-color:#303136;
     padding:5px
-}
-
-#itemDetailNav .nav-tabs > li > a{
-    color : #777;
-    font-weight : bold;
 }
 
 #itemDetailNav .nav-tabs > li:hover{
@@ -437,13 +450,42 @@ center
     color:#FFF;
 }
 
-#itemDetailNav .nav-tabs > li > a:hover{
-    color : #FFF;
+#itemDetailNav .nav-tabs > li{
+    color : #777;
     font-weight : bold;
-    background-color: #EF86AE !important;
-    border: medium none;
+    text-align:center;
+    cursor:pointer;
+    padding:1%;
+    border-bottom: 2px solid #EF86AE;
 }
 
+#itemDetailNav .nav-tabs  .active{
+    color : #777;
+    font-weight : bold;
+    text-align:center;
+    cursor:pointer;
+    padding:1%;
+    border: 2px solid #EF86AE;
+    border-bottom: None;
+}
+
+#itemDetailNav .nav-tabs > li > a{
+
+    border-color:#FFF;
+    height:0px;
+    padding: 0px;
+    z-index: -9999 !important;
+}
+
+#shopingBasketBtn
+{
+    width: 100%;
+}
+
+#purchaseBtn
+{
+    width: 100%;
+}
 
 /*
 ------------------------------------------------------------
@@ -471,7 +513,6 @@ center
 .text-label{
     margin:0 auto;
 }
-
 
 
 
