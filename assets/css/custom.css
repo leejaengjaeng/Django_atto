@@ -167,6 +167,16 @@ center
     {
         margin-top:0px;
         margin-bottom:0px;
+        height:inherit;
+        padding: 5px 5px;
+    }
+    #navMenu .container-fluid .navbar-header .navbar-toggle span
+    {
+        width:20px;
+    }
+    #navLogo
+    {
+        width:35.6px;
     }
 }
 
