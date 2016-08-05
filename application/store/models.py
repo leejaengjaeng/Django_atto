@@ -9,7 +9,7 @@ from django.db import models
 class ShopItem(models.Model):
 	# Setting.py에 있는 MEDIA_ROOT 이후 경로
 	image = models.ImageField(upload_to='shopItemImgs/item')
-	detailImage = models.ImageField(upload_to='shopItemImgs/detail', blank=True)
+	detailImage = models.ImageField(upload_to='shopItemImgs/detail')
 	itemName = models.CharField(max_length=100)
 	price = models.PositiveIntegerField(default=0)
 	stock = models.PositiveSmallIntegerField(default=0)

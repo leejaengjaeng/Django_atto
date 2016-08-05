@@ -15,6 +15,7 @@ def itemDetail(request):
     itemId = request.GET.get('itemId')
     try:
         item = ShopItem.objects.get(id=itemId)
+        print item.detailImage
     except:
         item = None
 

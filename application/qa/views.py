@@ -39,11 +39,10 @@ def oneqa(request):
         QnA.objects.create(user=user, query=query, time=datetime.now())
         from django.core.mail import send_mail
 
-        # EmailMessage(u"[문의사항]", query, from_email="attocube@attocube.co.kr", to=[user.email])
         send_mail(
             subject=u'[문의사항]',
             message=query,
-            from_email='johnny@attocube.co.kr',
+            from_email='attocube@attocube.co.kr',
             recipient_list=[user.email],
             fail_silently=False
         )
