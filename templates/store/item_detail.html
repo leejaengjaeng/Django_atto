@@ -152,11 +152,13 @@ $(document).ready(function()
     $('#shopingBasketBtn').click(function()
     {
         itemId = {{item.id}}
+        itemQuantity = $('itemQantity').val();
+        alert(itemQuantity);
         $.ajax(
         {
             method:'POST',
             url:'addShoppingBasket',
-            data:{'itemId':itemId,'csrfmiddlewaretoken':'{{ csrf_token }}'},
+            data:{'itemId':itemId,'itemQuantity':itemQuantity,'csrfmiddlewaretoken':'{{ csrf_token }}'},
             success: function(data)
             {
                 alert('장바구니에 추가되었습니다.');
