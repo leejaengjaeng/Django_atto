@@ -154,25 +154,22 @@ center
     width:16%;
 }
 @media screen and (max-width: 767px) {
-    #navbar li{
-        width : 100%;
-    }
-    .navbar-header
+    #navMenu .container-fluid .navbar-header
     {
-        width:100%;
-        vertical-align:center;
+        margin-bottom:2%;
     }
-    .navbar-brand
+    #navMenu .container-fluid .navbar-header .navbar-brand
     {
-        margin:0px 0px 5px 0px;
+        padding-top:0px;
+        padding-bottom:0px;
     }
-    .navbar-toggle
+    #navMenu .container-fluid .navbar-header .navbar-toggle
     {
-        //display:table-cell;
-        margin: 11px 0px 0px 0px;
+        margin-top:0px;
+        margin-bottom:0px;
     }
-
 }
+
 
 .navbar-toggle li
 {
@@ -312,31 +309,37 @@ center
 
 /*
 ------------------------------------------------------------
-    item_etail
+    item_detail
 ------------------------------------------------------------
 */
-#itemQuantity
-{
-    text-align:center;
-    border:1px solid #aaa;
-}
+@media screen and (max-width: 767px) {
+    #itemContent
+    {
+        padding-left:15%;
+        padding-right:15%;
+    }
 
-#itemContent b
-{
-    color:#777;
-}
+    #itemDetailImage
+    {
+        border-top: 2px solid #EF86AE;
+    }
 
+
+    #itemReviews
+    {
+        border-top: 2px solid #EF86AE;
+    }
+
+}
 #itemContent .row
 {
-    padding-top:2%
+    padding-top:2%;
 }
 
-#itemDetailContainer
+#itemName
 {
-    color:#777;
+    margin: 0px;
 }
-
-
 
 #itemPrice
 {
@@ -350,65 +353,57 @@ center
     font-weight:normal;
 }
 
-
-.shop_textBox
+#itemInfo
 {
     color:#777;
     background-color:#FFF;
     padding-top:10%;
 }
 
+#itemDetailImage
+{
+    padding-top:5%;
+}
+
+
 #itemReviews
 {
-    border-top:2px solid #EF86AE;
+    padding-top:5%;
 }
 
-#itemReviews .row
-{
-    border-top:1px solid #aaa;
-}
-
-#reviewContent
+#reviewModalContent
 {
     width:100%;
     box-sizing:border-box;
 }
 
-#reviewList
+.reviewContainer
 {
-    padding:2%;
+   padding:5%;
+   border-top: 1px solid #aaa;
 }
 
-.reviewItem
+.reviewContainer b
 {
-    padding:5%;
-    border-top: 1px solid #aaa;
-}
-.reviewImg
-{
-   // border: 1px solid #aaa;
-}
-.reviewTxt
-{
-    padding:5% 10% 5% 10%;
-    text-align:left;
-    background-color: #fef6f9;
+    color:#777;
 }
 
-.reviewItem .col-xs-8
-{
-    padding:0px;
-}
+
 #reviewMenu
 {
     position: relative;
-    padding: 3%;
 }
+
 #reviewAdd
 {
     position: absolute;
     right: 1%;
     bottom: 20%;
+}
+
+.reviewTxt
+{
+    padding-top:5%;
 }
 
 
@@ -426,7 +421,7 @@ center
 }
 
 
-#itemDetailContainer
+#itemAffixSpyContainer
 {
     position:relative;
 }
