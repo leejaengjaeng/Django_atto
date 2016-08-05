@@ -81,16 +81,17 @@ def addShopingBasket(request):
 
 def itembasket(request):
     if(request.user.is_authenticated()):
-
-        totalprice=0
-        saleprice=0
-        resultprice=0
-        for k in request.session['shopingBasket']:
-            totalprice=totalprice+k[3]
-            saleprice=saleprice+k[5]
-            resultprice=resultprice+(k[3]-k[5])
-        return render(request,"store/item_basket.html",{"itemlist":request.session['shopingBasket'],'totalp':totalprice,'salep':saleprice,'resultp':resultprice})
-
+        if 'shopingBasket' in request.session:
+            totalprice=0
+            saleprice=0
+            resultprice=0
+            for k in request.session['shopingBasket']:
+                totalprice=totalprice+k[3]
+                saleprice=saleprice+k[5]
+                resultprice=resultprice+(k[3]-k[5])
+            return render(request,"store/item_basket.html",{"itemlist":request.session['shopingBasket'],'totalp':totalprice,'salep':saleprice,'resultp':resultprice})
+        else:
+            return render(request,"store/item_basket.html")
 
     else:
         return render(request,"userTemplate/loginPage.html")
@@ -126,6 +127,8 @@ def paypage(request):
                   {"userprofile":curuser.userprofile,"user":curuser,"num1":num1,"num2":num2,"num3":num3,"addrdetail1":addrdetail1,"addrdetail2":addrdetail2,
                    "itemlist": request.session['shopingBasket'], 'totalp': totalprice, 'salep': saleprice,
                    'resultp': resultprice})
+
+
 
 def payresult(request):
     name=request.POST.get("rename")
