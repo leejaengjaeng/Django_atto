@@ -117,15 +117,24 @@ $(document).ready(function()
                     if(review.img != null)
                     {
                         $('#reviewList').append('\
-                            <div class="reviewItem row">\
-                                <div class="reviewImg col-xs-2">\
-                                    <a href="'+ review.img + '">\
-                                        <img class="img-responsive" src="' + review.img + '">\
-                                    </a>\
-                                </div>\
-                                <div class="reviewTxt col-xs-10">\
-                                    <p style="float:right;">'+ review.id + ' | ' + review.date + '</p>\
-                                    <div>' + review.content+'</div>\
+                            <div class="reviewContainer row">\
+                                <div>\
+                                    <div class="row">\
+                                        <div class="col-xs-12">\
+                                            <b>'+ review.id + '님 </b>\
+                                            <b style="float:right">'+ review.date +'</b>\
+                                        </div>\
+                                    </div>\
+                                    <div class="row">\
+                                        <div class="reviewTxt col-xs-9">\
+                                            <p>' + review.content+'</p>\
+                                        </div>\
+                                        <div class="col-xs-3">\
+                                            <a href="'+ review.img + '">\
+                                                <img class="img-responsive" src="' + review.img + '">\
+                                            </a>\
+                                        </div>\
+                                    </div>\
                                 </div>\
                             </div>\
                         ')
@@ -133,10 +142,20 @@ $(document).ready(function()
                     else
                     {
                         $('#reviewList').append('\
-                            <div class="reviewItem row">\
-                                <div class="reviewTxt col-xs-12">\
-                                    <p style="float:right;">'+ review.id + ' | ' + review.date + '</p>\
-                                    <div>' + review.content+'</div>\
+                            <div class="reviewContainer row">\
+                                <div>\
+                                    <div class="row">\
+                                        <div class="col-xs-12">\
+                                            <b>'+ review.id + '님 </b>\
+                                            <b style="float:right">'+ review.date +'</b>\
+                                        </div>\
+                                    </div>\
+                                    <div class="row">\
+                                        <div class="reviewTxt col-xs-9">\
+                                            <p>' + review.content+'</p>\
+                                        </div>\
+                                        <div class="col-xs-3"></div>\
+                                    </div>\
                                 </div>\
                             </div>\
                         ')
@@ -178,30 +197,28 @@ $(document).ready(function()
     });
 
 
-    $('#itemDetailContainer').scrollspy({ target: '#itemDetailNav' });
+    $('#itemAffixSpyContainer').scrollspy({ target: '#itemDetailNav' });
     $('body').scrollspy({ target: '#itemDetailNav' });
 
+
+    //affix 넓이,높이 잡기
+    $(window).resize(setAffixPosition()).resize();
+
+    $('#itemContent').ready(setAffixPosition());
 });
 //$(document).ready(function() 끝
 
-
-
-//affix 높이 잡기
-$('#itemDetailContainer').ready(function()
+setAffixPosition = function()
 {
     top_Toolbar_H = $('#top_Toolbar').outerHeight(true);
     navbar_H = $('#navMenu').outerHeight(true);
     itemContent_H = $('#itemContent').outerHeight(true);
     position = top_Toolbar_H + navbar_H + itemContent_H;
     $('#itemDetailNav').attr('data-offset-top',position);
-});
 
-//affix 넓이 잡기
-$('#itemDetailNav').ready(function()
-{
-     var parentWidth = $('#mainContainer').width();
+    var parentWidth = $('#mainContainer').width();
     $('#itemDetailNav').css('width',parentWidth);
-});
+}
 
 moveTo = function(str)
 {
@@ -213,7 +230,7 @@ moveTo = function(str)
 {% endblock additional_assets %}
 
 {% block main_content %}
-<div id="itemDetailContainer" data-spy="scroll" data-target="#itemDetailNav" data-offset="0">
+<div id="#itemAffixSpyContainer" data-spy="scroll" data-target="#itemDetailNav" data-offset="0">
     {% if item %}
         <div id="itemContent" class="row">
             <div class="col-xs-12 col-sm-6">
@@ -228,7 +245,7 @@ moveTo = function(str)
                 </div>
                 <div class="row">
                     <div class="col-xs-12">
-                        <h2>{{item.itemName}}</h2>
+                        <h2 id="itemName">{{item.itemName}}</h2>
                     </div>
                 </div>
                 <div class="row">
@@ -273,7 +290,7 @@ moveTo = function(str)
                 </div>
                 <div class="row">
                     <div class="col-xs-12">
-                        <p class="shop_textBox">
+                        <p id="itemInfo">
                             {{item.info}}
                         </p>
                     </div>
@@ -281,7 +298,7 @@ moveTo = function(str)
             </div>
         </div>
     <!-- 페이지 내부 nav 메뉴 -->
-        <nav class="collapse navbar-collapse" id="itemDetailNav"  data-spy="affix" data-offset-top = "0">
+        <nav class="collapse navbar-collapse" id="itemDetailNav"  data-spy="affix" data-offset-top = "500">
             <ul class="nav nav-tabs nav-justified">
                 <li class="active" onclick="moveTo('#top_Toolbar')"><a href="#top_Toolbar"></a>상품 정보</li>
                 <li onclick="moveTo('#itemDetailImage')"><a href="#itemDetailImage"></a>상세 정보</li>
@@ -290,13 +307,11 @@ moveTo = function(str)
         </nav>
     <!-- 디테일 이미지-->
         <div id="itemDetailImage">
-            <br><br>
             <h4>상세 정보</h4>
             <img class="img-responsive" src="{{MEDIA_URL}}{{item.detailImage}}">
         </div>
     <!-- 리뷰 -->
         <div id="itemReviews" class="container-fluid">
-            <br><br>
             <h4>상품 리뷰</h4>
             <div id="reviewMenu">
                 {% if request.user.is_authenticated %}
@@ -334,7 +349,7 @@ moveTo = function(str)
                       <p>{{request.user.username}}</p>
                   </div>
                   <div class="col-xs-10">
-                      <textarea class="form-control" rows="3" style="width:100%" name="reviewContent"></textarea>
+                      <textarea class="form-control" rows="3" style="width:100%" name="reviewModalContent"></textarea>
                   </div>
              </div>
              <div class="row">

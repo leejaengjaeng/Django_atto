@@ -1,12 +1,12 @@
 {% extends 'homepage/attoHome_base.html' %}
 {% load staticfiles %}
 {% block main_content %}
-<h1>구매자정보</h1>
-    <div>
-        <table class="table">
+    <div class="container-fluid center-block" style="background-color: white;">
+        <h1>구매자정보</h1>
+        <table class="table table-striped">
             <tr>
                 <th>이름</th>
-                <td>{{ user.last_name }}</td>
+                <td>{{ user.get_full_name }}</td>
             </tr>
             <tr>
                 <th>이메일</th>
@@ -18,176 +18,219 @@
             </tr>
         </table>
     </div>
-<h1>받는 사람 정보</h1>
-    <button class="btn btn-default" onclick="equal()">구매자 정보와 같게</button>
-    <div>
     <form action="/shop/payresult" method="post">
-        {% csrf_token %}
-        <table class="table">
-            <tr>
-                <th>이름</th>
-                <td><input type="text" size="3" id="renameid" name = "rename"></td>
-            </tr>
-            <tr>
-                <th>휴대폰</th>
-                <td><input type="tel" id="renumid" name="renum"></td>
-            </tr>
-            <tr>
-                <th>배송주소</th>
-                <td>
-
-                <div class="form group">
-
-                    <input type="text" id="sample4_postcode" placeholder="우편번호" name="addr1" >
-                    <input type="button" onclick="sample4_execDaumPostcode()" value="우편번호 찾기" class="btn btn-default">
-                </div>
-                <div class="form group">
-                    <label for="exampleInputNmae2"class="alignsignup"></label>
-                    <input type="text" id="sample4_roadAddress" placeholder="도로명주소+나머지주소"  name="addr2">
-                </div>
-                <div class="form group">
-                    <label for="exampleInputNmae2"class="alignsignup"></label>
-                    <input type="text" id="sample4_jibunAddress" placeholder="나머지 주소" name="addr3">
-                </div>
-
-                <span id="guide" style="color:#999"></span>
-
-                <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
-                <script>
-                    //본 예제에서는 도로명 주소 표기 방식에 대한 법령에 따라, 내려오는 데이터를 조합하여 올바른 주소를 구성하는 방법을 설명합니다.
-                    function sample4_execDaumPostcode() {
-                        new daum.Postcode({
-                            oncomplete: function(data) {
-                                // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
-
-                                // 도로명 주소의 노출 규칙에 따라 주소를 조합한다.
-                                // 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
-                                var fullRoadAddr = data.roadAddress; // 도로명 주소 변수
-                                var extraRoadAddr = ''; // 도로명 조합형 주소 변수
-
-                                // 법정동명이 있을 경우 추가한다. (법정리는 제외)
-                                // 법정동의 경우 마지막 문자가 "동/로/가"로 끝난다.
-                                if(data.bname !== '' && /[동|로|가]$/g.test(data.bname)){
-                                    extraRoadAddr += data.bname;
-                                }
-                                // 건물명이 있고, 공동주택일 경우 추가한다.
-                                if(data.buildingName !== '' && data.apartment === 'Y'){
-                                    extraRoadAddr += (extraRoadAddr !== '' ? ', ' + data.buildingName : data.buildingName);
-                                }
-                                // 도로명, 지번 조합형 주소가 있을 경우, 괄호까지 추가한 최종 문자열을 만든다.
-                                if(extraRoadAddr !== ''){
-                                    extraRoadAddr = ' (' + extraRoadAddr + ')';
-                                }
-                                // 도로명, 지번 주소의 유무에 따라 해당 조합형 주소를 추가한다.
-                                if(fullRoadAddr !== ''){
-                                    fullRoadAddr += extraRoadAddr;
-                                }
-
-                                // 우편번호와 주소 정보를 해당 필드에 넣는다.
-                                document.getElementById('sample4_postcode').value = data.zonecode; //5자리 새우편번호 사용
-                                document.getElementById('sample4_roadAddress').value = fullRoadAddr;
-                                //document.getElementById('sample4_jibunAddress').value = data.jibunAddress;
-
-                                // 사용자가 '선택 안함'을 클릭한 경우, 예상 주소라는 표시를 해준다.
-                                if(data.autoRoadAddress) {
-                                    //예상되는 도로명 주소에 조합형 주소를 추가한다.
-                                    var expRoadAddr = data.autoRoadAddress + extraRoadAddr;
-                                    document.getElementById('guide').innerHTML = '(예상 도로명 주소 : ' + expRoadAddr + ')';
-
-                                } else if(data.autoJibunAddress) {
-                                    var expJibunAddr = data.autoJibunAddress;
-                                    document.getElementById('guide').innerHTML = '(예상 지번 주소 : ' + expJibunAddr + ')';
-
-                                } else {
-                                    document.getElementById('guide').innerHTML = '';
-                                }
-                            }
-                        }).open();
-                    }</script><br/>
-                </td>
-            </tr>
-            <tr>
-                <th>추가 연락처</th>
-                <td><input name="phone2" type="tel"></td>
-            </tr>
-            <tr>
-                <th>
-                    배송시 요청사항
-                </th>
-                <td>
-                    <input type="text" name="require">
-                </td>
-            </tr>
-        </table>
-
-        <h1>상품정보</h1>
-        <div>
-            <table class="table">
-                <tr>
-                    <th>번호</th>
-                    <th>상품이름</th>
-                    <th>가격</th>
-                    <th>할인가격</th>
-                </tr>
-                {% for t in itemlist %}
-                    <tr>
-                        <td>
-                            {{ forloop.counter }}
-                        </td>
-                        <td>
-                            {{ t.2 }}
-                        </td>
-                        <td>
-                            {{ t.3 }}
-                        </td>
-                        <td>
-                            {{ t.5 }}
-                        </td>
-                    </tr>
-
-                {% endfor %}
-
-            </table>
+            {% csrf_token %}
+    <div class="container-fluid center-block" style="background-color:white;">
+        <div class="row">
+            <div class="col-xs-6 col-sm-6">
+                <h1>받는 사람 정보</h1>
+            </div>
+            <div class="col-xs-6 col-sm-6">
+                <br>
+                <button class="btn btn-default" type="button" onclick="equal()" style="float: right;">구매자 정보와 같게</button>
+            </div>
         </div>
-        <div>
+
+            <table class="table table-striped">
+                <tr>
+                    <th>이름</th>
+                    <td><input type="text" class="form-control" size="3" id="renameid" name = "rename"></td>
+                </tr>
+                <tr>
+                    <th>휴대폰</th>
+                    <td><input type="tel" class="form-control" id="renumid" name="renum"></td>
+
+                </tr>
+                <tr>
+                    <th>배송주소</th>
+                    <td>
+
+                        <div class="form group">
+                            <label for="exampleInputNmae2"class="alignsignup"></label>
+                            <input type="text" class="form-control" id="sample4_postcode" placeholder="우편번호" name="addr1" >
+                            <input type="text" class="form-control" id="sample4_roadAddress" placeholder="도로명주소"  name="addr2">
+                            <input type="text" class="form-control" id="sample4_roadAddress" placeholder="나머지주소"  name="addr3">
+                            <input type="button" onclick="sample4_execDaumPostcode()" value="우편번호 찾기" class="btn btn-default">
+                        </div>
+
+                        <div class="form group">
+                            <label for="exampleInputNmae2"class="alignsignup"></label>
+                            <input type="text" id="sample4_jibunAddress" placeholder="나머지 주소" name="addr3">
+                        </div>
+
+
+                        <span id="guide" style="color:#999"></span>
+
+                        <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
+                        <script>
+                            //본 예제에서는 도로명 주소 표기 방식에 대한 법령에 따라, 내려오는 데이터를 조합하여 올바른 주소를 구성하는 방법을 설명합니다.
+                            function sample4_execDaumPostcode() {
+                                new daum.Postcode({
+                                    oncomplete: function(data) {
+                                        // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
+
+                                        // 도로명 주소의 노출 규칙에 따라 주소를 조합한다.
+                                        // 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
+                                        var fullRoadAddr = data.roadAddress; // 도로명 주소 변수
+                                        var extraRoadAddr = ''; // 도로명 조합형 주소 변수
+
+                                        // 법정동명이 있을 경우 추가한다. (법정리는 제외)
+                                        // 법정동의 경우 마지막 문자가 "동/로/가"로 끝난다.
+                                        if(data.bname !== '' && /[동|로|가]$/g.test(data.bname)){
+                                            extraRoadAddr += data.bname;
+                                        }
+                                        // 건물명이 있고, 공동주택일 경우 추가한다.
+                                        if(data.buildingName !== '' && data.apartment === 'Y'){
+                                            extraRoadAddr += (extraRoadAddr !== '' ? ', ' + data.buildingName : data.buildingName);
+                                        }
+                                        // 도로명, 지번 조합형 주소가 있을 경우, 괄호까지 추가한 최종 문자열을 만든다.
+                                        if(extraRoadAddr !== ''){
+                                            extraRoadAddr = ' (' + extraRoadAddr + ')';
+                                        }
+                                        // 도로명, 지번 주소의 유무에 따라 해당 조합형 주소를 추가한다.
+                                        if(fullRoadAddr !== ''){
+                                            fullRoadAddr += extraRoadAddr;
+                                        }
+
+                                        // 우편번호와 주소 정보를 해당 필드에 넣는다.
+                                        document.getElementById('sample4_postcode').value = data.zonecode; //5자리 새우편번호 사용
+                                        document.getElementById('sample4_roadAddress').value = fullRoadAddr;
+                                        //document.getElementById('sample4_jibunAddress').value = data.jibunAddress;
+
+                                        // 사용자가 '선택 안함'을 클릭한 경우, 예상 주소라는 표시를 해준다.
+                                        if(data.autoRoadAddress) {
+                                            //예상되는 도로명 주소에 조합형 주소를 추가한다.
+                                            var expRoadAddr = data.autoRoadAddress + extraRoadAddr;
+                                            document.getElementById('guide').innerHTML = '(예상 도로명 주소 : ' + expRoadAddr + ')';
+
+                                        } else if(data.autoJibunAddress) {
+                                            var expJibunAddr = data.autoJibunAddress;
+                                            document.getElementById('guide').innerHTML = '(예상 지번 주소 : ' + expJibunAddr + ')';
+
+                                        } else {
+                                            document.getElementById('guide').innerHTML = '';
+                                        }
+                                    }
+                                }).open();
+                            }</script><br/>
+                    </td>
+                </tr>
+                <tr>
+                    <th>추가 연락처</th>
+                    <td><input name="phone2" class="form-control" type="tel"></td>
+                </tr>
+                <tr>
+                    <th>
+                        배송시 요청사항
+                    </th>
+                    <td>
+                        <input type="text" class="form-control" name="require">
+                    </td>
+                </tr>
+            </table>
+    </div>
+
+    <div class="container-fluid center-block" style="background-color:white;">
+        <h1>상품정보</h1>
+        <table class="table table-striped">
+            <tr>
+                <th>번호</th>
+                <th>상품이름</th>
+                <th>가격</th>
+                <th>할인가격</th>
+            </tr>
+            {% for t in itemlist %}
+                <tr>
+                    <td>
+                        {{ forloop.counter }}
+                    </td>
+                    <td>
+                        {{ t.2 }}
+                    </td>
+                    <td>
+                        {{ t.3 }}
+                    </td>
+                    <td>
+                        {{ t.5 }}
+                    </td>
+                </tr>
+
+            {% endfor %}
+
+        </table>
+        <p class="text-right">
             <b>총 금액 : {{ totalp }}, 할인가격 : {{ salep }}, 최종 결제 금액 : {{ resultp }}</b>
             <input type="text" hidden value="{{ resultp }}" name="cost">
-        </div>
-        <div>
-            <h1>
-                결제방법
-            </h1>
-        </div>
-        <div>
-            <label class = "radio-inline">
-                <input type="radio" value="이니시스" name="howToPay" checked="checked">이니시스 카드
-            </label>
-            <label class = "radio-inline">
-                <input type="radio" value="계좌이체" name="howToPay">계좌이체
-            </label>
-            <label class = "radio-inline">
-                <input type="radio" value="가상계좌" name="howToPay">가상계좌
-            </label>
-            <label class = "radio-inline">
-                <input type="radio" value="휴대폰 소액결제" name="howToPay">휴대폰 소액결제
-            </label>
-        </div>
-
-
-
-
-        <div>
-            <input class="btn btn-default" type="submit" value="결제">
-        </div>
-    </form>
+        </p>
     </div>
+
+    <div class="container-fluid">
+        <input id="pg" type="text" value="이니시스 카드 결제" name="howToPay" hidden />
+        <h1>결제방법</h1>
+
+        <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+            <div class="panel panel-default" id="pg1-parent" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                <div class="panel-heading" role="tab" id="headingOne">
+                    <h4 class="panel-title" id="pg1">이니시스 카드 결제</h4>
+                </div>
+                <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
+                    <div class="panel-body">이니시스 카드 결제 방법을 선택합니다.</div>
+                </div>
+            </div>
+
+            <div class="panel panel-default" id="pg2-parent" class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                <div class="panel-heading" role="tab" id="headingTwo">
+                    <h4 class="panel-title" id="pg2">실시간 계좌이체</h4>
+                </div>
+                <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
+                    <div class="panel-body">실시간 계좌이체 방법을 선택합니다.</div>
+                </div>
+            </div>
+
+            <div class="panel panel-default" id="pg3-parent" class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                <div class="panel-heading" role="tab" id="headingThree">
+                    <h4 class="panel-title" id="pg3">가상 계좌이체</h4>
+                </div>
+                <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
+                    <div class="panel-body">가상 계좌이체 방법을 선택합니다.</div>
+                </div>
+            </div>
+
+            <div class="panel panel-default" id="pg4-parent" class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+                <div class="panel-heading" role="tab" id="headingFour">
+                    <h4 class="panel-title" id="pg4">휴대폰 소액 결제</h4>
+                </div>
+                <div id="collapseFour" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingFour">
+                    <div class="panel-body">휴대폰으로 결제를 진행합니다.</div>
+                </div>
+
+            </div>
+        </div>
+
+        <input class="btn btn-default" type="submit" value="결제">
+
+    </div>
+    </form>
     <script>
-    function equal(){
-        document.getElementById("renameid").value='{{ user.last_name }}';
-        document.getElementById("renumid").value='{{ num }}';
-        document.getElementById('sample4_postcode').value='{{ userprofile.address_line1 }}';
-        document.getElementById('sample4_roadAddress').value='{{ addrdetail1 }}';
-        document.getElementById('sample4_jibunAddress').value='{{ addrdetail2 }}';
-    }
+        function ff (){
+
+        }
+        $('#accordion').on('shown.bs.collapse', function () {
+            for ( var i = 1; i < 5; i++ ){
+                if ( document.getElementById('pg' + i + '-parent').getAttribute('aria-expanded') == 'true'){
+                    document.getElementById('pg').value = document.getElementById('pg'+i).innerText;
+                }
+            }
+        });
+
+        function equal(){
+            document.getElementById("renameid").value='{{ user.get_full_name }}';
+
+            document.getElementById("renumid").value='{{ num }}';
+            document.getElementById('sample4_postcode').value='{{ userprofile.address_line1 }}';
+            document.getElementById('sample4_roadAddress').value='{{ addrdetail1 }}';
+            document.getElementById('sample4_jibunAddress').value='{{ addrdetail2 }}';
+        }
     </script>
+
 {% endblock %}

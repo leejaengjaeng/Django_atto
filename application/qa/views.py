@@ -43,7 +43,7 @@ def oneqa(request):
             subject=u'[문의사항]',
             message=query,
             from_email='attocube@attocube.co.kr',
-            recipient_list=[user.email],
+            recipient_list=['contactus@attocube.co.kr'],
             fail_silently=False
         )
     else :
