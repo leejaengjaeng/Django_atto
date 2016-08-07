@@ -30,7 +30,7 @@
             </tr>
             <tr>
                 <th>휴대폰</th>
-                <td><input type="tel" id="renum1id" name="renum1">-<input type="tel" id="renum2id" name="renum2">-<input type="tel" id="renum3id" name="renum3"></td>
+                <td><input type="tel" id="renumid" name="renum"></td>
             </tr>
             <tr>
                 <th>배송주소</th>
@@ -45,10 +45,10 @@
                     <label for="exampleInputNmae2"class="alignsignup"></label>
                     <input type="text" id="sample4_roadAddress" placeholder="도로명주소+나머지주소"  name="addr2">
                 </div>
-{#                <div class="form group">#}
-{#                    <label for="exampleInputNmae2"class="alignsignup"></label>#}
-{#                    <input type="text" id="sample4_jibunAddress" placeholder="나머지 주소" name="addr3">#}
-{#                </div>#}
+                <div class="form group">
+                    <label for="exampleInputNmae2"class="alignsignup"></label>
+                    <input type="text" id="sample4_jibunAddress" placeholder="나머지 주소" name="addr3">
+                </div>
 
                 <span id="guide" style="color:#999"></span>
 
@@ -163,13 +163,13 @@
                 <input type="radio" value="이니시스" name="howToPay" checked="checked">이니시스 카드
             </label>
             <label class = "radio-inline">
-                <input type="radio" value="계좌이체" name="howToPay" checked="checked">계좌이체
+                <input type="radio" value="계좌이체" name="howToPay">계좌이체
             </label>
             <label class = "radio-inline">
-                <input type="radio" value="가상계좌" name="howToPay" checked="checked">가상계좌
+                <input type="radio" value="가상계좌" name="howToPay">가상계좌
             </label>
             <label class = "radio-inline">
-                <input type="radio" value="휴대폰 소액결제" name="howToPay" checked="checked">휴대폰 소액결제
+                <input type="radio" value="휴대폰 소액결제" name="howToPay">휴대폰 소액결제
             </label>
         </div>
 
@@ -184,12 +184,10 @@
     <script>
     function equal(){
         document.getElementById("renameid").value='{{ user.last_name }}';
-        document.getElementById("renum1id").value='{{ num1 }}';
-        document.getElementById("renum2id").value='{{ num2 }}';
-        document.getElementById("renum3id").value='{{ num3 }}';
+        document.getElementById("renumid").value='{{ num }}';
         document.getElementById('sample4_postcode').value='{{ userprofile.address_line1 }}';
-        document.getElementById('sample4_roadAddress').value='{{ addrdetail1 }}'+'{{ addrdetail2 }}';
-{#        document.getElementById('sample4_jibunAddress').value='{{ addrdetail2 }}';#}
+        document.getElementById('sample4_roadAddress').value='{{ addrdetail1 }}';
+        document.getElementById('sample4_jibunAddress').value='{{ addrdetail2 }}';
     }
     </script>
 {% endblock %}

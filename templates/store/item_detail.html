@@ -152,8 +152,7 @@ $(document).ready(function()
     $('#shopingBasketBtn').click(function()
     {
         itemId = {{item.id}}
-        itemQuantity = $('itemQantity').val();
-        alert(itemQuantity);
+        itemQuantity = $('#itemQantity').val();
         $.ajax(
         {
             method:'POST',

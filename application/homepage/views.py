@@ -58,7 +58,8 @@ def inputsign(request):
     user = User.objects.create_user(username=username,email=email1+"@"+email2,password=pwd,last_name=name)
     user.userprofile.mobilePhoneNumber=mPhoneNum
     user.userprofile.address_line1=addr1
-    user.userprofile.address_line2=addr2+" "+addr3
+    user.userprofile.address_line2=addr2
+    user.userprofile.address_line3=addr3
     user.userprofile.role=role
     user.userprofile.save()
 
@@ -100,10 +101,12 @@ def myaccount(request):
         name = currentuser.get_full_name()
         addr1 = currentuser.userprofile.address_line1
         addr2 = currentuser.userprofile.address_line2
+        print currentuser.userprofile.address_line3
+        addr3= currentuser.userprofile.address_line3
         phonenum = currentuser.userprofile.mobilePhoneNumber
         role = currentuser.userprofile.role
         return render(request,'registration/myaccount.html',
-                      {'ids':id,'emails':mail,'names':name,'addr1s':addr1,'addr2s':addr2,'phonenums':phonenum,'roles':role})
+                      {'ids':id,'emails':mail,'names':name,'addr1s':addr1,'addr2s':addr2+" "+addr3,'phonenums':phonenum,'roles':role})
 
 
 def editaccount(request):
@@ -114,10 +117,11 @@ def editaccount(request):
         name = currentuser.last_name
         addr1 = currentuser.userprofile.address_line1
         addr2 = currentuser.userprofile.address_line2
+        addr3 = currentuser.userprofile.address_line3
         phonenum = currentuser.userprofile.mobilePhoneNumber
         role = currentuser.userprofile.role
         return render(request, 'registration/editaccount.html',
-                      {'ids': id, 'emails': mail, 'names': name, 'addr1s': addr1, 'addr2s': addr2,
+                      {'ids': id, 'emails': mail, 'names': name, 'addr1s': addr1, 'addr2s': addr2, 'addr3s':addr3,
                        'phonenums': phonenum, 'roles': role})
 
 def editaccountsave(request):
@@ -136,7 +140,8 @@ def editaccountsave(request):
     newaddr2 = request.POST.get("addr2")
     newaddr3 = request.POST.get("addr3")
     user.userprofile.address_line1 = newaddr1
-    user.userprofile.address_line2 = newaddr2 + " " + newaddr3
+    user.userprofile.address_line2 = newaddr2
+    user.userprofile.address_line3 = newaddr3
     newrole = request.POST.get("major")
     user.userprofile.role = newrole
     user.userprofile.save()

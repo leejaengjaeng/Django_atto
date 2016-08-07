@@ -1,7 +1,14 @@
 {% extends 'homepage/attoHome_base.html' %}
 {% load staticfiles %}
 {% block main_content %}
+<style>
+.textright{
+    float:right;
+}
+.btnbuy{
 
+}
+</style>
     <div xmlns="http://www.w3.org/1999/html">
         {#    {% for list in basketlist %}#}
         {#        <h2>{{ basketlist.list }}</h2>#}
@@ -12,22 +19,27 @@
     <div>
         <center>
             <table class="table" style="width:80%">
-                {#            <tr>#}
-                {#                <th>상품정보</th>#}
-                {#                <th>상품금액</th>#}
-                {#                <th>배송비</th>#}
-                {#            </tr>#}
+                            <tr>
+                                <th></th>
+                                <th>상품명</th>
+                                <th>상품금액</th>
+                                <th>재고량</th>
+                                <th>할인</th>
+                                <th>상품정보</th>
+                                <th>구매갯수</th>
+                                <th></th>
+                            </tr>
 
                 {% for k in itemlist %}
 
                     <tr>
                         <td><img src="{{ k.0 }}" style="width:50px"></td>
-                        <td>{{ k.2 }}</td>
-                        <td>{{ k.3 }}</td>
-                        <td>{{ k.4 }}</td>
-                        <td>{{ k.5 }}</td>
-                        <td>{{ k.6 }}</td>
+                        <td onclick="location.href='/shop/detail?itemId={{ k.9 }}'" style="cursor:pointer">{{ k.2 }}</td>
+                        <td>{{ k.3 }}원</td>
+                        <td>{{ k.4 }}개</td>
+                        <td>-{{ k.5 }}원</td>
                         <td>{{ k.7 }}</td>
+                        <td>{{ k.8 }}개</td>
                         <td width="50px">
                             <button class="btn btn-default" onclick="rmbasketitem({{ forloop.counter0 }})">삭제 </button>
                         </td>
@@ -39,10 +51,12 @@
 
     </div >
     <div>
-        <b>합계 금액 : {{ totalp }}, 할인금액 : {{ salep }}, 최종결제금액 : {{ resultp }}</b>
+        <b class="textright">합계 금액 : {{ totalp }}원, 할인금액 : {{ salep }}원, 최종결제금액 : {{ resultp }}원</b><br/><br/><br/>
     </div>
-    <div style="padding-right:10%">
-        <button style="float:right;" class="btn btn-default" onclick="execute()">구매하기</button>
+    <div>
+    <center>
+        <button  class="btn btn-default" onclick="execute()">구매하기</button>
+    </center>
     </div>
     <script>
         function rmbasketitem(count) {

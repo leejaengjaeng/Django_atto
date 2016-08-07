@@ -51,6 +51,7 @@ class userProfile(models.Model):
 	# user.username is id and, first_name/ last_name is real name
 	address_line1 = models.CharField(max_length=100, null=True)
 	address_line2 = models.CharField(max_length=100, null=True)
+	address_line3 = models.CharField(max_length=100,null=True)
 	mobilePhoneNumber = models.CharField(max_length=50, null=True)
 	phoneNumber = models.CharField(max_length=50, null=True)
 	role = models.PositiveSmallIntegerField(default=0, null=False)

@@ -223,16 +223,16 @@
 
                 <div class="form group">
                     <label for="exampleInputNmae2"class="alignsignup">주소입력</label>
-                    <input type="text" id="sample4_postcode" placeholder="우편번호" name="addr1" class="form-control" >
+                    <input type="text" id="sample4_postcode" placeholder="우편번호" name="addr1" class="form-control" value="{{ addr1s }}">
                     <input type="button" onclick="sample4_execDaumPostcode()" value="우편번호 찾기" class="btn btn-default">
                 </div>
                 <div class="form group">
                     <label for="exampleInputNmae2"class="alignsignup"></label>
-                    <input type="text" id="sample4_roadAddress" placeholder="도로명주소" name="addr2" class="form-control">
+                    <input type="text" id="sample4_roadAddress" placeholder="도로명주소" name="addr2" class="form-control" value="{{ addr2s }}">
                 </div>
                 <div class="form group">
                     <label for="exampleInputNmae2"class="alignsignup"></label>
-                    <input type="text" id="sample4_jibunAddress" placeholder="나머지 주소" name="addr3" class="form-control">
+                    <input type="text" id="sample4_jibunAddress" placeholder="나머지 주소" name="addr3" class="form-control" value="{{ addr3s }}">
                 </div>
 
                 <span id="guide" style="color:#999"></span>

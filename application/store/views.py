@@ -47,7 +47,7 @@ def addReview(request):
 
 def addShopingBasket(request):
     itemId = request.POST.get('itemId')
-    itemQuantity = request.POST.get('itemQantity')
+    itemQuantity = int(request.POST.get('itemQuantity'))
 
     item = ShopItem.objects.get(id=itemId)
 
@@ -61,12 +61,22 @@ def addShopingBasket(request):
     else :
         itemImg = None;
 
-    inputValue = [itemImg,detailImg,item.itemName,item.price,item.stock,item.sale,item.category,item.info,itemQuantity]
+    inputValue = [itemImg,detailImg,item.itemName,item.price,item.stock,item.sale,item.category,item.info,itemQuantity,itemId]
 
 
     if 'shopingBasket' in request.session:
         sessionList = request.session['shopingBasket']
-        print sessionList
+
+        # for k in request.session['shopingBasket']:
+        for k in sessionList:
+            if k[9]==inputValue[9]:
+                k[8]=k[8]+inputValue[8]
+                request.session['shopingBasket'] = sessionList
+
+                print request.session['shopingBasket']
+                return HttpResponse()
+
+        #print sessionList
         sessionList.append(inputValue)
         print sessionList
         request.session['shopingBasket'] = sessionList
@@ -87,9 +97,9 @@ def itembasket(request):
             saleprice=0
             resultprice=0
             for k in request.session['shopingBasket']:
-                totalprice=totalprice+k[3]
-                saleprice=saleprice+k[5]
-                resultprice=resultprice+(k[3]-k[5])
+                totalprice=totalprice+k[3]*int(k[8])
+                saleprice=saleprice+k[5]*int(k[8])
+                resultprice=resultprice+(k[3]*int(k[8])-k[5]*int(k[8]))
             return render(request,"store/item_basket.html",{"itemlist":request.session['shopingBasket'],'totalp':totalprice,'salep':saleprice,'resultp':resultprice})
         else:
             return render(request,"store/item_basket.html")
@@ -109,23 +119,23 @@ def removebasketitem(request):
     return redirect('/shop/itembasket')
 
 def paypage(request):
+
     curuser=request.user
     num=request.user.userprofile.mobilePhoneNumber
-    num1=num[0]+num[1]+num[2]
-    num2=num[3]+num[4]+num[5]+num[6]
-    num3=num[7]+num[8]+num[9]+num[10]
-    addrdetail1=curuser.userprofile.address_line2.split(')')[0]+')'
-    addrdetail2=curuser.userprofile.address_line2.split(')')[1]
-    print addrdetail1
+
+    addrdetail1=curuser.userprofile.address_line1
+    addrdetail2=curuser.userprofile.address_line2
+    addrdetail3=curuser.userprofile.address_line3
+
     totalprice = 0
     saleprice = 0
     resultprice = 0
     for k in request.session['shopingBasket']:
-        totalprice = totalprice + k[3]
-        saleprice = saleprice + k[5]
-        resultprice = resultprice + (k[3] - k[5])
+        totalprice = totalprice + k[3] * int(k[8])
+        saleprice = saleprice + k[5] * int(k[8])
+        resultprice = resultprice + (k[3] * int(k[8]) - k[5] * int(k[8]))
     return render(request,"store/pay.html",
-                  {"userprofile":curuser.userprofile,"user":curuser,"num1":num1,"num2":num2,"num3":num3,"addrdetail1":addrdetail1,"addrdetail2":addrdetail2,
+                  {"userprofile":curuser.userprofile,"user":curuser,"num":num,"addrdetail1":addrdetail1,"addrdetail2":addrdetail2,"addrdetail3":addrdetail3,
                    "itemlist": request.session['shopingBasket'], 'totalp': totalprice, 'salep': saleprice,
                    'resultp': resultprice})
 
@@ -133,23 +143,26 @@ def paypage(request):
 
 def payresult(request):
     name=request.POST.get("rename")
-    phone=request.POST.get("renum1")+request.POST.get("renum2")+request.POST.get("renum3")
-    addr=request.POST.get("addr1")+' '+request.POST.get("addr2")
+    phone=request.POST.get("renum")
+    addr=request.POST.get("addr1")+' '+request.POST.get("addr2")+' '+request.POST.get("addr3")
     phone2=request.POST.get("phone2")
     require=request.POST.get("require")
     howToPay=request.POST.get("howToPay")
     cost=request.POST.get("cost")
-    itemlist=[]
+    itemlist=''
+    count='ea'
     for k in request.session['shopingBasket']:
-        itemlist.append(k[2])
+        itemlist=itemlist+k[2]+' '+str(k[8])+count+'\n'
+
     userid=request.user.username
-    print userid
+
     pay.objects.create(userid=request.user,
                                 receivername = name,
                                 receiverphonenumber = phone,
                                 receiveraddress = addr,
                                 receiverphonenumber2 = phone2,
-                                itemlist = itemlist,cost = cost,
+                                itemlist = itemlist,
+                                cost = cost,
                                 require=require,
                                 ispay = False,
                                 isreceive = False,
