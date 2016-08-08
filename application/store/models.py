@@ -47,7 +47,7 @@ class Review(models.Model):
 class pay(models.Model):
 	userid=models.ForeignKey(User,unique=False)
 	receivername=models.CharField(null=False,max_length=10)
-	receiverphonenumber=models.IntegerField(max_length=30)
+	receiverphonenumber=models.IntegerField()
 	receiveraddress=models.CharField(max_length=100)
 	receiverphonenumber2=models.CharField(max_length=100)
 	itemlist=models.TextField(max_length=500)
@@ -59,10 +59,30 @@ class pay(models.Model):
 
 	def __unicode__(self):
 		if self.ispay==False:
-			return "결제 완료"
-		else :
 			return "결제 미완료"
+		else :
+			return "결제 완료"
 
 	class Meta:
 		verbose_name = '결제건'
 		verbose_name_plural = '결제 항목들 '
+
+class CurrentPay(models.Model):
+	userid = models.ForeignKey(User, unique=False)
+	receivername = models.CharField(null=False, max_length=10)
+	receiverphonenumber = models.IntegerField()
+	receiveraddress = models.CharField(max_length=100)
+	receiverphonenumber2 = models.CharField(max_length=100)
+	itemlist = models.TextField(max_length=500)
+	cost = models.IntegerField()
+	require = models.TextField(max_length=100)
+	ispay = models.BooleanField(default=False)
+	isreceive = models.BooleanField(default=False)
+	howToPay = models.CharField(max_length=50)
+	paymodelid=models.IntegerField(default=0)
+	def __unicode__(self):
+		return self.userid.username
+
+	class Meta:
+		verbose_name = '유저별 현재 진행중인 결제내역'
+		verbose_name_plural='유저별 현재 진행중인 결제내역들'

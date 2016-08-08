@@ -3,7 +3,7 @@
 
 <h1>회원가입</h1>
 {% block main_content %}
-    <script language="Javascript">
+    <script language="Javascript"><!--이메일이랑 유효성 검사 js-->
         <!--
         function changeEmail ( email ) {
             if(email == "1") {
@@ -94,7 +94,7 @@
                 c.style.borderRadius="17px";
             }
         }
-    </script>
+    </script><!--role 선택 js-->
     <script>
                     $(document).ready(function()
                     {
@@ -135,51 +135,7 @@
                                     });
                         });
                     });
-                </script>
-    <!--<style>
-        .alignsignup{
-            width:20%; text-align: right;padding-top: 20px;
-        }
-        .outer{
-            width:50%; float:left;
-        }
-        .selectrole{
-            margin:auto;
-            padding-bottom: 50px;
-        }
-        .btnOK{
-            clear:both;
-            padding-top:50px;
-            padding-bottom:50px;
-        }
-        .rightside{
-            float:left;
-        }
-        .wantservice{
-            padding-top:30px;
-        }
-        .wantimage{
-            padding : 10px;
-        }
-    @media screen and (max-width: 480px){
-        .alignsignup{
-            width:100%;
-            text-align:left;
-        }
-        .rightside{
-            display:none;
-        }
-        .outer{
-            width:100%;
-        }
-        img{
-            width:75px;
-        }
-        .rightside{
-            display:none;
-        }
-    }
-    </style>-->
+                </script><!--아이디 중복검사 ajax-->
     <div class="container-fluid"></div>
     <form class="form-horizontal" method="POST" name="form1" action="/inputsign" onsubmit="return execute()">
         {% csrf_token %}
