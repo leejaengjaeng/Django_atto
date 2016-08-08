@@ -49,14 +49,11 @@
                             <label for="exampleInputNmae2"class="alignsignup"></label>
                             <input type="text" class="form-control" id="sample4_postcode" placeholder="우편번호" name="addr1" >
                             <input type="text" class="form-control" id="sample4_roadAddress" placeholder="도로명주소"  name="addr2">
-                            <input type="text" class="form-control" id="sample4_roadAddress" placeholder="나머지주소"  name="addr3">
+                            <input type="text" class="form-control" id="sample4_jibunAddress" placeholder="나머지주소"  name="addr3">
                             <input type="button" onclick="sample4_execDaumPostcode()" value="우편번호 찾기" class="btn btn-default">
                         </div>
+                        
 
-                        <div class="form group">
-                            <label for="exampleInputNmae2"class="alignsignup"></label>
-                            <input type="text" id="sample4_jibunAddress" placeholder="나머지 주소" name="addr3">
-                        </div>
 
 
                         <span id="guide" style="color:#999"></span>
@@ -139,6 +136,11 @@
                 <th>가격</th>
                 <th>할인가격</th>
             </tr>
+        {% ifequal itemlist.0.8 0 %}
+            <input type="text" hidden name="sessionobj" value="0">
+        {% else %}
+            <input type="text" hidden name="sessionobj" value="1">
+        {% endifequal %}
             {% for t in itemlist %}
                 <tr>
                     <td>

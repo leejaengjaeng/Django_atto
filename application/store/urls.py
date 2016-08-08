@@ -15,6 +15,8 @@ urlpatterns = [
 
 	url(r'^addShoppingBasket$', views.addShopingBasket, name='addShopingBasket'),
 	url(r'^paypage$',views.paypage,name='paypage'),
-	url(r'^payresult$',views.payresult,name='payresult')
+	url(r'^payresult$',views.payresult,name='payresult'),
+	url(r'^directBuy$',views.directBuy,name='directBuy'),
+	url(r'^paypagedirect$',views.paypagedirect,name='paypagedirect')
 ]
 

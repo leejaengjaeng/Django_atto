@@ -188,7 +188,27 @@ $(document).ready(function()
             }
         });
     });
-
+    $('#purchaseBtn').click(function()
+    {
+        itemId = {{item.id}}
+        itemQuantity = $('#itemQantity').val();
+        $.ajax(
+        {
+            method:'POST',
+            url:'directBuy',
+            data:{'itemId':itemId,'itemQuantity':itemQuantity,'csrfmiddlewaretoken':'{{ csrf_token }}'},
+            success: function(data)
+            {
+                location.href='/shop/paypagedirect';
+{#                alert("aa");#}
+            },
+            error: function(error)
+            {
+                alert('실패하였습니다.');
+                console.log(error);
+            }
+        });
+    });
     // 상품 페이지 내부에 affix navbar 하이라이트
     $('#itemDetailNav ul li').click(function(clickedTag)
     {

@@ -122,7 +122,6 @@ def paypage(request):
 
     curuser=request.user
     num=request.user.userprofile.mobilePhoneNumber
-
     addrdetail1=curuser.userprofile.address_line1
     addrdetail2=curuser.userprofile.address_line2
     addrdetail3=curuser.userprofile.address_line3
@@ -130,6 +129,7 @@ def paypage(request):
     totalprice = 0
     saleprice = 0
     resultprice = 0
+
     for k in request.session['shopingBasket']:
         totalprice = totalprice + k[3] * int(k[8])
         saleprice = saleprice + k[5] * int(k[8])
@@ -139,8 +139,6 @@ def paypage(request):
                    "itemlist": request.session['shopingBasket'], 'totalp': totalprice, 'salep': saleprice,
                    'resultp': resultprice})
 
-
-
 def payresult(request):
     name=request.POST.get("rename")
     phone=request.POST.get("renum")
@@ -149,10 +147,15 @@ def payresult(request):
     require=request.POST.get("require")
     howToPay=request.POST.get("howToPay")
     cost=request.POST.get("cost")
+    isBasket=request.POST.get("sessionobj")
+    print isBasket
     itemlist=''
     count='ea'
-    for k in request.session['shopingBasket']:
-        itemlist=itemlist+k[2]+' '+str(k[8])+count+'\n'
+    if(isBasket=="0"):
+        itemlist=request.session['directBuy'][0][2]+' 1ea'
+    else:
+        for k in request.session['shopingBasket']:
+            itemlist=itemlist+k[2]+' '+str(k[8])+count+'\n'
 
     userid=request.user.username
 
@@ -169,3 +172,52 @@ def payresult(request):
                                 howToPay=howToPay)
 
     return redirect('/shop/paypage')
+
+def directBuy(request):
+    itemId = request.POST.get('itemId')
+    itemQuantity = int(request.POST.get('itemQuantity'))
+
+    item = ShopItem.objects.get(id=itemId)
+
+    if item.detailImage:
+        detailImg = item.detailImage.url
+    else:
+        detailImg = None
+
+    if item.image:
+        itemImg = item.image.url;
+    else:
+        itemImg = None;
+
+    inputValue = [itemImg, detailImg, item.itemName, item.price, item.stock, item.sale, item.category, item.info,
+                  0, itemId]
+
+
+    input = []
+    input.append(inputValue)
+    print input
+    request.session['directBuy'] = input
+
+    print request.session['directBuy'][0][8]
+    return HttpResponse()
+
+def paypagedirect(request):
+
+    curuser=request.user
+    num=request.user.userprofile.mobilePhoneNumber
+    addrdetail1=curuser.userprofile.address_line1
+    addrdetail2=curuser.userprofile.address_line2
+    addrdetail3=curuser.userprofile.address_line3
+
+    totalprice = 0
+    saleprice = 0
+    resultprice = 0
+
+
+    totalprice = request.session['directBuy'][0][3]
+    saleprice = request.session['directBuy'][0][5]
+    resultprice = totalprice-saleprice
+    return render(request,"store/pay.html",
+                  {"userprofile":curuser.userprofile,"user":curuser,"num":num,"addrdetail1":addrdetail1,"addrdetail2":addrdetail2,"addrdetail3":addrdetail3,
+                   "itemlist": request.session['directBuy'], 'totalp': totalprice, 'salep': saleprice,
+                   'resultp': resultprice})
