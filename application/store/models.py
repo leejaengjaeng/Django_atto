@@ -58,7 +58,10 @@ class pay(models.Model):
 	howToPay=models.CharField(max_length=50)
 
 	def __unicode__(self):
-		return self.receivername
+		if self.ispay==False:
+			return "결제 완료"
+		else :
+			return "결제 미완료"
 
 	class Meta:
 		verbose_name = '결제건'
