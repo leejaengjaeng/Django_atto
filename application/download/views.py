@@ -13,3 +13,6 @@ def downcontents(request):
 def downdocs(request):
     docscontents=doccontents.objects.all()
     return render(request,'download/downcontents.html',{'contents':docscontents,'flag':1})
+
+def teacher(request):
+    return render(request,'download/teacherPage.html',{})

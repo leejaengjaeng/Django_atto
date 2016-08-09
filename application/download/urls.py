@@ -7,6 +7,7 @@ from . import views
 urlpatterns = [
 	url(r'^$',views.delThis, name='delThis'),
 	url(r'^downcontents/',views.downcontents ,name='downcontents'),
-	url(r'^downdocs/',views.downdocs,name='downdocs')
+	url(r'^downdocs/',views.downdocs,name='downdocs'),
+	url(r'^teacher/', views.teacher, name='teacher'),
 ]
 

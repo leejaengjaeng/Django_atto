@@ -599,3 +599,19 @@ del
     position:relative;
     bottom: 0px;
 }
+
+/*
+------------------------------------------------------------
+    download Teacher
+------------------------------------------------------------
+*/
+.downloadTeacherContainer .img-responsive
+{
+    margin:auto;
+}
+
+.downloadTeacherContainer .row
+{
+    margin-top:1%;
+    margin-bottom:1%;
+}
