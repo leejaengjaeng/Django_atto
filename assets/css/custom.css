@@ -375,6 +375,12 @@ del
     cursor:pointer;
 }
 
+#commentDelPw
+{
+    float:right;
+    margin:0;
+    width:30%;
+}
 /*
 ------------------------------------------------------------
     item_detail
