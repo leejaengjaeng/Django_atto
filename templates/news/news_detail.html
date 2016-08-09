@@ -145,7 +145,11 @@ getComments= function()
             </div>
         {% endif %}
     </div>
-    <div id="newsCommentsList" class="container-fluid"><hr></div>
+
+    <!-- 코멘트가 들어가는 부분-->
+    <div id="newsCommentsList" class="container-fluid">
+        <br>
+    </div>
 </div>
 
 <!-- comment modal-->
@@ -171,11 +175,9 @@ getComments= function()
              </div>
              <br>
              <div class="row">
-                 <div class="col-xs-6" style="float:right; margin:0;">
-                    <input id="commentDelPw" class="form-control" type="password" maxlength="4"  style="width:100%;">
-                 </div>
-                 <div class="col-xs-6" style="margin:0; padding:0; float:right;">
-                     <p style="margin-top:6%;" >삭제 비밀 번호</p>
+                 <div class="col-xs-12">
+                    <input id="commentDelPw" class="form-control" type="password" maxlength="4"  style="float:right; margin:0;">
+                     <p style="margin-top:1%; margin-right:1.5%; float:right;" >삭제 비밀 번호</p>
                  </div>
              </div>
         </div>
