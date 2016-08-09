@@ -61,6 +61,7 @@ class pay(models.Model):
 	ispay=models.BooleanField(default=False)
 	isreceive=models.BooleanField(default=False)
 	howToPay=models.CharField(max_length=50)
+	time=models.DateTimeField(default="")
 
 	def __unicode__(self):
 		if self.ispay==False:

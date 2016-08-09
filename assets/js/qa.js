@@ -54,11 +54,11 @@ function ClickEvent(index){
         var classname = "hidden" + i;
         var docu = document.getElementById(classname)
         if ( index == i ){
-            if ( docu.style.display == "table" ){
+            if ( docu.style.display == "-webkit-box" ){
                 docu.style.display = "none";
             }
             else {
-                docu.style.display = "table";
+                docu.style.display = "-webkit-box";
             }
         }
         else {
