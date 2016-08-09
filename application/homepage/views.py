@@ -5,7 +5,7 @@ import django.contrib.auth as django_auth
 from django.http import HttpResponse
 import json
 import application.common.customUserHandler as cuh
-
+from application.store.models import pay
 # Create your views here.
 
 def home(request):
@@ -105,8 +105,9 @@ def myaccount(request):
         addr3= currentuser.userprofile.address_line3
         phonenum = currentuser.userprofile.mobilePhoneNumber
         role = currentuser.userprofile.role
+        paylist = pay.objects.filter(userid=currentuser)
         return render(request,'registration/myaccount.html',
-                      {'ids':id,'emails':mail,'names':name,'addr1s':addr1,'addr2s':addr2+" "+addr3,'phonenums':phonenum,'roles':role})
+                      {'paylists':paylist,'ids':id,'emails':mail,'names':name,'addr1s':addr1,'addr2s':addr2+" "+addr3,'phonenums':phonenum,'roles':role})
 
 
 def editaccount(request):
