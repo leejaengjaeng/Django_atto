@@ -29,11 +29,12 @@
                             <div class="thumbnail" style="cursor: pointer; border:2px solid #6CCEF5;" onclick="ClickLink('/shop/detail?itemId={{item.id}}');" >
                                 <img src="{{MEDIA_URL}}/{{item.image}}" alt="Responsive Image" class="img-responsive">
                                 <div class="caption">
-                                    <p class="lead" style="margin: 0 auto;"><strong style="font-size: x-large">{{item.itemName}}</strong><br>
+                                    <p class="itemName">{{item.itemName}}</p>
+                                    <p class="lead itemPrice" style="margin: 0 auto;"><br>
                                     {% if item.sale == 0 %}
                                         {{item.price}}원</p>
                                     {% else %}
-                                        <del><small>{{ item.price }}</small></del>
+                                        <del>{{ item.price }}원</del>
                                         {% sub item.price item.sale %}원
                                     </p>
                                     {% endif %}
@@ -52,11 +53,12 @@
                             <div class="thumbnail" style="cursor: pointer; border:2px solid #6CCEF5;" onclick="ClickLink('/shop/detail?itemId={{item.id}}');" >
                                 <img src="{{MEDIA_URL}}/{{item.image}}" alt="Responsive Image" class="img-responsive">
                                 <div class="caption">
-                                    <p class="lead" style="margin: 0 auto;"><strong style="font-size: x-large">{{item.itemName}}</strong><br>
+                                    <p class="itemName">{{item.itemName}}</p>
+                                    <p class="lead itemPrice" style="margin: 0 auto;"><br>
                                     {% if item.sale == 0 %}
                                         {{item.price}}원</p>
                                     {% else %}
-                                        <del><small>{{ item.price }}</small></del>
+                                        <del>{{ item.price }}원</del>
                                         {% sub item.price item.sale %}원
                                     </p>
                                     {% endif %}
@@ -75,11 +77,12 @@
                             <div class="thumbnail" style="cursor: pointer; border:2px solid #6CCEF5;" onclick="ClickLink('/shop/detail?itemId={{item.id}}');" >
                                 <img src="{{MEDIA_URL}}/{{item.image}}" alt="Responsive Image" class="img-responsive">
                                 <div class="caption">
-                                    <p class="lead" style="margin: 0 auto;"><strong style="font-size: x-large">{{item.itemName}}</strong><br>
+                                    <p class="itemName">{{item.itemName}}</p>
+                                    <p class="lead itemPrice" style="margin: 0 auto;"><br>
                                     {% if item.sale == 0 %}
                                         {{item.price}}원</p>
                                     {% else %}
-                                        <del><small>{{ item.price }}</small></del>
+                                        <del>{{ item.price }}원</del>
                                         {% sub item.price item.sale %}원
                                     </p>
                                     {% endif %}

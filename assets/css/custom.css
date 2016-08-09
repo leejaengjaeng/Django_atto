@@ -1,15 +1,17 @@
 body
 {
   padding-top : 0px;
+  color: #777;
 }
 center
 {
     font-size:15px;
 }
-
-.price {
-    font-size: 10px;
+del
+{
+    color: #777;
 }
+
 
 .beforeSale {
     font-size: 7px;
@@ -196,7 +198,7 @@ center
 
 .eName{
     text-align: center;
-    font-size:1vw;
+    font-size:1.2vh;
     color:#EF86AE;
     font-weight:bold;
 }
@@ -204,7 +206,7 @@ center
 .kName{
     text-align: center;
     margin-top:20px;
-    font-size:1.25vw;
+    font-size:1.25em;
     font-weight:bold;
 }
 
@@ -308,6 +310,7 @@ center
 {
     color:#FFFFFF;
     background-color:#6CCEF5;
+    text-align:center;
 }
 .newsContent
 {
@@ -318,8 +321,7 @@ center
 
 .news-img
 {
-    width:220px;
-    height:220px;
+    overflow:hidden;
 }
 /*
 ------------------------------------------------------------
@@ -344,17 +346,26 @@ center
 
 .newsCommentContent
 {
-    border-radius:3px;
-    border: 1px solid #EF86AE;
+    border-top: 1px solid #777;
     margin:2%;
 }
 .newsCommentContent .row
 {
     padding:1%;
 }
-.delCommentBtn
+.commentTxt
+{
+    padding-left:1%;
+    padding-right:1%;
+    word-wrap:break-word;
+}
+.delBtn
 {
     margin-top:1%;
+}
+.deltBtn:hover
+{
+    cursor:pointer;
 }
 
 /*
@@ -394,15 +405,18 @@ center
     padding-top:2%;
 }
 
-#itemName
+.itemName
 {
     margin: 0px;
+    font-size: 1.7em;
+    font-weight:bold;
+
 }
 
-#itemPrice
+.itemPrice
 {
     color:#a51717 !important; //red
-    font-size:15px;
+    font-size: 1.5em;
 }
 
 #beforeSale
@@ -415,6 +429,7 @@ center
 {
     color:#777;
     background-color:#FFF;
+    font-size:1.2em;
     padding-top:10%;
 }
 
@@ -463,7 +478,8 @@ center
 
 .reviewTxt
 {
-    padding-top:5%;
+    word-wrap: break-word;
+    color:#000;
 }
 
 

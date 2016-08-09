@@ -17,16 +17,16 @@ $(document).ready(function()
             $('#itemQantity').val(currentQuantity-1);
 
             var beforeSale = $('#beforeSale').text().slice(0,-1) * 1.0;
-            var price = $('#itemPrice').text().slice(0,-1) * 1.0;
+            var price = $('.itemPrice').text().slice(0,-1) * 1.0;
 
             if( {{item.sale}} == 0 )
             {
-                $('#itemPrice').text(price/2+'원')
+                $('.itemPrice').text(price/2+'원')
             }
             else
             {
                 $('#beforeSale').text(beforeSale/2+'원')
-                $('#itemPrice').text(price/2+'원')
+                $('.itemPrice').text(price/2+'원')
             }
         }
     });
@@ -57,12 +57,12 @@ $(document).ready(function()
 
             if( {{item.sale}} == 0 )
             {
-                $('#itemPrice').text(price*quantity+'원')
+                $('.itemPrice').text(price*quantity+'원')
             }
             else
             {
                 $('#beforeSale').text(beforeSale*quantity)
-                $('#itemPrice').text(price*quantity+'원')
+                $('.itemPrice').text(price*quantity+'원')
             }
         }
     });
@@ -76,16 +76,16 @@ $(document).ready(function()
             $('#itemQantity').val(currentQuantity+1);
 
             var beforeSale = $('#beforeSale').text().slice(0,-1) * 1.0;
-            var price = $('#itemPrice').text().slice(0,-1) * 1.0;
+            var price = $('.itemPrice').text().slice(0,-1) * 1.0;
 
             if( {{item.sale}} == 0 )
             {
-                $('#itemPrice').text(price*2+'원')
+                $('.itemPrice').text(price*2+'원')
             }
             else
             {
                 $('#beforeSale').text(beforeSale*2+'원')
-                $('#itemPrice').text(price*2+'원')
+                $('.itemPrice').text(price*2+'원')
             }
         }
         else if(currentQuantity < bigQuantity)
@@ -118,6 +118,12 @@ $(document).ready(function()
                     {
                         $('#reviewList').append('\
                             <div class="reviewContainer row">\
+                                <div class="col-xs-2">\
+                                    <a href="'+ review.img + '">\
+                                        <img class="img-responsive" src="' + review.img + '">\
+                                    </a>\
+                                </div>\
+                                <div class="col-xs-10">\
                                     <div class="row">\
                                         <div class="col-xs-12">\
                                             <input id="reviewId" type="hidden" value="'+review.id+'">\
@@ -126,27 +132,25 @@ $(document).ready(function()
                                         </div>\
                                     </div>\
                                     <div class="row">\
-                                        <div class="reviewTxt col-xs-9">\
+                                        <div class="reviewTxt col-xs-12">\
                                             <p>' + review.content+'</p>\
-                                        </div>\
-                                        <div class="col-xs-3">\
-                                            <a href="'+ review.img + '">\
-                                                <img class="img-responsive" src="' + review.img + '">\
-                                            </a>\
                                         </div>\
                                     </div>\
                                     <div class="row">\
-                                        <div class="col-xs-12">\
+                                        <div class="reviewTxt col-xs-12">\
                                             <b>'+ review.date +'</b>\
                                         </div>\
                                     </div>\
+                                </div>\
                             </div>\
                         ')
                     }
                     else
                     {
                         $('#reviewList').append('\
-                            <div class="reviewContainer row">\
+                          <div class="reviewContainer row">\
+                                <div class="col-xs-2"></div>\
+                                <div class="col-xs-10">\
                                     <div class="row">\
                                         <div class="col-xs-12">\
                                             <input id="reviewId" type="hidden" value="'+review.id+'">\
@@ -155,17 +159,17 @@ $(document).ready(function()
                                         </div>\
                                     </div>\
                                     <div class="row">\
-                                        <div class="reviewTxt col-xs-9">\
+                                        <div class="reviewTxt col-xs-12">\
                                             <p>' + review.content+'</p>\
                                         </div>\
-                                        <div class="col-xs-3"></div>\
                                     </div>\
                                     <div class="row">\
-                                        <div class="col-xs-12">\
+                                        <div class="reviewTxt col-xs-12">\
                                             <b>'+ review.date +'</b>\
                                         </div>\
                                     </div>\
                                 </div>\
+                            </div>\
                         ')
                     }
                 }
@@ -306,21 +310,21 @@ moveTo = function(str)
                 </div>
                 <div class="row">
                     <div class="col-xs-12">
-                        <h2 id="itemName">{{item.itemName}}</h2>
+                        <h1>{{item.itemName}}</h1>
                     </div>
                 </div>
                 <div class="row">
                     {% if item.sale == 0 %}
                         <div class="col-xs-12">
                             <h4>
-                                <b id="itemPrice">{{item.price}}원</b>
+                                <b class="itemPrice">{{item.price}}원</b>
                             </h4>
                         </div>
                     {% else %}
                         <div class="col-xs-12">
                             <h4>
                                 <del id="beforeSale">{{ item.price }}원</del>
-                                <b id="itemPrice">{% sub item.price item.sale %}원</b>
+                                <b class="itemPrice">{% sub item.price item.sale %}원</b>
                             </h4>
                         </div>
                     {% endif%}

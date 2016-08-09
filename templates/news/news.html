@@ -2,6 +2,7 @@
 {% load staticfiles %}
 {% load custom_tags %}
 
+
 {% block main_content %}
 
 <div id="newsPage">
@@ -12,21 +13,16 @@
     <div id="feeds">
         {% if posts %}
             <div class="container-fluid" id="itemContainer">
+                <div class="row">
                 {% for post in posts %}
-                    <!-- modulo 연산 (built in)-->
-                    {% if forloop.counter0|divisibleby:3 %}
-                    <div class="row">
-                    {% endif %}
-                        <div class="feed col-xs-4 col-md-4">
-                            <a href="detail?newsPost={{post.id}}">
-                                <img src="{{MEDIA_URL}}/{{post.image}}" alt="post_Image" class="news-img img-responsive">
-                            </a>
-                            <p class="headLine">{{post.headLine}}</p>
-                        </div>
-                    {% if forloop.counter|divisibleby:3 %}
-                    </div><!--/row-->
-                    {% endif %}
+                    <div class="col-xs-6 col-sm-4">
+                        <a href="detail?newsPost={{post.id}}">
+                            <img src="{{MEDIA_URL}}/{{post.image}}" alt="post_Image" class="news-img img-responsive">
+                        </a>
+                        <p class="headLine">{{post.headLine}}</p>
+                    </div>
                 {% endfor %}
+                </div><!--/row-->
             </div>
         {% endif %}
     </div>
