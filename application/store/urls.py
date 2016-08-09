@@ -8,6 +8,7 @@ urlpatterns = [
 	url(r'^$',views.shop, name='store'),
 	url(r'^detail$', views.itemDetail, name='itemDetail'),
 	url(r'^addReview$', views.addReview, name='addReview'),
+	url(r'^delReview$', views.delReview, name='delReview'),
 	url(r'^getReviews$', views.getReviews, name='getReviews'),
 
 	url(r'^itembasket$',views.itembasket,name='itembasket'),
@@ -17,7 +18,6 @@ urlpatterns = [
 	url(r'^paypage$',views.paypage,name='paypage'),
 	url(r'^payresult$',views.payresult,name='payresult'),
 	url(r'^directBuy$',views.directBuy,name='directBuy'),
-	url(r'^paypagedirect$',views.paypagedirect,name='paypagedirect'),
-	url(r'^pay_complete$',views.pay_complete,name='paycomplete')
+	url(r'^paypagedirect$',views.paypagedirect,name='paypagedirect')
 ]
 

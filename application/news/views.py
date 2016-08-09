@@ -45,6 +45,21 @@ def addComment(request):
     content = request.POST.get("content",str).encode("utf-8")
     makeTime = datetime.now()
     postNum = Posts.objects.get(id=request.POST.get("postNum"))
-    newComment = Comments(author=author,content=content,makeTime=makeTime,postNum=postNum)
+    delPw = request.POST.get("delPw",str).encode("utf-8")
+    newComment = Comments(author=author,content=content,makeTime=makeTime,postNum=postNum,delPw = delPw)
     newComment.save()
     return HttpResponse()
+
+def delComment(request):
+    id = request.POST.get("id")
+    inputPw = request.POST.get("pw",str).encode("utf-8")
+    comment = Comments.objects.get(id=id)
+
+    if inputPw == comment.delPw:
+        comment.delete()
+        retVal = 1
+    else:
+        retVal = 0
+
+    return HttpResponse(retVal)
+
