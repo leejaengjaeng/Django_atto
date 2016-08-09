@@ -8,14 +8,14 @@ from django.db import models
 # Create your models here.
 class ShopItem(models.Model):
 	# Setting.py에 있는 MEDIA_ROOT 이후 경로
-	image = models.ImageField(upload_to='shopItemImgs/item')
-	detailImage = models.ImageField(upload_to='shopItemImgs/detail')
-	itemName = models.CharField(max_length=100)
-	price = models.PositiveIntegerField(default=0)
-	stock = models.PositiveSmallIntegerField(default=0)
-	sale = models.PositiveIntegerField(default=0)
-	category = models.PositiveSmallIntegerField(default=0)
-	info = models.TextField(blank=True)
+	image = models.ImageField(upload_to='shopItemImgs/item', default=None)
+	detailImage = models.ImageField(upload_to='shopItemImgs/detail', default=None)
+	itemName = models.CharField(max_length=100, null=True, blank=True)
+	price = models.PositiveIntegerField(default=0, null=True, blank=True)
+	stock = models.PositiveSmallIntegerField(default=0, null=True, blank=True)
+	sale = models.PositiveIntegerField(default=0, null=True, blank=True)
+	category = models.PositiveSmallIntegerField(default=0, null=True, blank=True)
+	info = models.TextField(null=True, blank=True)
 
 	class Meta:
 		verbose_name = '상품'
@@ -31,11 +31,11 @@ def shopItem_delete(sender, instance, **kwargs):
 
 
 class Review(models.Model):
-	author = models.ForeignKey(User, unique=False)
+	author = models.ForeignKey(User, unique=False, on_delete=models.CASCADE)
 	image = models.ImageField(upload_to='shopItemImgs/item')
 	content = models.TextField(null=False)
 	makeTime = models.DateTimeField(blank=True, null=True)
-	itemNum = models.ForeignKey(ShopItem, unique=False)
+	itemNum = models.ForeignKey(ShopItem, unique=False, on_delete=models.CASCADE)
 
 	def __unicode__(self):
 		return self.content

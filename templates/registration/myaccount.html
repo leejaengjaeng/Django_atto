@@ -12,65 +12,65 @@
         .tableborder1{
             border-top: 3px solid #EF86AE;
         }
-    .tableborder2{
-         border-top: 3px solid #6CCEF5;
-    }
-    .tableborder3{
-         border-top: 3px solid #099A55;
-    }
-    .tableborder4{
-         border-top: 3px solid #F4883D;
-    }
-    .tableborder5{
-         border-top: 3px solid #6CCEF5;;
-    }
-    .tableborder6{
-         border-top: 3px solid #A6D060;
-    }
+        .tableborder2{
+            border-top: 3px solid #6CCEF5;
+        }
+        .tableborder3{
+            border-top: 3px solid #099A55;
+        }
+        .tableborder4{
+            border-top: 3px solid #F4883D;
+        }
+        .tableborder5{
+            border-top: 3px solid #6CCEF5;;
+        }
+        .tableborder6{
+            border-top: 3px solid #A6D060;
+        }
     </style>
     <div class="pad">
-    <table class="table">
-    <tr>
+        <table class="table">
+            <tr>
 
-        <th class="textali">이름</th>
+                <th class="textali">이름</th>
 
-        <td>{{ names }}</td>
-    </tr>
-    <tr>
-        <th class="textali">이메일 주소</th>
-        <td>{{ emails }}</td>
-    </tr>
-    <tr>
-        <th class="textali">아이디</th>
-        <td>{{ ids }}</td>
-    </tr>
-    <tr>
-        <th class="textali">주소</th>
-        <td>{{ addr1s }}   {{ addr2s }}</td>
-    </tr>
-    <tr>
-        <th class="textali">전화번호</th>
-        <td>{{ phonenums }}</td>
-    </tr>
-    <tr>
-        <th class="textali">구분</th>
-        <td>
-            {% ifequal roles 0 %}
-                Customer
-            {% endifequal %}
-            {% ifequal roles 1 %}
-                Teacher
-            {% endifequal %}
-            {% ifequal roles 2 %}
-                Business
-            {% endifequal %}
-        </td>
-    </tr>
-    </table>
+                <td>{{ names }}</td>
+            </tr>
+            <tr>
+                <th class="textali">이메일 주소</th>
+                <td>{{ emails }}</td>
+            </tr>
+            <tr>
+                <th class="textali">아이디</th>
+                <td>{{ ids }}</td>
+            </tr>
+            <tr>
+                <th class="textali">주소</th>
+                <td>{{ addr1s }}   {{ addr2s }}</td>
+            </tr>
+            <tr>
+                <th class="textali">전화번호</th>
+                <td>{{ phonenums }}</td>
+            </tr>
+            <tr>
+                <th class="textali">구분</th>
+                <td>
+                    {% ifequal roles 0 %}
+                        Customer
+                    {% endifequal %}
+                    {% ifequal roles 1 %}
+                        Teacher
+                    {% endifequal %}
+                    {% ifequal roles 2 %}
+                        Business
+                    {% endifequal %}
+                </td>
+            </tr>
+        </table>
 
-</p>
-    <center>
-<button type="button" onclick="location.href='/editaccount'" class="btn btn-default btn-lg">정보수정</button>
-    </center>
+        </p>
+        <center>
+            <button type="button" onclick="location.href='/editaccount'" class="btn btn-default btn-lg">정보수정</button>
+        </center>
     </div>
 {% endblock main_content %}
