@@ -10,7 +10,6 @@
 {% block main_content %}
 <div class="container-fluid">
 	<img src="{% static 'assets/img/slogan.jpg' %}" class="img-responsive" alt="Responsive image" style="margin-top:2%;">
-
 	{% if items %}
         <div class="row" style="margin-top: 2%;">
 		{% for item in items %}
@@ -20,15 +19,17 @@
 						<a href="/shop/detail?itemId={{item.id}}">
 							<img src="{{MEDIA_URL}}/{{item.image}}" alt="Image" class="img-responsive">
 						</a>
-						{{item.itemName}} <br>
+						<center>
+						<p class="itemName">{{item.itemName}}</p>
 						{% if item.sale == 0 %}
-						<p class="price">{{item.price}}</p>
+						<p class="itemPrice">{{item.price}}원</p>
 						{% else %}
-						<p class="price center">
-							<del><small>{{ item.price }}</small></del>
-							{% sub item.price item.sale %}
+						<p class="itemPrice">
+							<del>{{ item.price }}원</del>
+							{% sub item.price item.sale %}원
 						</p>
 						{% endif %}
+						</center>
 					</div>
 				</div>
 		{% endfor %}

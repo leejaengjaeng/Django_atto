@@ -18,8 +18,6 @@
         $("#commentAddBtn").click(function()
         {
             var date = new Date()
-            var formatDate = date.getFullYear()+'.'+date.getMonth()+'.'+date.getDate()+' - '
-                            + date.getHours()+':'+date.getMinutes();
             $.ajax(
             {
                 method:'POST',
@@ -40,7 +38,7 @@
 
 commentDelFunc = function(btn)
 {
-    id = btn.parent('div').parent('div').children('.commentId').val() * 1.0;
+    id = btn.parent('div').parent('div').parent('div').children('.commentId').val() * 1.0;
     pw = prompt('삭제 비밀번호를 입력하세요.');
 
     $.ajax(
@@ -81,21 +79,20 @@ getComments= function()
             {
                 var comment=comments[flag]
                 $('#newsCommentsList').append('\
-                    <div class="newsCommentContent container-fluid">\
-                        <div class="row">\
-                            <input class="commentId"type="hidden"value="'+comment.id+'">\
-                            <div class="col-xs-12">\
+                    <div class="row">\
+                        <input class="commentId"type="hidden"value="'+comment.id+'">\
+                        <div class="col-xs-2">\
+                            <div class="row">\
                                 <b>{{request.user.username}}</b>\
-                                <span class="delCommentBtn glyphicon glyphicon-remove" style="float:right" onclick="commentDelFunc($(this))"></span>\
+                            </div>\
+                            <div class="row">\
+                                <p>'+comment.date+'</p>\
                             </div>\
                         </div>\
-                        <div class="row">\
-                            <div class="col-xs-12">\
+                        <div class="col-xs-10">\
+                            <div class="commentTxt  row">\
+                                <span class="delBtn glyphicon glyphicon-remove" style="float:right" onclick="commentDelFunc($(this))"></span>\
                                 <p>'+comment.content+'</p>\
-                            </div>\
-                         </div><div class="row">\
-                            <div class="col-xs-12">\
-                                <p>'+comment.date+'</p>\
                             </div>\
                         </div>\
                     </div>\
@@ -148,7 +145,7 @@ getComments= function()
             </div>
         {% endif %}
     </div>
-    <div id="newsCommentsList" class="row container-fluid"></div>
+    <div id="newsCommentsList" class="container-fluid"><hr></div>
 </div>
 
 <!-- comment modal-->

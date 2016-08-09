@@ -98,7 +98,7 @@ def getComments(request):
     try:
         data = Comments.objects.filter(postNum=postId)
         for comment in data:
-            date = comment.makeTime.strftime('%Y.%m.%d - %H:%M')
+            date = comment.makeTime.strftime('%y.%m.%d')
             comments.append({'id':comment.id,'name':comment.author.username,'date':date,'content':comment.content})
 
 #        comments = serializers.serialize('json',Comments.objects.filter(postNum=postId))
