@@ -315,9 +315,14 @@ del
 .newsContent
 {
     text-align:center;
+    font-size:2em;
     margin-bottom:2%;
 }
 
+newsContent .img-responsive
+{
+    margin:auto;
+}
 
 .news-img
 {
