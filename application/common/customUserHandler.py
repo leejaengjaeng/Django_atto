@@ -99,7 +99,7 @@ def getComments(request):
         data = Comments.objects.filter(postNum=postId)
         for comment in data:
             date = comment.makeTime.strftime('%Y.%m.%d - %H:%M')
-            comments.append({'id':comment.author.username,'date':date,'content':comment.content})
+            comments.append({'id':comment.id,'name':comment.author.username,'date':date,'content':comment.content})
 
 #        comments = serializers.serialize('json',Comments.objects.filter(postNum=postId))
     except ObjectDoesNotExist:
@@ -119,7 +119,7 @@ def getReviews(request):
             else:
                 img = None
 
-            reviews.append({'id':review.author.username,'date':date,'content':review.content,'img':img})
+            reviews.append({'id':review.id,'name':review.author.username,'date':date,'content':review.content,'img':img})
 
     except ObjectDoesNotExist:
         reviews = {}

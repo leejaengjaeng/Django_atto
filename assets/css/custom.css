@@ -304,15 +304,22 @@ center
     news
 ------------------------------------------------------------
 */
-#newsPage
-{
-    padding: 3% 5% 3% 5%;
-}
 .headLine
 {
-    width:100%;
     color:#FFFFFF;
     background-color:#6CCEF5;
+}
+.newsContent
+{
+    text-align:center;
+    margin-bottom:2%;
+}
+
+
+.news-img
+{
+    width:220px;
+    height:220px;
 }
 /*
 ------------------------------------------------------------
@@ -322,7 +329,32 @@ center
 
 #newsComments
 {
-    border-top:2px solid #000000;
+    border-top:2px solid #EF86AE;
+}
+
+#commentContent
+{
+    width:100%;
+}
+#newsCommentAdd
+{
+    float:right;
+    clear:both;
+}
+
+.newsCommentContent
+{
+    border-radius:3px;
+    border: 1px solid #EF86AE;
+    margin:2%;
+}
+.newsCommentContent .row
+{
+    padding:1%;
+}
+.delCommentBtn
+{
+    margin-top:1%;
 }
 
 /*
@@ -348,6 +380,14 @@ center
         border-top: 2px solid #EF86AE;
     }
 
+}
+.delReviewBtn
+{
+    margin-top:1%;
+}
+.delReviewBtn:hover
+{
+    cursor:pointer;
 }
 #itemContent .row
 {
@@ -381,12 +421,14 @@ center
 #itemDetailImage
 {
     padding-top:5%;
+    border-top: 2px solid #EF86AE;
 }
 
 
 #itemReviews
 {
     padding-top:5%;
+    border-top: 2px solid #EF86AE;
 }
 
 #reviewModalContent

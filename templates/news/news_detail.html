@@ -13,52 +13,21 @@
     <script>
     $(document).ready(function()
     {
-        postId = {{post.id}}
-        $.ajax(
-        {
-            method:'POST',
-            url:'getComments',
-            data:{'postId':postId, 'csrfmiddlewaretoken': '{{ csrf_token }}',},
-            success: function(data)
-            {
-                //comments = JSON.parse(data.comments)
-                comments = data.comments
-
-                for(flag in comments)
-                {
-                    console.log(comments[flag])
-                    var comment = comments[flag]
-
-                    $('#newsCommentsList').append('\
-                        <li>' + comment.id + '|' + comment.date + '|' + comment.content + '</li>\
-                    ')
-                }
-            },
-            error: function(error)
-            {
-                console.log(error)
-            },
-        });
-
+        getComments();
 
         $("#commentAddBtn").click(function()
         {
             var date = new Date()
             var formatDate = date.getFullYear()+'.'+date.getMonth()+'.'+date.getDate()+' - '
                             + date.getHours()+':'+date.getMinutes();
-
-            $('#newsCommentsList').append('\
-                <li> {{request.user.username}} |' + formatDate + '|' + $('#commentContent').val() + '</li>\
-            ');
-
             $.ajax(
             {
                 method:'POST',
                 url:'addComment',
-                data:{'content':$('#commentContent').val(),'postNum':"{{post.id}}", 'csrfmiddlewaretoken': '{{ csrf_token }}',},
+                data:{'content':$('#commentContent').val(),'postNum':"{{post.id}}",'delPw':$('#commentDelPw').val(),'csrfmiddlewaretoken': '{{ csrf_token }}',},
                 success: function(data)
                 {
-                   console.log('댓글이 입력되었슝!')
+                   alert('댓글이 입력되었습니다.');
                 },
                 error: function(error)
                 {
@@ -68,49 +37,159 @@
         });
 
     });
-    </script>
+
+commentDelFunc = function(btn)
+{
+    id = btn.parent('div').parent('div').children('.commentId').val() * 1.0;
+    pw = prompt('삭제 비밀번호를 입력하세요.');
+
+    $.ajax(
+    {
+        method:'POST',
+        url:'delComment',
+        data:{'id':id,'pw':pw,'csrfmiddlewaretoken': '{{ csrf_token }}',},
+        success: function(data)
+        {
+            if(data == 1)
+            {
+                alert("삭제 되었습니다.");
+                delEl = btn.parent('div').parent('div').parent('div');
+                delEl.remove();
+            }
+            else
+                alert("비밀번호가 틀렸습니다.");
+        },
+        error: function(error)
+        {
+            console.log(error)
+        },
+    });
+}
+
+getComments= function()
+{
+    postId={{post.id}}
+    $.ajax(
+    {
+        method:'POST',
+        url:'getComments',
+        data:{'postId':postId,'csrfmiddlewaretoken':'{{csrf_token}}',},
+        success:function(data)
+        {
+            comments=data.comments
+            for(flag in comments)
+            {
+                var comment=comments[flag]
+                $('#newsCommentsList').append('\
+                    <div class="newsCommentContent container-fluid">\
+                        <div class="row">\
+                            <input class="commentId"type="hidden"value="'+comment.id+'">\
+                            <div class="col-xs-12">\
+                                <b>{{request.user.username}}</b>\
+                                <span class="delCommentBtn glyphicon glyphicon-remove" style="float:right" onclick="commentDelFunc($(this))"></span>\
+                            </div>\
+                        </div>\
+                        <div class="row">\
+                            <div class="col-xs-12">\
+                                <p>'+comment.content+'</p>\
+                            </div>\
+                         </div><div class="row">\
+                            <div class="col-xs-12">\
+                                <p>'+comment.date+'</p>\
+                            </div>\
+                        </div>\
+                    </div>\
+                ')
+            }
+        },
+        error:function(error)
+        {
+        console.log(error)
+        },
+    });
+}
+
+
+</script>
 {% endblock additional_assets %}
 
 {% block main_content %}
-<div id="newsDetailContainer">
+<div class="container-fluid">
     {% if post.contentsImg %}
-        <div id="newsContent" class="row">
-          <div class="col-sm-12">
-            <div class="caption">
-                <h3>{{post.headLine}}</h3>
-            </div>
-            <div class="thumbnail">
-              <img src="{{MEDIA_URL}}/{{post.contentsImg}}">
-            </div>
-          </div>
+    <div class="row">
+        <div class="newsContent col-sm-12">
+            <h3>{{post.headLine}}</h3>
+            <img src="{{MEDIA_URL}}/{{post.contentsImg}}" class="img-responsive">
         </div>
+    </div>
     {% else %}
         <p>test:{{post.contentsImg }}</p>
     {% endif %}
 
-    <div id="newsComments">
+    <div id="newsComments" class="row">
         <h4>Comments</h4>
         {% if request.user.is_authenticated %}
-            <div id="newsCommentAdd">
-                <form class="form-inline">
+        <div id="newsCommentAdd" >
+            <button type="button" class="btn btn-default" data-toggle="modal" data-target="#commentModal"  >댓글 등록</button>
+        </div>
+                <!--<form class="form-inline">
                     <div class="form-group">
                         <input type="text" class="form-control" id="commentContent">
                     </div>
                     <input type="hidden" id="postId" value="{{post.id}}">
                     <div class="form-group">
-                        <button id="commentAddBtn" type="button" class="btn btn-default" >등록</button>
+                        <button id="" type="button" class="btn btn-default" >등록</button>
                     </div>
-                </form>
-            </div>
+                </form>-->
         {% else %}
             <div id="newsCommentAdd">
                 <button onclick="window.location.href='/login'"> 로그인 </button>
                 <button onclick="window.location.href='/signup'"> 회원 가입 </button>
             </div>
         {% endif %}
-        <div id="newsCommentsList">
-        </div>
     </div>
-
+    <div id="newsCommentsList" class="row container-fluid"></div>
 </div>
+
+<!-- comment modal-->
+<div class="modal fade" id="commentModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">댓글 등록</h4>
+      </div>
+      <form id="commentForm" class="form-inline" method="post">
+        {% csrf_token %}
+        <div class=" container-fluid modal-body">
+             <div class="row">
+                  <div class="col-xs-2">
+                      <p>{{request.user.username}}</p>
+                  </div>
+             </div>
+             <div class="row">
+                  <div class="col-xs-12">
+                        <textarea class="form-control" rows="3" style="width:100%" id="commentContent"></textarea>
+                  </div>
+             </div>
+             <br>
+             <div class="row">
+                 <div class="col-xs-6" style="float:right; margin:0;">
+                    <input id="commentDelPw" class="form-control" type="password" maxlength="4"  style="width:100%;">
+                 </div>
+                 <div class="col-xs-6" style="margin:0; padding:0; float:right;">
+                     <p style="margin-top:6%;" >삭제 비밀 번호</p>
+                 </div>
+             </div>
+        </div>
+        <div class="modal-footer">
+              <button type="button" class="btn btn-default" data-dismiss="modal">취소</button>
+              <button id="commentAddBtn" type="submit" class="btn btn-primary">등록</button>
+        </div>
+       </form>
+    </div>
+  </div>
+</div>
+<!-- modal End-->
+
 {% endblock main_content %}

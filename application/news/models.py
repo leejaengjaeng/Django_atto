@@ -29,6 +29,7 @@ class Comments(models.Model):
     content = models.TextField(null=False)
     makeTime = models.DateTimeField(auto_now=True)
     postNum = models.ForeignKey(Posts)
+    delPw = models.CharField(max_length=4,default='0000')
 
     def __unicode__(self):
         return self.content

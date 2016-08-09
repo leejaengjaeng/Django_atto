@@ -11,7 +11,7 @@
     <br>
     <div id="feeds">
         {% if posts %}
-            <div class="container" id="itemContainer">
+            <div class="container-fluid" id="itemContainer">
                 {% for post in posts %}
                     <!-- modulo 연산 (built in)-->
                     {% if forloop.counter0|divisibleby:3 %}
@@ -19,11 +19,9 @@
                     {% endif %}
                         <div class="feed col-xs-4 col-md-4">
                             <a href="detail?newsPost={{post.id}}">
-                                <img src="{{MEDIA_URL}}/{{post.image}}" alt="post_Image" class="img-responsive">
+                                <img src="{{MEDIA_URL}}/{{post.image}}" alt="post_Image" class="news-img img-responsive">
                             </a>
-                            <div class="headLine">
-                                <p>{{post.headLine}}</p>
-                            </div>
+                            <p class="headLine">{{post.headLine}}</p>
                         </div>
                     {% if forloop.counter|divisibleby:3 %}
                     </div><!--/row-->

@@ -118,11 +118,11 @@ $(document).ready(function()
                     {
                         $('#reviewList').append('\
                             <div class="reviewContainer row">\
-                                <div>\
                                     <div class="row">\
                                         <div class="col-xs-12">\
-                                            <b>'+ review.id + '님 </b>\
-                                            <b style="float:right">'+ review.date +'</b>\
+                                            <input id="reviewId" type="hidden" value="'+review.id+'">\
+                                            <b>'+ review.name + '님 </b>\
+                                            <span class="delReviewBtn glyphicon glyphicon-remove" onclick="reviewDelFunc($(this))" aria-hidden="true" style="float:right"></span>\
                                         </div>\
                                     </div>\
                                     <div class="row">\
@@ -135,7 +135,11 @@ $(document).ready(function()
                                             </a>\
                                         </div>\
                                     </div>\
-                                </div>\
+                                    <div class="row">\
+                                        <div class="col-xs-12">\
+                                            <b>'+ review.date +'</b>\
+                                        </div>\
+                                    </div>\
                             </div>\
                         ')
                     }
@@ -143,11 +147,11 @@ $(document).ready(function()
                     {
                         $('#reviewList').append('\
                             <div class="reviewContainer row">\
-                                <div>\
                                     <div class="row">\
                                         <div class="col-xs-12">\
-                                            <b>'+ review.id + '님 </b>\
-                                            <b style="float:right">'+ review.date +'</b>\
+                                            <input id="reviewId" type="hidden" value="'+review.id+'">\
+                                            <b>'+ review.name + '님 </b>\
+                                            <span class="delReviewBtn glyphicon glyphicon-remove" onclick="reviewDelFunc($(this))" aria-hidden="true" style="float:right"></span>\
                                         </div>\
                                     </div>\
                                     <div class="row">\
@@ -156,8 +160,12 @@ $(document).ready(function()
                                         </div>\
                                         <div class="col-xs-3"></div>\
                                     </div>\
+                                    <div class="row">\
+                                        <div class="col-xs-12">\
+                                            <b>'+ review.date +'</b>\
+                                        </div>\
+                                    </div>\
                                 </div>\
-                            </div>\
                         ')
                     }
                 }
@@ -209,6 +217,7 @@ $(document).ready(function()
             }
         });
     });
+
     // 상품 페이지 내부에 affix navbar 하이라이트
     $('#itemDetailNav ul li').click(function(clickedTag)
     {
@@ -225,8 +234,40 @@ $(document).ready(function()
     $(window).resize(setAffixPosition()).resize();
 
     $('#itemContent').ready(setAffixPosition());
+
 });
 //$(document).ready(function() 끝
+
+
+reviewDelFunc = function(btn)
+{
+
+    id = btn.parent('div').children('#reviewId').val() * 1.0;
+    pw = prompt('삭제 비밀번호를 입력하세요.');
+
+    $.ajax(
+    {
+        method:'POST',
+        url:'delReview',
+        data:{'id':id,'pw':pw,'csrfmiddlewaretoken': '{{ csrf_token }}',},
+        success: function(data)
+        {
+            if(data == 1)
+            {
+                alert("삭제 되었습니다.");
+                delEl = btn.parent('div').parent('div').parent('div');
+                delEl.remove();
+            }
+            else
+                alert("비밀번호가 틀렸습니다.");
+        },
+        error: function(error)
+        {
+            console.log(error)
+        },
+    });
+}
+
 
 setAffixPosition = function()
 {
@@ -328,7 +369,7 @@ moveTo = function(str)
     <!-- 디테일 이미지-->
         <div id="itemDetailImage">
             <h4>상세 정보</h4>
-            <img class="img-responsive" src="{{MEDIA_URL}}{{item.detailImage}}">
+            <img class="img-responsive container-fluid" src="{{MEDIA_URL}}{{item.detailImage}}">
         </div>
     <!-- 리뷰 -->
         <div id="itemReviews" class="container-fluid">
@@ -363,10 +404,10 @@ moveTo = function(str)
       </div>
       <form id="reviewForm" class="form-inline" method="post" action="addReview" enctype="multipart/form-data">
         {% csrf_token %}
-        <div class="modal-body">
+        <div class="modal-body container-fluid">
              <div class="row">
                   <div class="col-xs-2">
-                      <p>{{request.user.username}}</p>
+                      <b>{{request.user.username}}</b>
                   </div>
                   <div class="col-xs-10">
                       <textarea class="form-control" rows="3" style="width:100%" name="reviewModalContent"></textarea>
@@ -376,6 +417,12 @@ moveTo = function(str)
                   <div class="col-xs-12">
                       <input type="file" name="uploadReviewImg">
                   </div>
+             </div>
+             <div class="row">
+                 <div class="col-xs-12">
+                    <input name="reviewDelPw" class="form-control" type="password" maxlength="4" style="float:right; width:30%;">
+                    <b style="float:right; margin:1%;">삭제 비밀 번호</b>
+                 </div>
              </div>
              <input type="hidden" name="itemId" value="{{item.id}}">
         </div>

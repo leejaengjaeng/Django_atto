@@ -9,6 +9,7 @@ urlpatterns = [
 	url(r'^detail$', views.newsDetail, name='newsDetail'),
 	url(r'^getComments$', views.showComments, name='showComments'),
 	url(r'^addComment$', views.addComment, name='addComment'),
+	url(r'^delComment$', views.delComment, name='delComment'),
 
 ]
 
