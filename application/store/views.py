@@ -176,7 +176,7 @@ def payresult(request):
             itemlist=itemlist+k[2]+' '+str(k[8])+count+'\n'
 
     userid=request.user.username
-
+    from datetime import datetime
     pay.objects.create(userid=request.user,
                                 receivername = name,
                                 receiverphonenumber = phone,
@@ -187,7 +187,8 @@ def payresult(request):
                                 require=require,
                                 ispay = False,
                                 isreceive = False,
-                                howToPay=howToPay)
+                                howToPay=howToPay,
+                                time=datetime.now())
 
     return redirect('/shop/paypage')
 
