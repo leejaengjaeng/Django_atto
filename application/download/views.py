@@ -16,3 +16,6 @@ def downdocs(request):
 
 def teacher(request):
     return render(request,'download/teacherPage.html',{})
+
+def community(request):
+    return render(request, 'download/communityPage.html', {})

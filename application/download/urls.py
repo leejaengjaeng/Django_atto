@@ -9,5 +9,6 @@ urlpatterns = [
 	url(r'^downcontents/',views.downcontents ,name='downcontents'),
 	url(r'^downdocs/',views.downdocs,name='downdocs'),
 	url(r'^teacher/', views.teacher, name='teacher'),
+	url(r'^community/', views.community, name='community'),
 ]
 

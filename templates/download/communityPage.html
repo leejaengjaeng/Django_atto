@@ -1,0 +1,62 @@
+{% extends 'homepage/attoHome_base.html' %}
+{% load staticfiles %}
+
+{% block main_content %}
+   <div id="communityContainer" class="container-fluid">
+
+       <div id=communityUtil" class="row form-inline">
+          <div class="col-xs-12">
+               <form method="get" action="#" style="float:right">
+                   <select name="searchSelect" class="form-control">
+                       <option value="author"> 작성자 </option>
+                       <option value="conetent"> 글 내용 </option>
+                       <option value="headLine"> 글 제목 </option>
+                   </select>
+                   <input class="form-control" type="text" name="keyword" size="15em">
+                  <button type="submit" class="btn btn-default">검색</button>
+               </form>
+           </div>
+       </div>
+
+       <table id="postList" class="table table-hover">
+           <thead><tr>
+               <th>번호</th>
+               <th>이미지</th>
+               <th>제목</th>
+               <th>작성자</th>
+               <th>작성일</th>
+               <th>조회</th>
+           </tr></thead>
+           <tfoot></tfoot>
+           <tbody>
+            <tr>
+               <td class="postNum">112</td>
+               <td class="postImg">
+                    <img src="{% static 'assets/img/download/download-guide.png' %}" class="img-responsive">
+               </td>
+               <td class="postHead">
+                      제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목
+               </td>
+               <td class="postauthor">
+                   작성자감사잠사작성자감사잠사작성자감사잠사
+               </td>
+               <td class="postMakeDate">
+                   2016.08.10
+               </td>
+               <td class="postHit">
+                   1111
+               </td>
+            </tr>
+           </tbody>
+       </table>
+       <div id="commnunityFooter" class="row">
+           <div class="col-xs-12">
+               <div >
+                   페이지 네이션
+                   <button style="float:right" class="btn btn-default" onclick="#">글작성</button>
+               </div>
+           </div>
+       </div>
+    </div>
+
+{% endblock %}

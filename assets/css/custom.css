@@ -605,13 +605,59 @@ del
     download Teacher
 ------------------------------------------------------------
 */
-.downloadTeacherContainer .img-responsive
+.downloadTeacherContainer img
 {
-    margin:auto;
+    margin:0 auto;
 }
 
 .downloadTeacherContainer .row
 {
     margin-top:1%;
     margin-bottom:1%;
+}
+
+
+/*
+------------------------------------------------------------
+    download Teacher
+------------------------------------------------------------
+*/
+#communityContainer
+{
+    //border : 1px solid #EF86AE;
+    //text-align:center;
+}
+#commnunityHeader
+{
+    border-bottom : 1px solid #EF86AE;
+}
+#commnunityFooter
+{
+    //border-top : 1px solid #EF86AE;
+}
+
+
+#postList .postNum
+{
+    width:5em;
+}
+#postList .postImg
+{
+    width:10em;
+}
+#postList .postHead
+{
+    width:25em;
+}
+#postList .postauthor
+{
+    width:10em;
+}
+#postList .postMakeDate
+{
+    width:5em;
+}
+#postList .postHit
+{
+    width:5em;
 }
