@@ -1,5 +1,6 @@
-#Django + jQuery / bootstrap + mysql 
-- responsive web application
+#attoCube
+- 반응형 홈페이지 , 쇼핑몰 
+- Django + jQuery / bootstrap + mysql 
 
 #Requirements
 - django==1.9.7
@@ -7,7 +8,6 @@
 - pillow==3.3.0
 - django-cors-headers==1.1.0
 - Fabric==1.11.1
-
 
 #Structure
 Homepage
